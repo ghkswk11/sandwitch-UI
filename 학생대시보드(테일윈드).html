@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 역량 평가과정</title>
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff", // 메인 퍼플
+                hover: "#5a4ce6", // 호버 퍼플
+                bg: "#f3f1ff", // 배경 퍼플
+                dark: "#1e1b3a", // 다크 네이비 (완료 버튼)
+              },
+              text: {
+                base: "#1e1b3a", // 기본 텍스트
+                desc: "#666666", // 설명 텍스트
+                disabled: "#999999", // 비활성 텍스트
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div {
+        word-break: keep-all;
+      }
+
+      /* Scrollbar Custom */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+      ::-webkit-scrollbar-button:vertical:single-button:start {
+        position: absolute;
+        content: "";
+        border-right: 20px solid transparent;
+        border-bottom: 62px solid transparent;
+        border-left: 20px solid transparent;
+        border-top: 20px solid transparent;
+      }
+      ::-webkit-scrollbar-button:vertical:single-button:end {
+        position: absolute;
+        overflow: hidden;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-top: 62px solid transparent;
+        border-right: 20px solid transparent;
+        border-left: 20px solid transparent;
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans text-text-base leading-[1.5] h-full relative overflow-hidden"
+  >
+    <!-- 헤더 -->
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white"
+    >
+      <div class="logo">
+        <img src="logo.svg" alt="logo" class="block max-w-full" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="name text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="button flex gap-[12px]">
+          <div
+            class="my_page text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+          >
+            마이페이지
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 메인 -->
+    <main
+      class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
+    >
+      <!-- 메인 박스 -->
+      <div
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto relative flex flex-col"
+      >
+        <!-- 타이틀 -->
+        <div class="title mb-[40px] shrink-0">
+          <h2 class="text-[32px] font-semibold mb-[4px]">AI 역량 평가과정</h2>
+          <p class="text-[18px] font-normal text-text-desc">
+            관리자의 안내에 따라 과제를 수행해주세요
+          </p>
+        </div>
+
+        <!-- 인포박스 -->
+        <div
+          class="info_box flex items-center justify-between mb-[60px] px-[4px] shrink-0"
+        >
+          <ul class="flex items-center gap-[8px_24px] flex-wrap mr-[24px]">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
+              <img src="box_icon07.svg" alt="icon" class="block" />ChatGPT,
+              Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </li>
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
+              <img src="box_icon01.svg" alt="icon" class="block" />한국대학교
+              컴퓨터공학과
+            </li>
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
+              <img src="box_icon08.svg" alt="icon" class="block" />김교수
+            </li>
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
+              <img src="box_icon03.svg" alt="icon" class="block" />2025-12-19
+              14:00 - 16:00
+            </li>
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
+              <img src="box_icon04.svg" alt="icon" class="block" />온라인 (Zoom)
+            </li>
+          </ul>
+          <div
+            class="refresh flex gap-[2px] items-center text-text-disabled cursor-pointer text-[16px] shrink-0"
+          >
+            <img src="refresh.svg" alt="icon" class="block" />새로고침
+          </div>
+        </div>
+
+        <!-- 메인컨텐츠 (대시보드) -->
+        <div
+          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px] shrink-0 max-[1600px]:grid-cols-2 max-[810px]:grid-cols-1"
+        >
+          <!-- Box 1: PPS (평가모드) -->
+          <div
+            class="box p-[40px] shadow-inset-border rounded-[20px] min-h-[360px] flex flex-col"
+          >
+            <div
+              class="tit column flex flex-col items-start gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="w-full flex justify-between items-center text-[24px] font-semibold"
+              >
+                PPS
+                <span
+                  class="test_mode h-[28px] px-[20px] flex items-center justify-center rounded-[50px] text-[14px] font-semibold bg-brand text-white"
+                  >평가모드</span
+                >
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                prompt problem solving
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              프롬프트 작성 및 문제 해결 과정의<br />
+              구조화 정도 평가 복잡한 문제를 해결하기 위해<br />
+              AI에게 논리적이고 체계적인 지시(프롬프트)를 설계
+            </div>
+            <div
+              class="button w-full text-center p-[8px] rounded-[4px] bg-brand text-white text-[14px] font-medium transition-all duration-300 cursor-pointer mt-auto hover:bg-brand-hover"
+            >
+              입장하기
+            </div>
+          </div>
+
+          <!-- Box 2: DIG (학습모드) -->
+          <div
+            class="box p-[40px] shadow-inset-border rounded-[20px] min-h-[360px] flex flex-col"
+          >
+            <div
+              class="tit column flex flex-col items-start gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="w-full flex justify-between items-center text-[24px] font-semibold"
+              >
+                DIG
+                <span
+                  class="edu_mode h-[28px] px-[20px] flex items-center justify-center rounded-[50px] text-[14px] font-semibold bg-brand-bg text-brand"
+                  >학습모드</span
+                >
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                data insight generation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              데이터를 AI로 분석하고 인사이트를 도출하는 능력<br />
+              코드를 직접 실행하여 데이터를 검증하고<br />
+              근거 기반의 실질적인 해결책을 도출
+            </div>
+            <div
+              class="button w-full text-center p-[8px] rounded-[4px] bg-brand text-white text-[14px] font-medium transition-all duration-300 cursor-pointer mt-auto hover:bg-brand-hover"
+            >
+              입장하기
+            </div>
+          </div>
+
+          <!-- Box 3: GCC (학습모드 / 완료) -->
+          <div
+            class="box p-[40px] shadow-inset-border rounded-[20px] min-h-[360px] flex flex-col"
+          >
+            <div
+              class="tit column flex flex-col items-start gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="w-full flex justify-between items-center text-[24px] font-semibold"
+              >
+                GCC
+                <span
+                  class="edu_mode h-[28px] px-[20px] flex items-center justify-center rounded-[50px] text-[14px] font-semibold bg-brand-bg text-brand"
+                  >학습모드</span
+                >
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                generative content creation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              텍스트/이미지/영상 생성 능력 상황과 목적에 <br />
+              완벽히 부합하는 결과물을 생성하고<br />
+              스타일을 정교하게 최적화
+            </div>
+            <div
+              class="button complate w-full text-center p-[8px] rounded-[4px] bg-brand-dark text-white text-[14px] font-medium cursor-default mt-auto"
+            >
+              완료
+            </div>
+          </div>
+
+          <!-- Box 4: WFA (학습모드 / 입장불가) -->
+          <div
+            class="box p-[40px] shadow-inset-border rounded-[20px] min-h-[360px] flex flex-col"
+          >
+            <div
+              class="tit column flex flex-col items-start gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="w-full flex justify-between items-center text-[24px] font-semibold"
+              >
+                WFA
+                <span
+                  class="edu_mode h-[28px] px-[20px] flex items-center justify-center rounded-[50px] text-[14px] font-semibold bg-brand-bg text-brand"
+                  >학습모드</span
+                >
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                workflow automation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              반복 업무를 AI 및 자동화 도구로 설계하는 능력 <br />
+              업무 흐름을 구조화하여 예외 상황에서도 오류 없이<br />
+              작동하는 자동화 프로세스를 설계
+            </div>
+            <div
+              class="button disable w-full text-center p-[8px] rounded-[4px] bg-text-disabled text-white text-[14px] font-medium cursor-default mt-auto"
+            >
+              입장불가
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

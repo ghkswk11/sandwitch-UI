@@ -200,6 +200,9 @@ main {
   padding: 40px;
   box-shadow: inset 0 0 0 1px #ddd;
   border-radius: 20px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main_box .main_content > div .tit {
@@ -221,6 +224,33 @@ main {
   white-space: nowrap;
   font-size: 24px;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_box .main_content > div .tit h3:has(span) {
+  width: 100%;
+}
+
+.main_box .main_content > div .tit h3 span {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border-radius: 50px;
+}
+
+.main_box .main_content > div .tit h3 span.test_mode {
+  background: #6a5cff;
+  color: #fff;
+}
+
+.main_box .main_content > div .tit h3 span.edu_mode {
+  background: #f3f1ff;
+  color: #6a5cff;
 }
 
 .main_box .main_content > div .tit p {
@@ -307,6 +337,7 @@ main {
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
+  margin-top: auto;
 }
 .main_box .main_content > div .button:hover {
   background: #5a4ce6;
@@ -314,6 +345,12 @@ main {
 
 .main_box .main_content > div .button.disable {
   background: #999;
+  cursor: default;
+}
+
+.main_box .main_content > div .button.complate {
+  background: #1e1b3a;
+  cursor: default;
 }
 
 .main_box .pagination {
