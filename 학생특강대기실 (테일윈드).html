@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학생 특강 대기실</title>
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+                dark: "#1e1b3a",
+              },
+              text: {
+                base: "#1e1b3a",
+                desc: "#666666",
+                disabled: "#999999",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom CSS & Reset -->
+    <style>
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div {
+        word-break: keep-all;
+      }
+
+      /* Input Reset */
+      input[type="search"]::-webkit-search-decoration,
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-results-button,
+      input[type="search"]::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+        appearance: none;
+        display: none;
+      }
+      input[type="search"] {
+        -webkit-appearance: none;
+      }
+
+      /* Select Reset */
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+
+      /* Scrollbar Custom */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+      ::-webkit-scrollbar-button:vertical:single-button:start {
+        position: absolute;
+        content: "";
+        border-right: 20px solid transparent;
+        border-bottom: 62px solid transparent;
+        border-left: 20px solid transparent;
+        border-top: 20px solid transparent;
+      }
+      ::-webkit-scrollbar-button:vertical:single-button:end {
+        position: absolute;
+        overflow: hidden;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-top: 62px solid transparent;
+        border-right: 20px solid transparent;
+        border-left: 20px solid transparent;
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans text-text-base leading-[1.5] h-full relative overflow-hidden"
+  >
+    <!-- 헤더 -->
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white"
+    >
+      <div class="logo">
+        <img src="logo.svg" alt="logo" class="block max-w-full" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="name text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="button flex gap-[12px]">
+          <div
+            class="my_page text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+          >
+            마이페이지
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 메인 -->
+    <main
+      class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
+    >
+      <!-- 메인박스 -->
+      <div
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto relative flex flex-col"
+      >
+        <!-- 타이틀 -->
+        <div class="title mb-[40px] shrink-0">
+          <h2 class="text-[32px] font-semibold mb-[4px]">특강 대기실</h2>
+          <p class="text-[18px] font-normal text-text-desc">
+            개설한 특강을 관리하고 대시보드로 입장하세요
+          </p>
+        </div>
+
+        <!-- 인풋박스 -->
+        <div
+          class="input_box flex justify-between gap-[24px] mb-[60px] shrink-0 max-[1400px]:flex-col max-[1400px]:gap-[20px]"
+        >
+          <!-- 좌측 검색어 영역 -->
+          <div class="search flex-1 flex flex-col gap-[8px]">
+            <p class="text-[16px] font-medium">검색어</p>
+            <input
+              type="search"
+              placeholder="검색어를 입력해 주세요"
+              class="appearance-none font-sans block w-full h-[40px] px-[16px] pl-[44px] py-[8px] border border-[#ddd] rounded-[8px] bg-white text-[14px] text-[#1e1b3a] leading-[1.5] bg-[url('search.svg')] bg-no-repeat bg-[16px_8px] focus:outline-none placeholder:text-[#999] placeholder:text-[14px]"
+            />
+          </div>
+
+          <!-- 우측 선택 옵션 및 버튼 영역 -->
+          <div
+            class="select flex flex-1 gap-[24px] items-end max-[1400px]:w-full max-[1400px]:flex-wrap"
+          >
+            <!-- 연도 (Custom Select) -->
+            <div class="year flex-1 flex flex-col gap-[8px] relative group">
+              <p class="text-[16px] font-medium">연도</p>
+              <div
+                class="custom_select w-full h-[40px] px-[16px] flex justify-between items-center shadow-inset-border rounded-[8px] cursor-pointer bg-white"
+              >
+                <span class="text-[14px]">연도</span>
+                <img src="input_down.svg" alt="icon" class="block" />
+              </div>
+              <ul
+                class="option absolute top-[calc(100%+4px)] w-full border border-[#ddd] bg-white rounded-[8px] max-h-[200px] overflow-y-auto z-10 shadow-lg"
+              >
+                <li
+                  class="h-[40px] px-[16px] flex items-center text-[14px] cursor-pointer transition-all duration-300 hover:bg-[#f3f1ff] hover:text-brand font-medium"
+                >
+                  2025
+                </li>
+                <li
+                  class="h-[40px] px-[16px] flex items-center text-[14px] cursor-pointer transition-all duration-300 hover:bg-[#f3f1ff] hover:text-brand font-medium"
+                >
+                  2024
+                </li>
+                <li
+                  class="h-[40px] px-[16px] flex items-center text-[14px] cursor-pointer transition-all duration-300 hover:bg-[#f3f1ff] hover:text-brand font-medium"
+                >
+                  2023
+                </li>
+                <li
+                  class="h-[40px] px-[16px] flex items-center text-[14px] cursor-pointer transition-all duration-300 hover:bg-[#f3f1ff] hover:text-brand font-medium"
+                >
+                  2022
+                </li>
+                <li
+                  class="h-[40px] px-[16px] flex items-center text-[14px] cursor-pointer transition-all duration-300 hover:bg-[#f3f1ff] hover:text-brand font-medium"
+                >
+                  2021
+                </li>
+              </ul>
+            </div>
+
+            <!-- 월 (Native Select Styled) -->
+            <div class="month flex-1 flex flex-col gap-[8px]">
+              <p class="text-[16px] font-medium">월</p>
+              <div class="relative w-full">
+                <select
+                  class="appearance-none font-sans w-full h-[40px] px-[16px] border border-[#ddd] rounded-[8px] bg-white text-[14px] text-[#1e1b3a] focus:outline-none cursor-pointer bg-[url('input_down.svg')] bg-no-repeat bg-[right_16px_center]"
+                >
+                  <option value="">12</option>
+                  <option value="">11</option>
+                  <option value="">10</option>
+                  <option value="">9</option>
+                  <option value="">8</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 특강상태 (Native Select Styled) -->
+            <div class="status flex-1 flex flex-col gap-[8px]">
+              <p class="text-[16px] font-medium">특강상태</p>
+              <div class="relative w-full">
+                <select
+                  class="appearance-none font-sans w-full h-[40px] px-[16px] border border-[#ddd] rounded-[8px] bg-white text-[14px] text-[#1e1b3a] focus:outline-none cursor-pointer bg-[url('input_down.svg')] bg-no-repeat bg-[right_16px_center]"
+                >
+                  <option value="">진행중</option>
+                  <option value="">예정</option>
+                  <option value="">취소</option>
+                  <option value="">종료</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 업데이트 버튼 -->
+            <div
+              class="new w-[140px] h-[40px] font-semibold text-white rounded-[8px] bg-brand flex items-center justify-center gap-[8px] transition-all duration-300 cursor-pointer hover:bg-brand-hover shrink-0"
+            >
+              업데이트 <img src="update.svg" alt="icon" class="block" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 메인컨텐츠 -->
+        <div
+          class="main_content grid grid-cols-4 gap-[20px] mb-[60px] shrink-0 max-[1600px]:grid-cols-2 max-[810px]:grid-cols-1"
+        >
+          <!-- Box 1: 진행중 -->
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div class="tit flex items-center gap-[8px] mb-[20px]">
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                생성형 AI 활용 가이드와 기초다지기
+              </h3>
+              <span
+                class="ing flex items-center justify-center px-[8px] py-[4px] rounded-[4px] text-white shrink-0 text-[12px] font-medium bg-brand"
+                >진행중</span
+              >
+            </div>
+            <div
+              class="desc max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-normal text-text-desc mb-[24px]"
+            >
+              ChatGPT, Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </div>
+            <div class="info flex flex-col gap-[8px] mb-[24px]">
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon01.svg" alt="icon" />한국대학교 컴퓨터공학과
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon02.svg" alt="icon" />80명
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon03.svg" alt="icon" />2025-12-19 14:00 - 16:00
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon04.svg" alt="icon" />온라인 (Zoom)
+              </div>
+            </div>
+            <div
+              class="button w-full text-center p-[8px] rounded-[4px] bg-brand text-white text-[14px] font-medium transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+            >
+              입장하기
+            </div>
+          </div>
+
+          <!-- Box 2: 예정 -->
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div class="tit flex items-center gap-[8px] mb-[20px]">
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                생성형 AI 활용 가이드와 기초다지기
+              </h3>
+              <span
+                class="pre flex items-center justify-center px-[8px] py-[4px] rounded-[4px] text-white shrink-0 text-[12px] font-medium bg-brand-light"
+                >예정</span
+              >
+            </div>
+            <div
+              class="desc max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-normal text-text-desc mb-[24px]"
+            >
+              ChatGPT, Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </div>
+            <div class="info flex flex-col gap-[8px] mb-[24px]">
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon01.svg" alt="icon" />한국대학교 컴퓨터공학과
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon02.svg" alt="icon" />80명
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon03.svg" alt="icon" />2025-12-19 14:00 - 16:00
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon04.svg" alt="icon" />온라인 (Zoom)
+              </div>
+            </div>
+            <div
+              class="button disable w-full text-center p-[8px] rounded-[4px] bg-text-disabled text-white text-[14px] font-medium cursor-default"
+            >
+              입장하기
+            </div>
+          </div>
+
+          <!-- Box 3: 완료 -->
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div class="tit flex items-center gap-[8px] mb-[20px]">
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                생성형 AI 활용 가이드와 기초다지기
+              </h3>
+              <span
+                class="end flex items-center justify-center px-[8px] py-[4px] rounded-[4px] text-white shrink-0 text-[12px] font-medium bg-brand-dark"
+                >완료</span
+              >
+            </div>
+            <div
+              class="desc max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-normal text-text-desc mb-[24px]"
+            >
+              ChatGPT, Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </div>
+            <div class="info flex flex-col gap-[8px] mb-[24px]">
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon01.svg" alt="icon" />한국대학교 컴퓨터공학과
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon02.svg" alt="icon" />80명
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon03.svg" alt="icon" />2025-12-19 14:00 - 16:00
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon04.svg" alt="icon" />온라인 (Zoom)
+              </div>
+            </div>
+            <div
+              class="button disable w-full text-center p-[8px] rounded-[4px] bg-text-disabled text-white text-[14px] font-medium cursor-default"
+            >
+              입장하기
+            </div>
+          </div>
+
+          <!-- Box 4: 취소 -->
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div class="tit flex items-center gap-[8px] mb-[20px]">
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                생성형 AI 활용 가이드와 기초다지기
+              </h3>
+              <span
+                class="cancle flex items-center justify-center px-[8px] py-[4px] rounded-[4px] text-white shrink-0 text-[12px] font-medium bg-[#999999]"
+                >취소</span
+              >
+            </div>
+            <div
+              class="desc max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[14px] font-normal text-text-desc mb-[24px]"
+            >
+              ChatGPT, Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </div>
+            <div class="info flex flex-col gap-[8px] mb-[24px]">
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon01.svg" alt="icon" />한국대학교 컴퓨터공학과
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon02.svg" alt="icon" />80명
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon03.svg" alt="icon" />2025-12-19 14:00 - 16:00
+              </div>
+              <div
+                class="flex gap-[8px] text-[14px] font-medium text-text-desc"
+              >
+                <img src="box_icon04.svg" alt="icon" />온라인 (Zoom)
+              </div>
+            </div>
+            <div
+              class="button disable w-full text-center p-[8px] rounded-[4px] bg-text-disabled text-white text-[14px] font-medium cursor-default"
+            >
+              입장하기
+            </div>
+          </div>
+        </div>
+
+        <!-- 아무것도없을때 (hidden) -->
+        <div class="no_result hidden flex-col justify-center items-center">
+          <img src="noresult.svg" alt="icon" class="block mb-[16px]" />
+          <p class="text-[16px] font-normal text-text-desc">
+            현재 진행 중인 특강이 없습니다.
+          </p>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="pagination relative shrink-0">
+          <ul class="flex items-center justify-center gap-[8px]">
+            <li
+              class="prev w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-transparent mr-[16px]"
+            >
+              <img src="pagi_arrow.svg" alt="arrow" />
+            </li>
+            <li
+              class="active w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 bg-brand text-white font-semibold"
+            >
+              1
+            </li>
+            <li
+              class="w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-brand hover:text-white hover:font-semibold"
+            >
+              2
+            </li>
+            <li
+              class="w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-brand hover:text-white hover:font-semibold"
+            >
+              3
+            </li>
+            <li
+              class="w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-brand hover:text-white hover:font-semibold"
+            >
+              4
+            </li>
+            <li
+              class="w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-brand hover:text-white hover:font-semibold"
+            >
+              5
+            </li>
+            <li
+              class="next w-[24px] h-[24px] rounded-[50px] flex justify-center items-center font-medium cursor-pointer transition-all duration-300 hover:bg-transparent ml-[16px] scale-x-[-1]"
+            >
+              <img src="pagi_arrow.svg" alt="arrow" />
+            </li>
+          </ul>
+          <div
+            class="label absolute top-1/2 right-[16px] -translate-y-1/2 text-[14px] font-normal text-[#999]"
+          >
+            총<span class="font-medium"> 11 </span>개의 강의
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
