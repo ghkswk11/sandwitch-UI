@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI 역량 평가과정 대시보드</title>
 
-    <!-- Font: Pretendard -->
+    <!-- font -->
     <link
       rel="stylesheet"
       as="style"
@@ -13,10 +13,10 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
 
-    <!-- Tailwind CSS Library -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Config: 디자인 토큰 정의 -->
+    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
         theme: {
@@ -26,32 +26,34 @@
             },
             colors: {
               brand: {
-                DEFAULT: "#6a5cff", // 메인 브랜드
-                hover: "#5a4ce6", // 호버 상태
-                bg: "#f3f1ff", // 메인 배경
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+                dark: "#1e1b3a",
               },
               text: {
-                base: "#1e1b3a", // 기본 텍스트
-                desc: "#666666", // 설명 텍스트
-                disabled: "#999999", // 비활성 텍스트
+                base: "#1e1b3a",
+                desc: "#666666",
+                disabled: "#999999",
               },
               border: {
-                DEFAULT: "#dddddd", // 기본 테두리
+                DEFAULT: "#dddddd",
               },
             },
             boxShadow: {
-              "inset-border": "inset 0 0 0 1px #ddd", // 기본 테두리
-              "inset-brand": "inset 0 0 0 1px #6a5cff", // 활성 테두리
-              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6", // 호버 테두리
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
             },
           },
         },
       };
     </script>
 
-    <!-- Custom Styles: 스크롤바 및 기본 리셋 -->
+    <!-- Custom CSS -->
     <style>
-      /* 텍스트 줄바꿈 (단어 단위) */
       body,
       p,
       h1,
@@ -65,7 +67,7 @@
         word-break: keep-all;
       }
 
-      /* 스크롤바 커스텀 */
+      /* Scrollbar Custom */
       ::-webkit-scrollbar {
         width: 10px;
       }
@@ -78,7 +80,6 @@
         border: 3px solid transparent;
         background-clip: content-box;
       }
-      /* 스크롤바 상하 여백용 투명 버튼 */
       ::-webkit-scrollbar-button:vertical:single-button:start {
         position: absolute;
         content: "";
@@ -147,7 +148,7 @@
         <div
           class="info_box flex items-center justify-between mb-[60px] px-[4px] shrink-0"
         >
-          <ul class="flex items-center gap-[24px]">
+          <ul class="flex items-center gap-[8px_24px] flex-wrap mr-[24px]">
             <li
               class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
             >
@@ -188,7 +189,7 @@
             </li>
           </ul>
           <div
-            class="refresh flex gap-[2px] items-center text-text-disabled cursor-pointer text-[16px]"
+            class="refresh flex gap-[2px] items-center text-text-disabled cursor-pointer text-[16px] shrink-0"
           >
             <img src="refresh.svg" alt="icon" class="block" />새로고침
           </div>
@@ -196,7 +197,7 @@
 
         <!-- 메인컨텐츠 (대시보드) -->
         <div
-          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px] shrink-0"
+          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px] shrink-0 max-[1600px]:grid-cols-2 max-[810px]:grid-cols-1"
         >
           <!-- Box 1: PPS -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">

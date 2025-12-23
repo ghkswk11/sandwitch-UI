@@ -426,7 +426,9 @@ main {
 .info_box ul {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px 24px;
+  flex-wrap: wrap;
+  margin-right: 24px;
 }
 
 .info_box ul li {
@@ -440,6 +442,7 @@ main {
   align-items: center;
   color: #999;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .no_result {
@@ -460,7 +463,7 @@ main {
   }
 
   .main_box .main_content {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
