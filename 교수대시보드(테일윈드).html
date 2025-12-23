@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI 역량 평가과정 대시보드</title>
 
+    <!-- Font: Pretendard -->
     <link
       rel="stylesheet"
       as="style"
@@ -12,8 +13,10 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
 
+    <!-- Tailwind CSS Library -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Tailwind Config: 디자인 토큰 정의 -->
     <script>
       tailwind.config = {
         theme: {
@@ -23,11 +26,9 @@
             },
             colors: {
               brand: {
-                DEFAULT: "#6a5cff", // 기본 브랜드 컬러
-                hover: "#5a4ce6", // 호버 시
-                light: "#b7adff", // 연한 컬러
+                DEFAULT: "#6a5cff", // 메인 브랜드
+                hover: "#5a4ce6", // 호버 상태
                 bg: "#f3f1ff", // 메인 배경
-                copy: "#9b8cff", // 복사 아이콘 배경
               },
               text: {
                 base: "#1e1b3a", // 기본 텍스트
@@ -35,35 +36,22 @@
                 disabled: "#999999", // 비활성 텍스트
               },
               border: {
-                DEFAULT: "#dddddd",
+                DEFAULT: "#dddddd", // 기본 테두리
               },
             },
             boxShadow: {
-              "inset-border": "inset 0 0 0 1px #ddd",
-              "inset-brand": "inset 0 0 0 1px #6a5cff",
-              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+              "inset-border": "inset 0 0 0 1px #ddd", // 기본 테두리
+              "inset-brand": "inset 0 0 0 1px #6a5cff", // 활성 테두리
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6", // 호버 테두리
             },
           },
         },
       };
     </script>
 
+    <!-- Custom Styles: 스크롤바 및 기본 리셋 -->
     <style>
-      /* reset.css 및 공통 스타일의 스크롤바 구현 */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: #6a5cff;
-        border-radius: 999px;
-        border: 3px solid transparent;
-        background-clip: content-box;
-      }
-
-      /* 텍스트 줄바꿈 설정 (CSS 7번 항목 반영) */
+      /* 텍스트 줄바꿈 (단어 단위) */
       body,
       p,
       h1,
@@ -76,9 +64,44 @@
       div {
         word-break: keep-all;
       }
+
+      /* 스크롤바 커스텀 */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+      /* 스크롤바 상하 여백용 투명 버튼 */
+      ::-webkit-scrollbar-button:vertical:single-button:start {
+        position: absolute;
+        content: "";
+        border-right: 20px solid transparent;
+        border-bottom: 62px solid transparent;
+        border-left: 20px solid transparent;
+        border-top: 20px solid transparent;
+      }
+      ::-webkit-scrollbar-button:vertical:single-button:end {
+        position: absolute;
+        overflow: hidden;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-top: 62px solid transparent;
+        border-right: 20px solid transparent;
+        border-left: 20px solid transparent;
+      }
     </style>
   </head>
-  <body class="font-sans text-text-base leading-[1.5] h-full relative">
+  <body
+    class="font-sans text-text-base leading-[1.5] h-full relative overflow-hidden"
+  >
+    <!-- 헤더 -->
     <header
       class="h-[80px] px-[40px] flex justify-between items-center bg-white"
     >
@@ -104,45 +127,63 @@
       </div>
     </header>
 
+    <!-- 메인 -->
     <main
       class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
     >
+      <!-- 메인 박스 -->
       <div
-        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto"
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto relative flex flex-col"
       >
-        <div class="title mb-[40px]">
+        <!-- 타이틀 -->
+        <div class="title mb-[40px] shrink-0">
           <h2 class="text-[32px] font-semibold mb-[4px]">AI 역량 평가과정</h2>
           <p class="text-[18px] font-normal text-text-desc">
             관리자의 안내에 따라 과제를 수행해주세요
           </p>
         </div>
 
+        <!-- 인포박스 -->
         <div
-          class="info_box flex items-center justify-between mb-[60px] px-[4px]"
+          class="info_box flex items-center justify-between mb-[60px] px-[4px] shrink-0"
         >
           <ul class="flex items-center gap-[24px]">
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon07.svg" alt="icon" class="block" />ChatGPT,
               Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon01.svg" alt="icon" class="block" />한국대학교
               컴퓨터공학과
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon08.svg" alt="icon" class="block" />김교수
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon03.svg" alt="icon" class="block" />2025-12-19
               14:00 - 16:00
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon04.svg" alt="icon" class="block" />온라인 (Zoom)
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon05.svg" alt="icon" class="block" />x12345
             </li>
-            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+            <li
+              class="flex gap-[8px] text-[16px] font-normal text-text-base items-center"
+            >
               <img src="box_icon02.svg" alt="icon" class="block" />12 명
             </li>
           </ul>
@@ -153,9 +194,11 @@
           </div>
         </div>
 
+        <!-- 메인컨텐츠 (대시보드) -->
         <div
-          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px]"
+          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px] shrink-0"
         >
+          <!-- Box 1: PPS -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div
               class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
@@ -217,6 +260,7 @@
             </div>
           </div>
 
+          <!-- Box 2: DIG -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div
               class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
@@ -278,6 +322,7 @@
             </div>
           </div>
 
+          <!-- Box 3: GCC -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div
               class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
@@ -339,6 +384,7 @@
             </div>
           </div>
 
+          <!-- Box 4: WFA -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div
               class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
