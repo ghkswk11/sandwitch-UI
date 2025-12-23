@@ -98,10 +98,14 @@
     <div class="fixed inset-0 bg-black/50 z-[9]"></div>
 
     <!-- 1. 개인정보 및 약관 팝업 (활성 상태) -->
-    <div class="popup policy fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[1200px] h-[800px] flex flex-col items-start p-[40px_60px]">
-      <h3 class="text-[24px] font-semibold shrink-0 mb-0">개인정보 처리방침</h3>
+    <div
+      class="hidden popup policy fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[1200px] h-[800px] flex flex-col items-start p-[40px_60px]"
+    >
+      <h3 class="text-[24px] font-semibold shrink-0 mb-[12px]">
+        개인정보 처리방침
+      </h3>
       <p
-        class="flex-1 text-[14px] font-normal leading-[2] overflow-y-auto py-[24px] w-full text-text-base"
+        class="flex-1 text-[14px] font-normal leading-[2] overflow-y-auto pt-[12px] pb-[24px] w-full text-text-base"
       >
         이남에서 겨며진 커자딘아껀과 솜횰지 읭이르귕 미께댤갈바면 원시댐을
         깍닌흐가 깰어자고를. 지디리구요 아어업죽넝의 관머드힌믈어 더기스기에
@@ -183,7 +187,9 @@
     </div>
 
     <!-- 2. 회원가입 인증번호 팝업 (비활성 상태) -->
-    <div class="popup ce_num hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]">
+    <div
+      class="hidden popup ce_num fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]"
+    >
       <div
         class="mail_info text-center text-[14px] font-normal text-[#666] mb-[12px]"
       >
@@ -259,7 +265,9 @@
     </div>
 
     <!-- 3. 강의코드 입력 팝업 (비활성 상태) -->
-    <div class="popup ce_num code_num hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]">
+    <div
+      class="hidden popup ce_num code_num fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]"
+    >
       <p
         class="text-[24px] font-medium max-w-full overflow-hidden text-ellipsis whitespace-nowrap mb-[16px] text-center"
       >
@@ -329,7 +337,9 @@
     </div>
 
     <!-- 4. 일반 알림 팝업 (확인 버튼만 있음) -->
-    <div class="popup normal hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center" >
+    <div
+      class="popup normal fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center"
+    >
       <p class="text-[16px] font-medium mb-[16px]">
         이메일 또는 비밀번호가 올바르지 않습니다.
       </p>
@@ -344,7 +354,9 @@
     </div>
 
     <!-- 5. 일반 알림 팝업 (확인/취소 버튼 있음) -->
-    <div class="popup normal normal_2 hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center">
+    <div
+      class="hidden popup normal normal_2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center"
+    >
       <p class="text-[16px] font-medium mb-[16px]">
         변경사항을 저장하지 않고 돌아가시겠습니까?
       </p>
