@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>팝업 모음</title>
 
     <!-- font -->
     <link
@@ -12,16 +13,96 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
 
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="css.css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Document</title>
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+                dark: "#1e1b3a",
+              },
+              text: {
+                base: "#1e1b3a",
+                desc: "#666666",
+                disabled: "#999999",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div {
+        word-break: keep-all;
+      }
+
+      /* Scrollbar Custom */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+
+      /* Chrome, Safari, Edge, Opera - Number Input Arrow Removal */
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox - Number Input Arrow Removal */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
-  <body class="overlay">
-    <!-- 개인정보 및 약관용 -->
-    <div class="policy popup active">
-      <h3>개인정보 처리방침</h3>
-      <p>
+  <body class="font-sans text-text-base leading-[1.5] relative">
+    <div class="fixed inset-0 bg-black/50 z-[9]"></div>
+
+    <!-- 1. 개인정보 및 약관 팝업 (활성 상태) -->
+    <div class="popup policy fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[1200px] h-[800px] flex flex-col items-start p-[40px_60px]">
+      <h3 class="text-[24px] font-semibold shrink-0 mb-0">개인정보 처리방침</h3>
+      <p
+        class="flex-1 text-[14px] font-normal leading-[2] overflow-y-auto py-[24px] w-full text-text-base"
+      >
         이남에서 겨며진 커자딘아껀과 솜횰지 읭이르귕 미께댤갈바면 원시댐을
         깍닌흐가 깰어자고를. 지디리구요 아어업죽넝의 관머드힌믈어 더기스기에
         나스밈아고 인되아의 샐킬어의 닸신밤캐는 실나뭐 르호아. 닿닐쉬엉던
@@ -96,113 +177,189 @@
         묵흐슈씨고족과 딨강닝득만 엉걱은즈에서. 국샀셕인심래립을 너리햅니다,
         저라아드숭에 라혾타아니숨그갈하 며새랃흤으로, 님텁널대어.
       </p>
-      <div class="close"><img src="close.svg" alt="close" /></div>
+      <div class="close absolute top-[24px] right-[24px] cursor-pointer">
+        <img src="close.svg" alt="close" />
+      </div>
     </div>
 
-    <!-- 회원가입 인증번호 -->
-    <div class="popup ce_num disable">
-      <div class="mail_info">
-        <span>메일메일</span>으로 <br />
+    <!-- 2. 회원가입 인증번호 팝업 (비활성 상태) -->
+    <div class="popup ce_num hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]">
+      <div
+        class="mail_info text-center text-[14px] font-normal text-[#666] mb-[12px]"
+      >
+        <span class="font-medium text-brand">메일메일</span>으로 <br />
         인증번호를 발송했습니다.
       </div>
-      <p>인증번호 6자리를 입력하세요</p>
-      <div class="num_box">
+      <p class="font-medium text-[#444] mb-[12px] text-center">
+        인증번호 6자리를 입력하세요
+      </p>
+      <div class="num_box flex justify-center gap-[12px] mb-[12px]">
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
       </div>
-      <div class="time">남은 시간 : <span>남은 시간 : 09 : 52</span></div>
-      <div class="info">
-        <p>인증번호를 받지 못하셨나요? 재전송(<span>22</span>초 후 가능)</p>
-        <b class="">인증번호가 일치하지 않습니다.</b>
+      <div
+        class="time text-[12px] font-normal text-[#666] text-center mb-[16px]"
+      >
+        남은 시간 : <span>남은 시간 : 09 : 52</span>
       </div>
-      <ul class="submit_box">
-        <li class="submit">확인</li>
-        <li class="cancle">취소</li>
+      <div
+        class="info flex flex-col gap-[12px] text-[14px] font-normal text-[#444] mb-[20px] text-center"
+      >
+        <p class="mb-0 text-[14px]">
+          인증번호를 받지 못하셨나요? 재전송(<span>22</span>초 후 가능)
+        </p>
+        <b class="hidden text-[#e05252] mb-0 text-[14px]"
+          >인증번호가 일치하지 않습니다.</b
+        >
+      </div>
+      <ul class="submit_box flex gap-[8px] w-[360px] h-[40px]">
+        <li
+          class="submit flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-brand hover:bg-brand-hover"
+        >
+          확인
+        </li>
+        <li
+          class="cancle flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-[#999] hover:bg-[#888]"
+        >
+          취소
+        </li>
       </ul>
 
-      <div class="close"><img src="close.svg" alt="close" /></div>
+      <div class="close absolute top-[24px] right-[24px] cursor-pointer">
+        <img src="close.svg" alt="close" />
+      </div>
     </div>
 
-    <!-- 강의코드  -->
-    <div class="popup ce_num code_num disable">
-      <p>강의명은 여기에 들어가며 강의명이 길어지면ddd</p>
-      <b>입장 코드 6자리를 입력하세요</b>
-      <div class="num_box">
+    <!-- 3. 강의코드 입력 팝업 (비활성 상태) -->
+    <div class="popup ce_num code_num hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden w-[540px] max-w-[90%] flex flex-col items-center p-[40px_60px]">
+      <p
+        class="text-[24px] font-medium max-w-full overflow-hidden text-ellipsis whitespace-nowrap mb-[16px] text-center"
+      >
+        강의명은 여기에 들어가며 강의명이 길어지면ddd
+      </p>
+      <b class="font-medium text-[#444] mb-[12px] text-[14px]"
+        >입장 코드 6자리를 입력하세요</b
+      >
+      <div class="num_box flex justify-center gap-[12px] mb-[12px]">
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
         <input
           type="number"
+          class="w-[40px] h-[40px] font-medium text-[20px] text-brand text-center p-0 border border-[#ddd] rounded-[4px] focus:outline-none focus:border-brand"
           oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);"
         />
       </div>
-      <div class="info">
-        <p>입장 코드는 6자리의 문자+숫자 조합입니다.</p>
-        <b class="active">입장 코드가 올바르지 않습니다. 다시 확인해주세요.</b>
+      <div
+        class="info flex flex-col gap-[12px] text-[14px] font-normal text-[#444] mb-[20px] text-center"
+      >
+        <p class="mb-0 text-[14px]">
+          입장 코드는 6자리의 문자+숫자 조합입니다.
+        </p>
+        <b class="active block text-[#e05252] mb-0 text-[14px]"
+          >입장 코드가 올바르지 않습니다. 다시 확인해주세요.</b
+        >
       </div>
-      <ul class="submit_box">
-        <li class="cancle">취소</li>
-        <li class="submit">확인</li>
+      <ul class="submit_box flex gap-[8px] w-[360px] h-[40px]">
+        <li
+          class="cancle flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-[#999] hover:bg-[#888]"
+        >
+          취소
+        </li>
+        <li
+          class="submit flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-brand hover:bg-brand-hover"
+        >
+          확인
+        </li>
       </ul>
 
-      <div class="close"><img src="close.svg" alt="close" /></div>
+      <div class="close absolute top-[24px] right-[24px] cursor-pointer">
+        <img src="close.svg" alt="close" />
+      </div>
     </div>
 
-    <!-- 그냥 확인만있는거 -->
-    <div class="popup normal disable">
-      <p>이메일 또는 비밀번호가 올바르지 않습니다.</p>
+    <!-- 4. 일반 알림 팝업 (확인 버튼만 있음) -->
+    <div class="popup normal hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center" >
+      <p class="text-[16px] font-medium mb-[16px]">
+        이메일 또는 비밀번호가 올바르지 않습니다.
+      </p>
 
-      <ul class="submit_box">
-        <li class="submit">확인</li>
+      <ul class="submit_box flex gap-[8px] w-[160px] h-[32px]">
+        <li
+          class="submit flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-brand hover:bg-brand-hover text-[14px]"
+        >
+          확인
+        </li>
       </ul>
     </div>
 
-    <!-- 그냥 확인취소있는거 -->
-    <div class="popup normal normal_2 disable">
-      <p>변경사항을 저장하지 않고 돌아가시겠습니까?</p>
+    <!-- 5. 일반 알림 팝업 (확인/취소 버튼 있음) -->
+    <div class="popup normal normal_2 hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] bg-white rounded-[20px] overflow-hidden min-w-[360px] p-[40px_60px_28px] flex flex-col items-center">
+      <p class="text-[16px] font-medium mb-[16px]">
+        변경사항을 저장하지 않고 돌아가시겠습니까?
+      </p>
 
-      <ul class="submit_box">
-        <li class="submit">확인</li>
-        <li class="cancle">취소</li>
+      <ul class="submit_box flex gap-[8px] w-[240px] h-[32px]">
+        <li
+          class="submit flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-brand hover:bg-brand-hover text-[14px]"
+        >
+          확인
+        </li>
+        <li
+          class="cancle flex-1 text-white rounded-[8px] flex justify-center items-center cursor-pointer transition-all duration-300 font-semibold bg-[#999] hover:bg-[#888] text-[14px]"
+        >
+          취소
+        </li>
       </ul>
     </div>
   </body>
