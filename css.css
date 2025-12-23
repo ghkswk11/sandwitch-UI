@@ -99,6 +99,7 @@ main {
 .main_box .button_box {
   display: flex;
   gap: 12px;
+  flex: 1;
 }
 
 .main_box .button_box > div {
@@ -143,16 +144,22 @@ main {
   color: #fff;
 }
 
+.search {
+  width: calc(100% - 52px);
+}
+
 .search input {
   padding-left: 44px;
   position: relative;
   background: url(search.svg) no-repeat 16px 8px;
-  width: 600px;
+  width: 100%;
 }
 
 .main_box .input_box .right {
   display: flex;
   gap: 12px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .main_box .input_box .new {
@@ -445,4 +452,37 @@ main {
 .no_result.disable,
 .main_content.disable {
   display: none;
+}
+
+@media screen and (max-width: 1600px) {
+  .main_box .button_box {
+    gap: 8px;
+  }
+
+  .main_box .main_content {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .main_box .button_box > div {
+    flex: 1;
+  }
+
+  .main_box .input_box {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main_box .main_content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .main_box .main_content {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>특강 대기실</title>
 
+    <!-- font -->
     <link
       rel="stylesheet"
       as="style"
@@ -12,8 +13,10 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
         theme: {
@@ -49,6 +52,7 @@
       };
     </script>
 
+    <!-- Custom CSS -->
     <style>
       body,
       p,
@@ -63,6 +67,7 @@
         word-break: keep-all;
       }
 
+      /* Search Input Reset */
       input[type="search"]::-webkit-search-decoration,
       input[type="search"]::-webkit-search-cancel-button,
       input[type="search"]::-webkit-search-results-button,
@@ -75,6 +80,7 @@
         -webkit-appearance: none;
       }
 
+      /* Scrollbar Custom */
       ::-webkit-scrollbar {
         width: 10px;
       }
@@ -152,10 +158,13 @@
         </div>
 
         <!-- 인풋박스 -->
-        <div class="input_box flex justify-between mb-[60px] px-[4px] shrink-0">
-          <div class="button_box flex gap-[12px]">
+        <div
+          class="input_box flex justify-between items-center mb-[60px] px-[4px] shrink-0 max-[1400px]:flex-col max-[1400px]:gap-[20px] max-[1400px]:items-stretch"
+        >
+          <!-- 버튼 박스 -->
+          <div class="button_box flex gap-[12px] flex-1 max-[1600px]:gap-[8px]">
             <div
-              class="active w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-brand rounded-[8px] font-medium transition-all duration-300 cursor-pointer bg-brand text-white hover:shadow-inset-brand-hover"
+              class="active w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-brand rounded-[8px] font-medium transition-all duration-300 cursor-pointer bg-brand text-white hover:shadow-inset-brand-hover max-[1400px]:w-auto max-[1400px]:flex-1"
             >
               전체
               <span
@@ -164,7 +173,7 @@
               >
             </div>
             <div
-              class="pre w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover"
+              class="pre w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover max-[1400px]:w-auto max-[1400px]:flex-1"
             >
               예정
               <span
@@ -173,7 +182,7 @@
               >
             </div>
             <div
-              class="ing w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover"
+              class="ing w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover max-[1400px]:w-auto max-[1400px]:flex-1"
             >
               진행중
               <span
@@ -182,7 +191,7 @@
               >
             </div>
             <div
-              class="end w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover"
+              class="end w-[140px] h-[40px] flex gap-[8px] justify-center items-center shadow-inset-border rounded-[8px] font-medium transition-all duration-300 cursor-pointer hover:shadow-inset-brand-hover max-[1400px]:w-auto max-[1400px]:flex-1"
             >
               종료
               <span
@@ -191,16 +200,20 @@
               >
             </div>
           </div>
-          <div class="right flex gap-[12px]">
-            <div class="search relative">
+
+          <!-- 우측 검색/등록 -->
+          <div
+            class="right flex items-center gap-[12px] flex-1 justify-end max-[1400px]:w-full"
+          >
+            <div class="search relative w-full">
               <input
                 type="search"
                 placeholder="검색어를 입력해 주세요"
-                class="appearance-none font-sans block w-[600px] h-[40px] px-[16px] pl-[44px] py-[8px] border border-[#ddd] rounded-[8px] bg-white text-[14px] text-[#1e1b3a] leading-[1.5] bg-[url('search.svg')] bg-no-repeat bg-[16px_8px] focus:outline-none placeholder:text-[#999] placeholder:text-[14px]"
+                class="appearance-none font-sans block w-full h-[40px] px-[16px] pl-[44px] py-[8px] border border-[#ddd] rounded-[8px] bg-white text-[14px] text-[#1e1b3a] leading-[1.5] bg-[url('search.svg')] bg-no-repeat bg-[16px_8px] focus:outline-none placeholder:text-[#999] placeholder:text-[14px]"
               />
             </div>
             <div
-              class="new w-[140px] h-[40px] font-semibold text-white rounded-[8px] bg-brand flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+              class="new w-[140px] h-[40px] font-semibold text-white rounded-[8px] bg-brand flex items-center justify-center shrink-0 transition-all duration-300 cursor-pointer hover:bg-brand-hover"
             >
               + 특강개설
             </div>
@@ -209,8 +222,9 @@
 
         <!-- 메인컨텐츠 -->
         <div
-          class="main_content grid grid-cols-4 gap-[20px] mb-[60px] shrink-0"
+          class="main_content grid grid-cols-4 gap-[20px] mb-[60px] shrink-0 max-[1600px]:grid-cols-3 max-[1200px]:grid-cols-2 max-[810px]:grid-cols-1"
         >
+          <!-- 박스: 진행중 -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
@@ -267,6 +281,7 @@
             </div>
           </div>
 
+          <!-- 박스: 예정 -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
@@ -323,6 +338,7 @@
             </div>
           </div>
 
+          <!-- 박스: 완료 -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
@@ -379,6 +395,7 @@
             </div>
           </div>
 
+          <!-- 박스: 취소 -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
@@ -435,6 +452,7 @@
             </div>
           </div>
 
+          <!-- 박스: 반복(진행중) -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
@@ -491,6 +509,7 @@
             </div>
           </div>
 
+          <!-- 박스: 반복(예정) -->
           <div class="box p-[40px] shadow-inset-border rounded-[20px]">
             <div class="tit flex items-center gap-[8px] mb-[20px]">
               <h3
