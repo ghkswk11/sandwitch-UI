@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 역량 평가과정 대시보드</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff", // 기본 브랜드 컬러
+                hover: "#5a4ce6", // 호버 시
+                light: "#b7adff", // 연한 컬러
+                bg: "#f3f1ff", // 메인 배경
+                copy: "#9b8cff", // 복사 아이콘 배경
+              },
+              text: {
+                base: "#1e1b3a", // 기본 텍스트
+                desc: "#666666", // 설명 텍스트
+                disabled: "#999999", // 비활성 텍스트
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* reset.css 및 공통 스타일의 스크롤바 구현 */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+
+      /* 텍스트 줄바꿈 설정 (CSS 7번 항목 반영) */
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div {
+        word-break: keep-all;
+      }
+    </style>
+  </head>
+  <body class="font-sans text-text-base leading-[1.5] h-full relative">
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white"
+    >
+      <div class="logo">
+        <img src="logo.svg" alt="logo" class="block max-w-full" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="name text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="button flex gap-[12px]">
+          <div
+            class="my_page text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+          >
+            마이페이지
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
+    >
+      <div
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto"
+      >
+        <div class="title mb-[40px]">
+          <h2 class="text-[32px] font-semibold mb-[4px]">AI 역량 평가과정</h2>
+          <p class="text-[18px] font-normal text-text-desc">
+            관리자의 안내에 따라 과제를 수행해주세요
+          </p>
+        </div>
+
+        <div
+          class="info_box flex items-center justify-between mb-[60px] px-[4px]"
+        >
+          <ul class="flex items-center gap-[24px]">
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon07.svg" alt="icon" class="block" />ChatGPT,
+              Claude 등 생성형 AI 도구를 활용한 실무 프로젝트
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon01.svg" alt="icon" class="block" />한국대학교
+              컴퓨터공학과
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon08.svg" alt="icon" class="block" />김교수
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon03.svg" alt="icon" class="block" />2025-12-19
+              14:00 - 16:00
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon04.svg" alt="icon" class="block" />온라인 (Zoom)
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon05.svg" alt="icon" class="block" />x12345
+            </li>
+            <li class="flex gap-[8px] text-[16px] font-normal text-text-base">
+              <img src="box_icon02.svg" alt="icon" class="block" />12 명
+            </li>
+          </ul>
+          <div
+            class="refresh flex gap-[2px] items-center text-text-disabled cursor-pointer text-[16px]"
+          >
+            <img src="refresh.svg" alt="icon" class="block" />새로고침
+          </div>
+        </div>
+
+        <div
+          class="main_content dashboard grid grid-cols-4 gap-[20px] mb-[60px]"
+        >
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div
+              class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                PPS
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                prompt problem solving
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              프롬프트 작성 및 문제 해결 과정의<br />
+              구조화 정도 평가 복잡한 문제를 해결하기 위해<br />
+              AI에게 논리적이고 체계적인 지시(프롬프트)를 설계
+            </div>
+            <div
+              class="setting pt-[20px] border-t border-border flex flex-col gap-[16px]"
+            >
+              <div class="mode">
+                <h3 class="text-[14px] font-semibold mb-[4px]">모드</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    학습모드
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    평가모드
+                  </li>
+                </ul>
+              </div>
+              <div class="status">
+                <h3 class="text-[14px] font-semibold mb-[4px]">상태</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    잠금
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    진행가능
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    종료
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div
+              class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                DIG
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                data insight generation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              데이터를 AI로 분석하고 인사이트를 도출하는 능력<br />
+              코드를 직접 실행하여 데이터를 검증하고<br />
+              근거 기반의 실질적인 해결책을 도출
+            </div>
+            <div
+              class="setting pt-[20px] border-t border-border flex flex-col gap-[16px]"
+            >
+              <div class="mode">
+                <h3 class="text-[14px] font-semibold mb-[4px]">모드</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    학습모드
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    평가모드
+                  </li>
+                </ul>
+              </div>
+              <div class="status">
+                <h3 class="text-[14px] font-semibold mb-[4px]">상태</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    잠금
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    진행가능
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    종료
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div
+              class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                GCC
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                generative content creation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              텍스트/이미지/영상 생성 능력 상황과 목적에 <br />
+              완벽히 부합하는 결과물을 생성하고<br />
+              스타일을 정교하게 최적화
+            </div>
+            <div
+              class="setting pt-[20px] border-t border-border flex flex-col gap-[16px]"
+            >
+              <div class="mode">
+                <h3 class="text-[14px] font-semibold mb-[4px]">모드</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    학습모드
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    평가모드
+                  </li>
+                </ul>
+              </div>
+              <div class="status">
+                <h3 class="text-[14px] font-semibold mb-[4px]">상태</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    잠금
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    진행가능
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    종료
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="box p-[40px] shadow-inset-border rounded-[20px]">
+            <div
+              class="tit column flex items-start flex-col gap-[8px] mb-[20px]"
+            >
+              <h3
+                class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[24px] font-semibold"
+              >
+                WFA
+              </h3>
+              <p class="font-medium text-text-desc text-[16px]">
+                workflow automation
+              </p>
+            </div>
+            <div
+              class="desc_full text-[14px] font-normal text-text-desc mb-[20px]"
+            >
+              반복 업무를 AI 및 자동화 도구로 설계하는 능력 <br />
+              업무 흐름을 구조화하여 예외 상황에서도 오류 없이<br />
+              작동하는 자동화 프로세스를 설계
+            </div>
+            <div
+              class="setting pt-[20px] border-t border-border flex flex-col gap-[16px]"
+            >
+              <div class="mode">
+                <h3 class="text-[14px] font-semibold mb-[4px]">모드</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    학습모드
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    평가모드
+                  </li>
+                </ul>
+              </div>
+              <div class="status">
+                <h3 class="text-[14px] font-semibold mb-[4px]">상태</h3>
+                <ul class="flex gap-[4px]">
+                  <li
+                    class="active flex-1 flex items-center justify-center rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 bg-brand text-white shadow-none hover:bg-brand-hover"
+                  >
+                    잠금
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    진행가능
+                  </li>
+                  <li
+                    class="flex-1 flex items-center justify-center shadow-inset-border rounded-[8px] text-[14px] font-medium h-[32px] cursor-pointer transition-all duration-300 hover:shadow-inset-brand"
+                  >
+                    종료
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
