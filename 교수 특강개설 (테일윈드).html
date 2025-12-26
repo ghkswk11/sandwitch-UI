@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>새 특강 개설</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+                dark: "#1e1b3a",
+              },
+              text: {
+                base: "#1e1b3a",
+                desc: "#666666",
+                disabled: "#999999",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div {
+        word-break: keep-all;
+      }
+
+      /* Scrollbar Custom */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+    </style>
+
+    <style>
+      /* 폰트 상속 강제 적용 */
+      input,
+      textarea,
+      select,
+      button {
+        font-family: "Pretendard", sans-serif !important;
+      }
+
+      /* 날짜 인풋 폰트 강제 적용 */
+      input[type="date"],
+      input[type="time"] {
+        font-family: "Pretendard", sans-serif !important;
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans text-text-base leading-[1.5] h-full relative overflow-hidden"
+  >
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white"
+    >
+      <div class="logo">
+        <img src="/imges/logo.svg" alt="logo" class="block max-w-full" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="name text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="button flex gap-[12px]">
+          <div
+            class="my_page text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+          >
+            마이페이지
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
+    >
+      <div
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto relative flex flex-col"
+      >
+        <div class="title mb-[40px] shrink-0">
+          <h2 class="text-[32px] font-semibold mb-[4px]">새 특강 개설</h2>
+          <p class="text-[18px] font-normal text-text-desc">
+            새로운 특강을 개설하고 학생들을 초대하세요
+          </p>
+        </div>
+
+        <div
+          class="lecture_opened flex flex-wrap gap-y-[24px] gap-x-[12px] justify-center flex-1 content-start"
+        >
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              특강명 <img src="/imges/star.svg" alt="icon" />
+            </p>
+            <input
+              type="text"
+              placeholder="예 :  생성형 AI 활용가이드"
+              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+            />
+          </div>
+
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              수행기관 <img src="/imges/star.svg" alt="icon" />
+            </p>
+            <input
+              type="text"
+              placeholder="예 : 한국대학교 컴퓨터 공학과"
+              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+            />
+          </div>
+
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[1200px]:[&:nth-child(3n)]:w-full max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              강사명
+            </p>
+            <input
+              type="text"
+              placeholder="예 : 김강사"
+              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+            />
+          </div>
+
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              시작 일시 <img src="/imges/star.svg" alt="icon" />
+            </p>
+            <div class="date_box flex gap-[8px]">
+              <input
+                type="date"
+                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+              />
+              <input
+                type="time"
+                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+              />
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              종료 일시 <img src="/imges/star.svg" alt="icon" />
+            </p>
+            <div class="date_box flex gap-[8px]">
+              <input
+                type="date"
+                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+              />
+              <input
+                type="time"
+                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+              />
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+          >
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              장소
+            </p>
+            <input
+              type="text"
+              placeholder="예 : 온라인(Zoom) 또는 공학관 301호"
+              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+            />
+          </div>
+
+          <div class="lecture_textarea w-full flex flex-col gap-[8px]">
+            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+              주제 및 내용 요약
+            </p>
+            <textarea
+              name=""
+              id=""
+              placeholder="특강의 주요 내용을 간단히 설명해 주세요."
+              class="w-full h-[240px] p-[20px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand resize-none appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+            ></textarea>
+          </div>
+
+          <div class="lecture_button w-[360px] max-w-full mt-auto">
+            <ul class="submit_box flex gap-[8px] h-[40px]">
+              <li
+                class="cancle flex-1 flex justify-center items-center rounded-[8px] bg-[#999] text-white font-semibold cursor-pointer transition-all duration-300 hover:bg-[#888] text-[16px] max-[1200px]:text-[14px]"
+              >
+                취소
+              </li>
+              <li
+                class="submit flex-1 flex justify-center items-center rounded-[8px] bg-brand text-white font-semibold cursor-pointer transition-all duration-300 hover:bg-brand-hover text-[16px] max-[1200px]:text-[14px]"
+              >
+                확인
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
