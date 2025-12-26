@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIG 측정용 스마트 데이터 그리드</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link
+      href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+              mono: ["D2Coding", "monospace"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff", // 헤더, 배경 등
+              },
+              bg: {
+                base: "#f3f1ff", // 메인 배경
+                main: "#f9f9f9", // 컨텐츠 영역 배경
+                white: "#ffffff",
+              },
+              state: {
+                error: "#e05252",
+                errorBg: "#ffe5e5",
+              },
+              text: {
+                main: "#1e1b3a",
+                sub: "#666666",
+                gray: "#999999",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              // css.css의 테이블 그리드 라인 구현
+              cell: "inset 1px -1px 0 #ddd",
+              "cell-first": "inset 0 -1px 0 #ddd",
+              "cell-last-row": "inset 1px 0 0 #ddd",
+              "cell-last-row-first": "none",
+              sidebar: "inset -1px 1px 0 0 #ddd",
+              toolbar: "inset 0 1px 0 #ddd, inset 0 -1px 0 #ddd",
+              enter: "inset 0 1px 0 0 #ddd",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* 스크롤바 스타일 (css.css 원본 100% 유지) 
+      테일윈드 클래스보다 원본 CSS를 유지하는 것이 디자인 일치도가 높습니다.
+    */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 6px; /* 가로 스크롤 높이 */
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+      /* Horizontal Scrollbar button (Start/End spacing) */
+      ::-webkit-scrollbar-button:horizontal:single-button:start {
+        width: 20px;
+        display: block;
+      }
+      ::-webkit-scrollbar-button:horizontal:single-button:end {
+        width: 20px;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body
+    class="m-0 p-0 font-sans text-text-main leading-[1.5] h-screen flex flex-col overflow-hidden text-[16px]"
+  >
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white shrink-0"
+    >
+      <div class="logo">
+        <img
+          src="logo.svg"
+          alt="logo"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'font-bold text-2xl text-brand\'>LOGO</span>'"
+        />
+      </div>
+      <div class="flex items-center gap-[20px]">
+        <div class="text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="flex gap-[12px]">
+          <button
+            class="text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all hover:bg-brand-hover cursor-pointer"
+          >
+            마이페이지
+          </button>
+          <button
+            class="text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="flex bg-bg-base h-[calc(100vh-80px)] items-center justify-center"
+    >
+      <div
+        class="left active flex flex-col bg-white h-full shadow-sidebar p-[40px_24px] relative box-border shrink-0 w-[430px]"
+      >
+        <div class="absolute top-[16px] right-[24px] cursor-pointer">
+          <img
+            src="ham.svg"
+            alt="icon"
+            onerror="this.outerHTML='<div class=\'w-6 h-6 bg-gray-300\'></div>'"
+          />
+        </div>
+
+        <div class="opacity-100 h-auto block">
+          <div class="flex gap-[8px] items-center mb-[32px]">
+            <span
+              class="px-[12px] py-[4px] rounded-[4px] bg-brand text-white text-[14px] font-semibold uppercase"
+              >module a-2</span
+            >
+            <h3 class="font-semibold text-[16px] tracking-tight">
+              DIG 측정용 스마트 데이터 그리드
+            </h3>
+          </div>
+
+          <div class="mb-[28px]">
+            <h3 class="text-[18px] font-semibold mb-[8px]">
+              MISSION : 급여 데이터 분석
+            </h3>
+            <p class="font-medium text-text-sub text-[16px]">
+              인사팀에서 전달받은 급여 대장을 분석하여, 직급별 평균 연봉과 야근
+              수당 비율을 시각화 하세요
+            </p>
+          </div>
+
+          <div
+            class="flex items-center gap-[20px] p-[12px] bg-[#f5f5f5] rounded-[12px] mb-[32px]"
+          >
+            <img
+              src="down.svg"
+              alt="icon"
+              onerror="this.outerHTML='<div class=\'w-8 h-8 bg-gray-300 rounded\'></div>'"
+            />
+            <div class="flex flex-col justify-center flex-1">
+              <p class="text-[14px] font-medium">salary_2024_Q1.xlsx</p>
+              <span class="text-[10px] font-medium text-text-gray"
+                >14KB • 보안등급 : 대외비</span
+              >
+            </div>
+            <button
+              class="flex items-center px-[12px] h-[24px] text-[12px] font-medium border border-border bg-white rounded-[4px] cursor-pointer"
+            >
+              다시받기
+            </button>
+          </div>
+
+          <div class="p-[20px] bg-brand-bg rounded-[12px] relative mb-[32px]">
+            <h3 class="font-semibold text-brand mb-[24px]">DIG 평가기준</h3>
+            <ul class="flex flex-col gap-[8px]">
+              <li
+                class="flex items-center text-[14px] font-medium active group"
+              >
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
+                ></div>
+                <p>보안(AES) :</p>
+                <span class="text-text-sub pl-[4px]">
+                  pII 식별 및 마스킹 (필수)</span
+                >
+              </li>
+              <li class="flex items-center text-[14px] font-medium">
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
+                ></div>
+                <p>정제 :</p>
+                <span class="text-text-sub pl-[4px]"> 결측치/오타 수정</span>
+              </li>
+              <li class="flex items-center text-[14px] font-medium">
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
+                ></div>
+                <p>시각화 :</p>
+                <span class="text-text-sub pl-[4px]"> 적절한 차트 선택</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-[32px] border-t border-border">
+            <h3 class="text-[18px] font-semibold mb-[28px]">
+              실시간 로그 감지(backend view)
+            </h3>
+          </div>
+
+          <div
+            class="p-[16px] bg-[#101828] min-h-[160px] max-h-[160px] rounded-[12px] flex flex-col gap-[4px] overflow-y-auto custom-scrollbar-white"
+          >
+            <p class="font-mono text-[12px] font-bold text-[#42c676]">
+              [10:00:01] file loded : salary_2024.xlsx
+            </p>
+            <p class="font-mono text-[12px] font-bold text-[#bf5a5f]">
+              [10:00:02] wARNING:PII pattern detected(rRN)
+            </p>
+            <p class="font-mono text-[12px] font-bold text-[#42c676]">
+              [10:00:01] file loded : salary_2024.xlsx
+            </p>
+            <p class="font-mono text-[12px] font-bold text-[#bf5a5f]">
+              [10:00:02] wARNING:PII pattern detected(rRN)
+            </p>
+            <p class="font-mono text-[12px] font-bold text-[#42c676]">
+              [10:00:01] file loded : salary_2024.xlsx
+            </p>
+            <p class="font-mono text-[12px] font-bold text-[#bf5a5f]">
+              [10:00:02] wARNING:PII pattern detected(rRN)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="right flex-1 h-full flex flex-col min-w-0">
+        <div
+          class="h-[60px] px-[24px] bg-white shadow-toolbar flex items-center relative shrink-0"
+        >
+          <div class="flex gap-[16px] pr-[24px]">
+            <img
+              src="undo.svg"
+              alt="undo"
+              class="cursor-pointer"
+              onerror="this.outerHTML='<span class=\'cursor-pointer text-gray-400\'>↩</span>'"
+            />
+            <img
+              src="undo.svg"
+              alt="redo"
+              class="cursor-pointer scale-x-[-1]"
+              onerror="this.outerHTML='<span class=\'cursor-pointer scale-x-[-1] text-gray-400\'>↩</span>'"
+            />
+          </div>
+
+          <div
+            class="pl-[24px] border-l border-border h-full flex gap-[8px] items-center"
+          >
+            <div
+              class="px-[12px] py-[8px] rounded-[8px] bg-state-error text-white text-[14px] font-medium"
+            >
+              PPI 마스킹
+            </div>
+            <div
+              class="px-[12px] py-[8px] rounded-[8px] bg-[#9b8cff] text-white text-[14px] font-medium"
+            >
+              결측치 채우기
+            </div>
+          </div>
+
+          <div
+            class="ml-auto mr-[24px] px-[12px] py-[8px] rounded-[8px] bg-brand flex items-center"
+          >
+            <p class="text-[14px] font-medium text-white">
+              AI에게 전송 및 분석
+            </p>
+            <span class="hidden"><img src="model.svg" alt="icon" /></span>
+          </div>
+
+          <div class="relative cursor-pointer group flex items-center">
+            <img
+              src="help.svg"
+              alt="icon"
+              onerror="this.outerHTML='<span class=\'text-gray-400\'>?</span>'"
+            />
+            <div
+              class="absolute bg-white rounded-[12px] py-[12px] px-[20px] w-[240px] top-[24px] right-[-4px] shadow-[1px_1px_6px_rgba(0,0,0,0.1)] hidden group-hover:block z-50"
+            >
+              <h3 class="text-[13px] mb-[4px] font-semibold">도움말</h3>
+              <p class="text-[12px] font-medium">설명이 들어갑니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-[40px] bg-bg-main">
+          <article class="flex flex-col gap-[24px] w-full max-w-full min-w-0">
+            <div
+              class="w-full bg-white border border-brand rounded-[20px] overflow-x-auto overflow-y-hidden"
+            >
+              <ul class="flex min-w-[840px] bg-brand-bg">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  ID
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  이름(NAME)
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  <img
+                    src="error.svg"
+                    alt="!"
+                    class="mr-[4px]"
+                    onerror="this.outerHTML='<span class=\'mr-1\'>⚠</span>'"
+                  />주민등록번호(RRN)
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  부서(Dept)
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  연봉(salary)
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  전화번호(phone)
+                </li>
+              </ul>
+
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  001
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  002
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  002
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  003
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-first"
+                >
+                  004
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+
+              <ul class="flex min-w-[840px] bg-white">
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row-first"
+                >
+                  005
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row"
+                >
+                  김철수
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row bg-state-errorBg text-state-error"
+                >
+                  800101-1234567
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row"
+                >
+                  인사팀
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row"
+                >
+                  50,000,000
+                </li>
+                <li
+                  class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row"
+                >
+                  010-1234-5678
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div class="bg-white p-[12px_24px_20px] shrink-0 shadow-enter">
+          <div class="relative h-[140px]">
+            <textarea
+              class="w-full h-full border border-brand rounded-[8px] p-[20px] text-[14px] font-medium outline-none resize-none placeholder-text-gray"
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div
+              class="absolute bottom-[16px] right-[16px] w-[32px] h-[32px] flex justify-center items-center bg-brand rounded-[50px] cursor-pointer transition-all hover:bg-brand-hover"
+            >
+              <img
+                src="enter.svg"
+                alt="icon"
+                onerror="this.outerHTML='<span class=\'text-white font-bold\'>↵</span>'"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

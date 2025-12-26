@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="name"><span>김마녀</span>님</div>
+        <div class="button">
+          <div class="my_page">마이페이지</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <!-- 사이드메뉴 -->
+      <div class="left active">
+        <div class="ham_btn">
+          <img src="ham.svg" alt="icon" />
+        </div>
+
+        <!-- 상단설명 -->
+        <div class="top">
+          <span>module a-2</span>
+          <h3>DIG 측정용 스마트 데이터 그리드</h3>
+        </div>
+        <!-- 미션 -->
+        <div class="mission">
+          <h3>MISSION : 급여 데이터 분석</h3>
+          <p>
+            인사팀에서 전달받은 급여 대장을 분석하여, 직급별 평균 연봉과 야근
+            수당 비율을 시각화 하세요
+          </p>
+        </div>
+        <!-- 다운로드 -->
+        <div class="download">
+          <img src="down.svg" alt="icon" />
+          <div class="file_desc">
+            <p>salary_2024_Q1.xlsx</p>
+            <span>14KB • 보안등급 : 대외비</span>
+          </div>
+          <button class="down_btn" type="button">다시받기</button>
+        </div>
+        <!-- 평가기준 -->
+        <div class="eval">
+          <h3>DIG 평가기준</h3>
+          <ul>
+            <li class="active">
+              <div class="check_box"></div>
+              <p>보안(AES) :</p>
+              <span> pII 식별 및 마스킹 (필수)</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>정제 :</p>
+              <span> 결측치/오타 수정</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>시각화 :</p>
+              <span> 적절한 차트 선택</span>
+            </li>
+          </ul>
+        </div>
+        <!-- 실시간 -->
+        <div class="live">
+          <h3>실시간 로그 감지(backend view)</h3>
+        </div>
+        <!-- 코드박스 -->
+        <div class="code_box">
+          <p class="success">[10:00:01] file loded : salary_2024.xlsx</p>
+          <p class="error">[10:00:02] wARNING:PII pattern detected(rRN)</p>
+          <p class="success">[10:00:01] file loded : salary_2024.xlsx</p>
+          <p class="error">[10:00:02] wARNING:PII pattern detected(rRN)</p>
+          <p class="success">[10:00:01] file loded : salary_2024.xlsx</p>
+          <p class="error">[10:00:02] wARNING:PII pattern detected(rRN)</p>
+          <p class="success">[10:00:01] file loded : salary_2024.xlsx</p>
+          <p class="error">[10:00:02] wARNING:PII pattern detected(rRN)</p>
+        </div>
+      </div>
+      <!-- 메인컨텐츠 -->
+      <div class="right">
+        <div class="main_toolbar">
+          <div class="btn_area">
+            <img src="undo.svg" alt="icon" class="undo" />
+            <img src="undo.svg" alt="icon" class="redo" />
+          </div>
+          <div class="status">
+            <div class="error">PPI 마스킹</div>
+            <div>결측치 채우기</div>
+          </div>
+          <div class="ai_send">
+            <p>AI에게 전송 및 분석</p>
+            <span><img src="model.svg" alt="icon" /></span>
+          </div>
+          <div class="help">
+            <img src="help.svg" alt="icon" />
+            <div class="help_tooltip disable">
+              <h3>여기제목</h3>
+              <p>
+                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
+                늘어나게 됩니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="main_cont dig">
+          <article>
+            <div class="table">
+              <ul class="head">
+                <li>ID</li>
+                <li>이름(NAME)</li>
+                <li class="error">
+                  <img src="error.svg" alt="icon" />주민등록번호(RRN)
+                </li>
+                <li>부서(Dept)</li>
+                <li>연봉(salary)</li>
+                <li>전화번호(phone)</li>
+              </ul>
+              <ul class="body">
+                <li>001</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>002</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>002</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>003</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>004</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>005</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="enter dig">
+          <div class="textarea">
+            <textarea
+              name=""
+              id=""
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div class="enter_icon"><img src="enter.svg" alt="icon" /></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
