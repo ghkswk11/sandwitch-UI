@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="name"><span>김마녀</span>님</div>
+        <div class="button">
+          <div class="my_page">마이페이지</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <div class="main_box">
+        <!-- 타이틀 -->
+        <div class="title">
+          <h2>새 특강 개설</h2>
+          <p>새로운 특강을 개설하고 학생들을 초대하세요</p>
+        </div>
+        <!-- 특강개설 -->
+        <div class="lecture_opened">
+          <!-- 특강명 -->
+          <div>
+            <p>특강명 <img src="star.svg" alt="icon" /></p>
+            <input type="text" placeholder="예 :  생성형 AI 활용가이드" />
+          </div>
+          <!-- 수행기관 -->
+          <div>
+            <p>수행기관 <img src="star.svg" alt="icon" /></p>
+            <input type="text" placeholder="예 : 한국대학교 컴퓨터 공학과" />
+          </div>
+          <!-- 강사명 -->
+          <div>
+            <p>강사명</p>
+            <input type="text" placeholder="예 : 김강사" />
+          </div>
+          <!-- 날짜 -->
+          <div>
+            <p>시작 일시 <img src="star.svg" alt="icon" /></p>
+            <div class="date_box">
+              <input type="date" /> <input type="time" />
+            </div>
+          </div>
+          <div>
+            <p>종료 일시 <img src="star.svg" alt="icon" /></p>
+            <div class="date_box">
+              <input type="date" /> <input type="time" />
+            </div>
+          </div>
+          <!-- 장소 -->
+          <div>
+            <p>장소</p>
+            <input
+              type="text"
+              placeholder="예 : 온라인(Zoom) 또는 공학관 301호"
+            />
+          </div>
+          <!-- 주제 및  내용 요약 -->
+          <div class="lecture_textarea">
+            <p>주제 및 내용 요약</p>
+            <textarea
+              name=""
+              id=""
+              placeholder="특강의 주요 내용을 간단히 설명해 주세요."
+            ></textarea>
+          </div>
+          <!-- 버튼 -->
+          <div class="lecture_button">
+            <ul class="submit_box">
+              <li class="cancle">취소</li>
+              <li class="submit">확인</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

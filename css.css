@@ -1263,6 +1263,87 @@ main .right .main_cont {
   background: #e05252;
 }
 
+.lecture_opened {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 12px;
+  justify-content: center;
+  flex: 1;
+}
+
+.lecture_opened > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: calc(100% / 3 - 8px);
+}
+
+.lecture_opened > div input {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.lecture_opened > div.lecture_textarea {
+  width: 100%;
+}
+
+.lecture_opened > div.lecture_textarea textarea {
+  padding: 20px;
+  height: 240px;
+}
+
+.lecture_opened > div p {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  font-weight: 500;
+}
+
+.lecture_opened .date_box {
+  display: flex;
+  gap: 8px;
+}
+
+.lecture_opened .date_box > input {
+  flex: 1;
+  font-family: "Pretendard", sans-serif !important;
+}
+
+.lecture_button {
+  width: 360px !important;
+}
+
+.lecture_button .submit_box {
+  display: flex;
+  gap: 8px;
+  height: 40px;
+  margin-top: auto;
+}
+.lecture_button .submit_box li {
+  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6a5cff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.lecture_button .submit_box li:hover {
+  background: #5a4ce6;
+}
+
+.lecture_button .submit_box li.cancle {
+  background: #999;
+}
+
+.lecture_button .submit_box li.cancle:hover {
+  background: #888;
+}
+
 @media screen and (max-width: 1600px) {
   .main_box .button_box {
     gap: 8px;
