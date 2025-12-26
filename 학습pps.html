@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="name"><span>김마녀</span>님</div>
+        <div class="button">
+          <div class="my_page">마이페이지</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <!-- 사이드메뉴 -->
+      <div class="left">
+        <!-- 상단설명 -->
+        <div class="top">
+          <span>module a-1</span>
+          <h3>PPS측정용 멀티탭 인터페이스</h3>
+        </div>
+        <!-- 미션 -->
+        <div class="mission">
+          <h3>MISSION : 콜드 메일 작성</h3>
+          <p>
+            잠재 고객(B2B)에게 우리 회사의 AI 솔루션을 소개하는 <br />첫 번째
+            이메일 초안을 작성 하세요.
+          </p>
+        </div>
+        <!-- 평가기준 -->
+        <div class="eval">
+          <h3>PPS 평가기준</h3>
+          <ul>
+            <li class="active">
+              <div class="check_box"></div>
+              <p>명확성 :</p>
+              <span> 모호한 표현(잘, 적당히 등) 제거</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>구조화 :</p>
+              <span> r.c.c.f 요소 포함</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>리파인 :</p>
+              <span> 3회 이상 수정 및 개선</span>
+            </li>
+          </ul>
+          <div class="help">
+            <img src="help.svg" alt="icon" />
+            <div class="help_tooltip disable">
+              <h3>여기제목</h3>
+              <p>
+                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
+                늘어나게 됩니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- 실시간 -->
+        <div class="live">
+          <h3>실시간 구조 분석(backend view)</h3>
+        </div>
+        <!-- 프로그래스바 -->
+        <div class="progress">
+          <ul>
+            <li>
+              <div class="text">
+                <h3>role(역할)</h3>
+                <p class="disable">not found</p>
+              </div>
+              <div class="bar_back"><div class="bar"></div></div>
+            </li>
+            <li>
+              <div class="text">
+                <h3>context(맥락)</h3>
+                <p class="">detected</p>
+              </div>
+              <div class="bar_back"><div class="bar"></div></div>
+            </li>
+            <li>
+              <div class="text">
+                <h3>refine count</h3>
+                <p class="">2/3</p>
+              </div>
+              <div class="bar_back"><div class="bar"></div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 메인컨텐츠 -->
+      <div class="right">
+        <div class="tab_btn">
+          <ul>
+            <li>
+              <div class="label">V1</div>
+              초안
+            </li>
+            <li class="active">
+              <div class="label">V2</div>
+              1차 수정
+            </li>
+            <li class="new">
+              <div class="label"><img src="plus.svg" alt="icon" /></div>
+              새 버전 추가
+            </li>
+          </ul>
+        </div>
+        <div class="main_cont">
+          <span class="info_text">V1 (초안) 에서 맥락을 가져왔습니다.</span>
+          <article>
+            <div class="user">
+              <div class="user_name">
+                <div class="img">
+                  <img src="user.svg" alt="icon" />
+                </div>
+                <span>김마녀</span>
+              </div>
+              <div class="chat">
+                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
+                넣어줘.
+              </div>
+            </div>
+            <div class="model">
+              <div class="model_name">
+                <div class="img">
+                  <img src="model.svg" alt="icon" />
+                </div>
+                <span>GPT-4o</span>
+              </div>
+              <div class="chat">
+                [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가 도착했습니다.<br />
+                안녕하세요, 팀장님. 영업 현장에서 10년간 발로 뛴 경험으로 미루어
+                볼 때, 가장 힘든 건 '고객 관리' 그 자체보다 '데이터 정리'였을
+                겁니다.<br /><br />
+
+                저희 솔루션은 팀장님의 시간을 이렇게 돌려드립니다:><br />
+                • 🚀 자동 기록: 통화 내용이 텍스트로 즉시 변환됩니다.><br />
+                • 📊 감정 분석: 고객의 구매 확률을 %로 예측합니다.><br />
+                • ✉️ 팔로우업: 미팅 후 감사 메일을 자동 발송합니다.
+              </div>
+              <div class="model_option">
+                <ul>
+                  <li class="copy"><img src="copy.svg" alt="icon" /> 복사</li>
+                  <li class="choose">
+                    <img src="check.svg" alt="icon" /> 채택
+                  </li>
+                  <li class="aes">
+                    <img src="aes.svg" alt="icon" /> 환각 신고 (AES)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+          <article>
+            <div class="user">
+              <div class="user_name">
+                <div class="img">
+                  <img src="user.svg" alt="icon" />
+                </div>
+                <span>김마녀</span>
+              </div>
+              <div class="chat">
+                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
+                넣어줘.
+              </div>
+            </div>
+            <div class="model">
+              <div class="model_name">
+                <div class="img">
+                  <img src="model.svg" alt="icon" />
+                </div>
+                <span>GPT-4o</span>
+              </div>
+              <div class="chat">
+                [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가 도착했습니다.<br />
+                안녕하세요, 팀장님. 영업 현장에서 10년간 발로 뛴 경험으로 미루어
+                볼 때, 가장 힘든 건 '고객 관리' 그 자체보다 '데이터 정리'였을
+                겁니다.<br /><br />
+
+                저희 솔루션은 팀장님의 시간을 이렇게 돌려드립니다:><br />
+                • 🚀 자동 기록: 통화 내용이 텍스트로 즉시 변환됩니다.><br />
+                • 📊 감정 분석: 고객의 구매 확률을 %로 예측합니다.><br />
+                • ✉️ 팔로우업: 미팅 후 감사 메일을 자동 발송합니다.
+              </div>
+              <div class="model_option">
+                <ul>
+                  <li class="copy"><img src="copy.svg" alt="icon" /> 복사</li>
+                  <li class="choose">
+                    <img src="check.svg" alt="icon" /> 채택
+                  </li>
+                  <li class="aes">
+                    <img src="aes.svg" alt="icon" /> 환각 신고 (AES)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="enter">
+          <div class="hint">
+            <h3>HINT :</h3>
+            <ul>
+              <li><img src="plus.svg" alt="icon" />역할(ROLE) 부여</li>
+              <li><img src="plus.svg" alt="icon" />제약조건(CONSTRAINT)</li>
+              <li><img src="plus.svg" alt="icon" />검증 요청(AES)</li>
+            </ul>
+          </div>
+          <div class="textarea">
+            <textarea
+              name=""
+              id=""
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div class="enter_icon"><img src="enter.svg" alt="icon" /></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
