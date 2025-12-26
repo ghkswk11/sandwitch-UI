@@ -1429,10 +1429,26 @@ main .right .main_cont {
   .progress ul {
     gap: 12px;
   }
+
+  .lecture_opened > div {
+    width: calc(50% - 6px);
+  }
+
+  .lecture_opened > div:nth-child(3n) {
+    width: 100%;
+  }
+
+  .lecture_button .submit_box li {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 810px) {
   .main_box .main_content {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .lecture_opened > div {
+    width: 100%;
   }
 }
