@@ -807,18 +807,41 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   background: #fff;
-  width: 430px;
   height: calc(100vh - 80px);
   flex-shrink: 0;
-  box-shadow: inset 0px 0px 0 1px #ddd;
+  box-shadow: inset -1px 1px 0 0px #ddd;
   padding: 40px 24px;
+  position: relative;
+  width: 72px;
+  box-sizing: border-box;
+}
+
+.left.active {
+  width: 430px;
+}
+
+.left div:not(.ham_btn) {
+  opacity: 0;
+  height: 0;
+}
+
+.left.active div {
+  opacity: 1;
+  height: auto;
+}
+
+.left .ham_btn {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  cursor: pointer;
 }
 
 .left .top {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .left .top span {
@@ -985,7 +1008,7 @@ input[type="number"] {
   color: #999;
 }
 
-.progress .bar_back {
+.left.active .progress .bar_back {
   width: 100%;
   height: 12px;
   background: #f3f1ff;
@@ -994,7 +1017,7 @@ input[type="number"] {
   overflow: hidden;
 }
 
-.progress .bar {
+.left.active .progress .bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -1213,6 +1236,8 @@ main .right .main_cont {
   box-shadow: inset 0 0 0 1px #6a5cff;
   border-radius: 20px;
   max-width: 800px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .model_option ul {
@@ -1264,8 +1289,8 @@ main .right .main_cont {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .left {
-    width: 320px;
+  .left.active {
+    width: 360px;
     padding: 32px 20px;
   }
 
@@ -1304,6 +1329,24 @@ main .right .main_cont {
 
   .enter .hint {
     align-items: flex-start;
+  }
+
+  .eval ul li span,
+  .eval ul li p {
+    letter-spacing: -0.02em;
+  }
+
+  .live h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .left.active .progress .bar_back {
+    height: 8px;
+  }
+
+  .progress ul {
+    gap: 12px;
   }
 }
 
