@@ -32,12 +32,11 @@
                 DEFAULT: "#6a5cff",
                 hover: "#5a4ce6",
                 light: "#b7adff",
-                bg: "#f3f1ff", // 헤더, 배경 등
+                bg: "#f3f1ff",
               },
               bg: {
-                base: "#f3f1ff", // 메인 배경
-                main: "#f9f9f9", // 컨텐츠 영역 배경
-                white: "#ffffff",
+                base: "#f3f1ff",
+                main: "#f9f9f9",
               },
               state: {
                 error: "#e05252",
@@ -53,7 +52,6 @@
               },
             },
             boxShadow: {
-              // css.css의 테이블 그리드 라인 구현
               cell: "inset 1px -1px 0 #ddd",
               "cell-first": "inset 0 -1px 0 #ddd",
               "cell-last-row": "inset 1px 0 0 #ddd",
@@ -68,12 +66,13 @@
     </script>
 
     <style>
-      /* 스크롤바 스타일 (css.css 원본 100% 유지) 
-      테일윈드 클래스보다 원본 CSS를 유지하는 것이 디자인 일치도가 높습니다.
-    */
+      /* =========================================
+       스크롤바 설정 (보내주신 css.css 100% 이식)
+       ========================================= */
+
+      /* 1. 기본 글로벌 스크롤바 (reset.css 내용) */
       ::-webkit-scrollbar {
         width: 10px;
-        height: 6px; /* 가로 스크롤 높이 */
       }
       ::-webkit-scrollbar-track {
         background: transparent;
@@ -84,14 +83,40 @@
         border: 3px solid transparent;
         background-clip: content-box;
       }
-      /* Horizontal Scrollbar button (Start/End spacing) */
-      ::-webkit-scrollbar-button:horizontal:single-button:start {
-        width: 20px;
-        display: block;
+
+      /* 2. 테이블 전용 가로 스크롤바 (css.css 내용) */
+      /* .table 클래스가 붙은 곳에만 적용 */
+      .table-scroll::-webkit-scrollbar {
+        width: 0.8em;
+        height: 6px; /* 높이 6px 고정 */
       }
-      ::-webkit-scrollbar-button:horizontal:single-button:end {
-        width: 20px;
-        display: block;
+
+      .table-scroll::-webkit-scrollbar-thumb {
+        background: #6a5cff;
+        border: 1.5px solid transparent;
+        border-radius: 2em;
+        background-clip: content-box;
+      }
+
+      /* 왼쪽 여백(Spacer) 역할을 하는 투명 버튼 */
+      .table-scroll::-webkit-scrollbar-button:horizontal:single-button:start {
+        position: absolute;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-right: 42px solid transparent; /* 여백 확보 */
+        border-left: 20px solid transparent;
+        border-top: 20px solid transparent;
+      }
+
+      /* 오른쪽 여백(Spacer) 역할을 하는 투명 버튼 */
+      .table-scroll::-webkit-scrollbar-button:horizontal:single-button:end {
+        position: absolute;
+        overflow: hidden;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-left: 42px solid transparent; /* 여백 확보 */
+        border-right: 20px solid transparent;
+        border-top: 20px solid transparent;
       }
     </style>
   </head>
@@ -132,7 +157,7 @@
       class="flex bg-bg-base h-[calc(100vh-80px)] items-center justify-center"
     >
       <div
-        class="left active flex flex-col bg-white h-full shadow-sidebar p-[40px_24px] relative box-border shrink-0 w-[430px]"
+        class="left active flex flex-col bg-white h-full shadow-sidebar p-[40px_24px] relative box-border shrink-0 w-[430px] max-[1200px]:w-[360px] max-[1200px]:p-[32px_20px]"
       >
         <div class="absolute top-[16px] right-[24px] cursor-pointer">
           <img
@@ -143,21 +168,29 @@
         </div>
 
         <div class="opacity-100 h-auto block">
-          <div class="flex gap-[8px] items-center mb-[32px]">
+          <div
+            class="flex gap-[8px] items-center mb-[32px] max-[1200px]:mb-[28px]"
+          >
             <span
-              class="px-[12px] py-[4px] rounded-[4px] bg-brand text-white text-[14px] font-semibold uppercase"
+              class="px-[12px] py-[4px] rounded-[4px] bg-brand text-white text-[14px] font-semibold uppercase max-[1200px]:text-[12px] max-[1200px]:shrink-0"
               >module a-2</span
             >
-            <h3 class="font-semibold text-[16px] tracking-tight">
+            <h3
+              class="font-semibold text-[16px] tracking-tight max-[1200px]:text-[14px]"
+            >
               DIG 측정용 스마트 데이터 그리드
             </h3>
           </div>
 
           <div class="mb-[28px]">
-            <h3 class="text-[18px] font-semibold mb-[8px]">
+            <h3
+              class="text-[18px] font-semibold mb-[8px] max-[1200px]:text-[16px]"
+            >
               MISSION : 급여 데이터 분석
             </h3>
-            <p class="font-medium text-text-sub text-[16px]">
+            <p
+              class="font-medium text-text-sub text-[16px] max-[1200px]:text-[14px]"
+            >
               인사팀에서 전달받은 급여 대장을 분석하여, 직급별 평균 연봉과 야근
               수당 비율을 시각화 하세요
             </p>
@@ -185,7 +218,11 @@
           </div>
 
           <div class="p-[20px] bg-brand-bg rounded-[12px] relative mb-[32px]">
-            <h3 class="font-semibold text-brand mb-[24px]">DIG 평가기준</h3>
+            <h3
+              class="font-semibold text-brand mb-[24px] max-[1200px]:text-[14px] max-[1200px]:mb-[16px]"
+            >
+              DIG 평가기준
+            </h3>
             <ul class="flex flex-col gap-[8px]">
               <li
                 class="flex items-center text-[14px] font-medium active group"
@@ -193,8 +230,10 @@
                 <div
                   class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
                 ></div>
-                <p>보안(AES) :</p>
-                <span class="text-text-sub pl-[4px]">
+                <p class="max-[1200px]:tracking-tight">보안(AES) :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
                   pII 식별 및 마스킹 (필수)</span
                 >
               </li>
@@ -202,27 +241,37 @@
                 <div
                   class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
                 ></div>
-                <p>정제 :</p>
-                <span class="text-text-sub pl-[4px]"> 결측치/오타 수정</span>
+                <p class="max-[1200px]:tracking-tight">정제 :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
+                  결측치/오타 수정</span
+                >
               </li>
               <li class="flex items-center text-[14px] font-medium">
                 <div
                   class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
                 ></div>
-                <p>시각화 :</p>
-                <span class="text-text-sub pl-[4px]"> 적절한 차트 선택</span>
+                <p class="max-[1200px]:tracking-tight">시각화 :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
+                  적절한 차트 선택</span
+                >
               </li>
             </ul>
           </div>
 
           <div class="pt-[32px] border-t border-border">
-            <h3 class="text-[18px] font-semibold mb-[28px]">
+            <h3
+              class="text-[18px] font-semibold mb-[28px] max-[1200px]:text-[16px] max-[1200px]:mb-[20px]"
+            >
               실시간 로그 감지(backend view)
             </h3>
           </div>
 
           <div
-            class="p-[16px] bg-[#101828] min-h-[160px] max-h-[160px] rounded-[12px] flex flex-col gap-[4px] overflow-y-auto custom-scrollbar-white"
+            class="p-[16px] bg-[#101828] min-h-[160px] max-h-[160px] rounded-[12px] flex flex-col gap-[4px] overflow-y-auto"
           >
             <p class="font-mono text-[12px] font-bold text-[#42c676]">
               [10:00:01] file loded : salary_2024.xlsx
@@ -245,6 +294,7 @@
           </div>
         </div>
       </div>
+
       <div class="right flex-1 h-full flex flex-col min-w-0">
         <div
           class="h-[60px] px-[24px] bg-white shadow-toolbar flex items-center relative shrink-0"
@@ -268,12 +318,12 @@
             class="pl-[24px] border-l border-border h-full flex gap-[8px] items-center"
           >
             <div
-              class="px-[12px] py-[8px] rounded-[8px] bg-state-error text-white text-[14px] font-medium"
+              class="px-[12px] py-[8px] rounded-[8px] bg-state-error text-white text-[14px] font-medium max-[1200px]:text-[12px] max-[1200px]:px-[12px]"
             >
               PPI 마스킹
             </div>
             <div
-              class="px-[12px] py-[8px] rounded-[8px] bg-[#9b8cff] text-white text-[14px] font-medium"
+              class="px-[12px] py-[8px] rounded-[8px] bg-[#9b8cff] text-white text-[14px] font-medium max-[1200px]:text-[12px] max-[1200px]:px-[12px]"
             >
               결측치 채우기
             </div>
@@ -282,10 +332,18 @@
           <div
             class="ml-auto mr-[24px] px-[12px] py-[8px] rounded-[8px] bg-brand flex items-center"
           >
-            <p class="text-[14px] font-medium text-white">
+            <p
+              class="text-[14px] font-medium text-white block max-[1200px]:hidden"
+            >
               AI에게 전송 및 분석
             </p>
-            <span class="hidden"><img src="model.svg" alt="icon" /></span>
+            <span class="hidden max-[1200px]:block">
+              <img
+                src="model.svg"
+                alt="icon"
+                onerror="this.outerHTML='<span class=\'text-white text-xs\'>AI</span>'"
+              />
+            </span>
           </div>
 
           <div class="relative cursor-pointer group flex items-center">
@@ -306,7 +364,7 @@
         <div class="flex-1 overflow-y-auto p-[40px] bg-bg-main">
           <article class="flex flex-col gap-[24px] w-full max-w-full min-w-0">
             <div
-              class="w-full bg-white border border-brand rounded-[20px] overflow-x-auto overflow-y-hidden"
+              class="table-scroll w-full bg-white border border-brand rounded-[20px] overflow-x-auto overflow-y-hidden"
             >
               <ul class="flex min-w-[840px] bg-brand-bg">
                 <li
@@ -506,7 +564,6 @@
                   010-1234-5678
                 </li>
               </ul>
-
               <ul class="flex min-w-[840px] bg-white">
                 <li
                   class="flex-1 flex items-center justify-center h-[40px] text-[14px] font-medium shadow-cell-last-row-first"
