@@ -488,6 +488,8 @@ main {
 .info_box ul li {
   display: flex;
   gap: 8px;
+  font-size: 14px;
+  color: #666;
 }
 
 .info_box .refresh {
