@@ -185,7 +185,7 @@
       class="flex bg-bg-base h-[calc(100vh-80px)] items-center justify-center"
     >
       <div
-        class="left-sidebar active flex flex-col bg-white h-full shadow-sidebar p-[40px_24px] relative box-border shrink-0"
+        class="left-sidebar active flex flex-col bg-white h-full shadow-sidebar p-[40px_24px] relative box-border shrink-0 overflow-y-auto"
       >
         <div
           class="ham_btn absolute top-[16px] right-[24px] cursor-pointer"
@@ -259,7 +259,7 @@
                 class="flex items-center text-[14px] font-medium active group"
               >
                 <div
-                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
                 ></div>
                 <p class="max-[1200px]:tracking-tight">보안(AES) :</p>
                 <span
@@ -268,6 +268,7 @@
                   pII 식별 및 마스킹 (필수)</span
                 >
               </li>
+
               <li class="flex items-center text-[14px] font-medium">
                 <div
                   class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
@@ -279,6 +280,7 @@
                   결측치/오타 수정</span
                 >
               </li>
+
               <li class="flex items-center text-[14px] font-medium">
                 <div
                   class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
@@ -386,7 +388,9 @@
             <div
               class="absolute bg-white rounded-[12px] py-[12px] px-[20px] w-[240px] top-[24px] right-[-4px] shadow-[1px_1px_6px_rgba(0,0,0,0.1)] hidden group-hover:block z-50"
             >
-              <h3 class="text-[13px] mb-[4px] font-semibold">도움말</h3>
+              <h3 class="text-[13px] mb-[4px] font-semibold text-brand">
+                도움말
+              </h3>
               <p class="text-[12px] font-medium">설명이 들어갑니다.</p>
             </div>
           </div>

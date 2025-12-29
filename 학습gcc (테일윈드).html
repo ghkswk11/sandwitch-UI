@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GCC 측정용 크리에이티브 캔버스</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link
+      href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+              mono: ["D2Coding", "monospace"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+              },
+              bg: { base: "#f3f1ff", main: "#f9f9f9" },
+              state: { error: "#e05252" },
+              text: { main: "#1e1b3a", sub: "#666666", gray: "#999999" },
+              border: { DEFAULT: "#dddddd" },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-left": "inset -1px 1px 0 0px #ddd",
+              "chat-user": "inset 0 0 0 1px #6a5cff",
+              enter: "inset 0 1px 0 0 #ddd",
+              toolbar: "inset 0 1px 0 #ddd, inset 0 -1px 0 #ddd",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* 사이드바 로직 (Transition 제거됨) */
+      .left {
+        width: 72px;
+      }
+      .left.active {
+        width: 430px;
+      }
+
+      /* 자식 요소 숨김/표시 처리 */
+      .left > div:not(.ham_btn) {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      .left.active > div:not(.ham_btn) {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+      }
+
+      @media screen and (max-width: 1200px) {
+        .left.active {
+          width: 360px;
+          padding: 32px 20px;
+        }
+      }
+
+      /* 기본 스크롤바 설정 */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+    </style>
+
+    <style>
+      /* 1. GCC 전용: 인터랙션(업로드/컬러) 완료 상태 */
+      .select_complate {
+        background-color: #6a5cff !important;
+        border: none !important;
+      }
+      .select_complate p {
+        color: #fff !important;
+      }
+
+      /* 2. GCC 전용: 코드박스 내부 흰색 스크롤바 */
+      .code-box-scroll::-webkit-scrollbar-thumb {
+        background-color: #fff;
+      }
+
+      /* 3. GCC 전용: 스크롤바 위아래 여백 (투명 버튼) */
+      ::-webkit-scrollbar-button:vertical:single-button:start {
+        position: absolute;
+        content: "";
+        border-right: 20px solid transparent;
+        border-bottom: 62px solid #ffffff00;
+        border-left: 20px solid transparent;
+        border-top: 20px solid transparent;
+      }
+
+      ::-webkit-scrollbar-button:vertical:single-button:end {
+        position: absolute;
+        overflow: hidden;
+        content: "";
+        border-bottom: 20px solid transparent;
+        border-top: 62px solid #ffffff00;
+        border-right: 20px solid transparent;
+        border-left: 20px solid transparent;
+      }
+    </style>
+  </head>
+
+  <body
+    class="m-0 p-0 font-sans text-text-main leading-[1.5] h-screen flex flex-col overflow-hidden text-[16px]"
+  >
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white shrink-0"
+    >
+      <div class="logo">
+        <img src="/images/logo.svg" alt="logo" />
+      </div>
+      <div class="flex items-center gap-[20px]">
+        <div class="text-[16px] font-medium">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="flex gap-[12px]">
+          <button
+            class="text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] hover:bg-brand-hover transition-all duration-300 cursor-pointer"
+          >
+            마이페이지
+          </button>
+          <button
+            class="text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="flex bg-brand-bg h-[calc(100vh-80px)] items-center justify-center"
+    >
+      <div
+        class="left active flex flex-col bg-white h-full shadow-inset-left p-[40px_24px] relative box-border shrink-0 overflow-y-auto overflow-x-hidden"
+      >
+        <div
+          class="ham_btn absolute top-[16px] right-[24px] cursor-pointer z-10"
+          onclick="document.querySelector('.left').classList.toggle('active')"
+        >
+          <img src="/images/ham.svg" alt="icon" />
+        </div>
+
+        <div class="h-auto block">
+          <div
+            class="flex gap-[8px] items-center mb-[32px] max-[1200px]:mb-[28px]"
+          >
+            <span
+              class="px-[12px] py-[4px] rounded-[4px] bg-brand text-white text-[14px] font-semibold uppercase max-[1200px]:text-[12px] max-[1200px]:px-[8px] max-[1200px]:shrink-0"
+              >module a-3</span
+            >
+            <h3 class="font-semibold text-[16px] max-[1200px]:text-[14px]">
+              GCC 측정용 크리에이티브 캔버스
+            </h3>
+          </div>
+
+          <div class="mb-[28px]">
+            <h3
+              class="text-[18px] font-semibold mb-[8px] max-[1200px]:text-[16px]"
+            >
+              MISSION : 캐릭터 마스코트 제작
+            </h3>
+            <p
+              class="font-medium text-text-sub text-[16px] max-[1200px]:text-[14px]"
+            >
+              우리 브랜드(친환경 카페)를 대표할 귀여운 다람쥐 캐릭터를
+              제작하세요.
+            </p>
+            <p class="text-[12px] text-state-error mt-[4px]">
+              *주의 : 특정 유명 캐릭터(피카츄,미키마우스 등)와 유사하면 안
+              됩니다.
+            </p>
+          </div>
+
+          <div class="p-[20px] bg-[#f5f5f5] rounded-[12px] mb-[20px]">
+            <h3
+              class="text-[14px] font-semibold text-text-sub mb-[12px] uppercase"
+            >
+              reference assets
+            </h3>
+            <ul class="flex gap-[8px]">
+              <li
+                class="flex-1 min-w-0 h-[48px] flex justify-center items-center rounded-[8px] relative border border-dotted border-[#b7adff] cursor-pointer bg-transparent"
+              >
+                <input
+                  type="color"
+                  value="#6a5cff"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  oninput="updateBrandColor(this)"
+                />
+                <p
+                  class="text-[14px] font-semibold text-brand pointer-events-none"
+                >
+                  Brand Color
+                </p>
+              </li>
+
+              <li
+                class="flex-1 min-w-0 h-[48px] flex justify-center items-center rounded-[8px] relative border border-dotted border-[#b7adff] cursor-pointer bg-transparent"
+              >
+                <input
+                  type="file"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  onchange="handleFileUpload(this)"
+                />
+                <p
+                  class="text-[14px] font-semibold text-brand truncate px-[8px] pointer-events-none"
+                >
+                  + Upload
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-[20px] bg-brand-bg rounded-[12px] relative mb-[32px]">
+            <h3
+              class="font-semibold text-brand mb-[24px] max-[1200px]:text-[14px] max-[1200px]:mb-[16px]"
+            >
+              GCC 평가기준
+            </h3>
+            <ul class="flex flex-col gap-[8px]">
+              <li
+                class="flex items-center text-[14px] font-medium active group"
+              >
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
+                ></div>
+                <p class="max-[1200px]:tracking-tight">윤리(AES) :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
+                  저작권 침해 키워드 회피(trap)</span
+                >
+              </li>
+              <li class="flex items-center text-[14px] font-medium">
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
+                ></div>
+                <p class="max-[1200px]:tracking-tight">일관성 :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
+                  Seed 고정 기능 사용</span
+                >
+              </li>
+              <li class="flex items-center text-[14px] font-medium">
+                <div
+                  class="w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
+                ></div>
+                <p class="max-[1200px]:tracking-tight">편집 :</p>
+                <span
+                  class="text-text-sub pl-[4px] max-[1200px]:tracking-tight"
+                >
+                  생성 후 리터칭(retouch) 수행</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-[32px] border-t border-border">
+            <h3
+              class="text-[18px] font-semibold mb-[28px] max-[1200px]:text-[16px] max-[1200px]:mb-[20px]"
+            >
+              실시간 로그 감지(backend view)
+            </h3>
+          </div>
+
+          <div
+            class="code-box-scroll p-[16px] bg-[#101828] min-h-[160px] max-h-[160px] rounded-[12px] flex flex-col gap-[4px] overflow-y-auto"
+          >
+            <p class="font-mono text-[12px] font-bold text-white">
+              [10:00:01] session Init : GEE_TEST_01
+            </p>
+            <p class="font-mono text-[12px] font-bold text-white">
+              [10:00:05] model selected : DALL-E 3
+            </p>
+            <p class="font-mono text-[12px] font-bold text-text-gray">
+              [Wating for input...]
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="right gcc flex-1 h-full flex flex-col min-w-0">
+        <div
+          class="h-[60px] px-[24px] bg-white shadow-toolbar flex items-center relative shrink-0"
+        >
+          <div class="flex gap-[24px] pr-[24px]">
+            <img
+              src="/images/gcc_icon01.svg"
+              alt="icon"
+              class="cursor-pointer"
+            />
+            <img
+              src="/images/gcc_icon02.svg"
+              alt="icon"
+              class="cursor-pointer"
+            />
+            <img
+              src="/images/gcc_icon03.svg"
+              alt="icon"
+              class="cursor-pointer"
+            />
+          </div>
+          <div class="pl-[24px] border-l border-border flex items-center">
+            <img
+              src="/images/gcc_icon04.svg"
+              alt="icon"
+              class="cursor-pointer"
+            />
+          </div>
+
+          <div class="ml-auto mr-[28px] text-[14px] font-medium text-text-gray">
+            Seed : <span class="text-text-sub">12345678</span>
+          </div>
+
+          <div class="relative cursor-pointer group flex items-center">
+            <img src="/images/help.svg" alt="icon" />
+            <div
+              class="absolute bg-white rounded-[12px] py-[12px] px-[20px] w-[240px] top-[24px] right-[-4px] shadow-[1px_1px_6px_rgba(0,0,0,0.1)] hidden group-hover:block z-50"
+            >
+              <h3 class="text-[13px] mb-[4px] font-semibold text-brand">
+                도움말
+              </h3>
+              <p class="text-[12px] font-medium">설명이 들어갑니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-[40px]">
+          <article class="flex flex-col gap-[24px] w-full max-w-full min-w-0">
+            <div class="flex flex-col items-end">
+              <div class="flex gap-[8px] items-center mb-[16px]">
+                <div
+                  class="w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                >
+                  <img src="/images/user.svg" alt="icon" />
+                </div>
+                <span class="text-[14px] font-medium text-brand">김마녀</span>
+              </div>
+              <div
+                class="bg-white p-[24px] shadow-chat-user rounded-[20px] max-w-[800px] text-[14px] font-medium"
+              >
+                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
+                넣어줘.
+              </div>
+            </div>
+
+            <div class="flex flex-col">
+              <div class="flex gap-[8px] items-center mb-[16px]">
+                <div
+                  class="w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                >
+                  <img src="/images/model.svg" alt="icon" />
+                </div>
+                <span class="text-[14px] font-medium text-text-sub"
+                  >GPT-4o</span
+                >
+              </div>
+
+              <div
+                class="relative overflow-hidden rounded-[20px] max-w-[320px] group p-0 bg-transparent shadow-none"
+              >
+                <div class="relative rounded-[20px] overflow-hidden">
+                  <img
+                    src="/images/sample.png"
+                    alt="img"
+                    class="block w-full h-auto"
+                  />
+                  <div
+                    class="absolute top-[12px] right-[12px] rounded-[50px] w-[24px] h-[24px] bg-black/50 flex justify-center items-center cursor-pointer opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    <img src="/images/down_icon.svg" alt="icon" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="bg-white p-[12px_24px_20px] shrink-0 shadow-enter">
+          <div class="flex relative w-[120px] mb-[12px]">
+            <div
+              class="w-full bg-[#f5f5f5] shadow-inset-border rounded-[4px] h-[28px] flex items-center justify-between px-[16px] text-[12px] font-medium cursor-pointer"
+              onclick="toggleSelect(this)"
+            >
+              DALL_E 3
+              <img src="/images/input_down.svg" alt="icon" />
+            </div>
+            <ul
+              class="hidden absolute top-[calc(100%+4px)] left-0 w-full border border-border bg-white rounded-[8px] z-50 shadow-lg max-h-[200px] overflow-y-auto"
+            >
+              <li
+                class="h-[auto] py-[4px] px-[16px] text-[12px] font-medium hover:bg-brand-bg hover:text-brand cursor-pointer"
+                onclick="selectOption(this)"
+              >
+                DALL_E 3
+              </li>
+              <li
+                class="h-[auto] py-[4px] px-[16px] text-[12px] font-medium hover:bg-brand-bg hover:text-brand cursor-pointer"
+                onclick="selectOption(this)"
+              >
+                Nano Banana
+              </li>
+              <li
+                class="h-[auto] py-[4px] px-[16px] text-[12px] font-medium hover:bg-brand-bg hover:text-brand cursor-pointer"
+                onclick="selectOption(this)"
+              >
+                Fire Fly
+              </li>
+            </ul>
+          </div>
+
+          <div class="relative h-[140px]">
+            <textarea
+              class="w-full h-full border border-brand rounded-[8px] p-[20px] text-[14px] font-medium outline-none resize-none placeholder-text-gray"
+              placeholder="다음 수정을 위해 피드백을 입력하세요."
+            ></textarea>
+            <div
+              class="absolute bottom-[16px] right-[16px] w-[32px] h-[32px] flex justify-center items-center bg-brand rounded-[50px] cursor-pointer hover:bg-brand-hover transition-all duration-300"
+            >
+              <img src="/images/enter.svg" alt="icon" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function toggleSelect(el) {
+        el.nextElementSibling.classList.toggle("hidden");
+      }
+
+      function selectOption(el) {
+        const text = el.innerText;
+        const selectBox = el.parentElement.previousElementSibling;
+        selectBox.childNodes[0].nodeValue = text + " ";
+        el.parentElement.classList.add("hidden");
+      }
+    </script>
+
+    <script>
+      function updateBrandColor(input) {
+        const parent = input.parentElement;
+        const text = input.nextElementSibling;
+
+        // select_complate 클래스 추가 (CSS에서 배경색/테두리 제어)
+        parent.classList.add("select_complate");
+
+        // 텍스트 내용 변경 (대문자 변환 없이)
+        text.innerText = input.value;
+      }
+
+      function handleFileUpload(input) {
+        if (input.files.length > 0) {
+          const parent = input.parentElement;
+          const text = input.nextElementSibling;
+
+          text.innerText = input.files[0].name;
+
+          // 파일 업로드 시에도 select_complate 로직 적용
+          parent.classList.add("select_complate");
+        }
+      }
+    </script>
+  </body>
+</html>

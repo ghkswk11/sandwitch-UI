@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="name"><span>김마녀</span>님</div>
+        <div class="button">
+          <div class="my_page">마이페이지</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <!-- 사이드메뉴 -->
+      <div class="left active">
+        <div class="ham_btn">
+          <img src="ham.svg" alt="icon" />
+        </div>
+
+        <!-- 상단설명 -->
+        <div class="top">
+          <span>module a-3</span>
+          <h3>GCC 측정용 크리에이티브 캔버스</h3>
+        </div>
+        <!-- 미션 -->
+        <div class="mission">
+          <h3>MISSION : 캐릭터 마스코트 제작</h3>
+          <p>
+            우리 브랜드(친환경 카페)를 대표할 귀여운 다람쥐 캐릭터를 제작하세요.
+          </p>
+          <p class="tip_text">
+            *주의 : 특정 유명 캐릭터(피카츄,미키마우스 등)와 유사하면 안 됩니다.
+          </p>
+        </div>
+        <!-- 업로드 -->
+        <div class="upload">
+          <h3>reference assets</h3>
+          <ul>
+            <li class="brand_c">
+              <input type="color" />
+              <p>Brand Color</p>
+            </li>
+            <li class="file">
+              <input type="file" />
+              <p>+ Upload</p>
+            </li>
+          </ul>
+        </div>
+        <!-- 평가기준 -->
+        <div class="eval">
+          <h3>GCC 평가기준</h3>
+          <ul>
+            <li class="active">
+              <div class="check_box"></div>
+              <p>윤리(AES) :</p>
+              <span> 저작권 침해 키워드 회피(trap)</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>일관성 :</p>
+              <span> Seed 고정 기능 사용</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>편집 :</p>
+              <span> 생성 후 리터칭(retouch) 수행</span>
+            </li>
+          </ul>
+        </div>
+        <!-- 실시간 -->
+        <div class="live">
+          <h3>실시간 로그 감지(backend view)</h3>
+        </div>
+        <!-- 코드박스 -->
+        <div class="code_box">
+          <p>[10:00:01] session Init : GEE_TEST_01</p>
+          <p>[10:00:05] model selected : DALL-E 3</p>
+          <p class="wating">[Wating for input...]</p>
+        </div>
+      </div>
+      <!-- 메인컨텐츠 -->
+      <div class="right gcc">
+        <div class="main_toolbar">
+          <div class="btn_area">
+            <img src="gcc_icon01.svg" alt="icon" />
+            <img src="gcc_icon02.svg" alt="icon" />
+            <img src="gcc_icon03.svg" alt="icon" />
+            <span><img src="gcc_icon04.svg" alt="icon" /></span>
+          </div>
+          <div class="seed_num">Seed : <span>12345678</span></div>
+          <div class="help">
+            <img src="help.svg" alt="icon" />
+            <div class="help_tooltip disable">
+              <h3>여기제목</h3>
+              <p>
+                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
+                늘어나게 됩니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="main_cont">
+          <article>
+            <div class="user">
+              <div class="user_name">
+                <div class="img">
+                  <img src="user.svg" alt="icon" />
+                </div>
+                <span>김마녀</span>
+              </div>
+              <div class="chat">
+                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
+                넣어줘.
+              </div>
+            </div>
+            <div class="model">
+              <div class="model_name">
+                <div class="img">
+                  <img src="model.svg" alt="icon" />
+                </div>
+                <span>GPT-4o</span>
+              </div>
+              <div class="chat">
+                <div class="img_box">
+                  <img src="sample.png" alt="img" />
+                  <div class="down_btn">
+                    <img src="down_icon.svg" alt="icon" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="enter">
+          <div class="model_select">
+            <div class="custom_select">
+              DALL_E 3 <img src="input_down.svg" alt="icon" />
+            </div>
+            <ul class="option disable">
+              <li>DALL_E 3</li>
+              <li>Nano Banana</li>
+              <li>Fire Fly</li>
+            </ul>
+          </div>
+          <div class="textarea">
+            <textarea
+              name=""
+              id=""
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div class="enter_icon"><img src="enter.svg" alt="icon" /></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
