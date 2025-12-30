@@ -824,7 +824,7 @@ input[type="number"] {
   height: calc(100vh - 80px);
   flex-shrink: 0;
   box-shadow: inset -1px 1px 0 0px #ddd;
-  padding: 40px 24px;
+  padding: 16px 24px 40px;
   position: relative;
   width: 72px;
   box-sizing: border-box;
@@ -846,111 +846,216 @@ input[type="number"] {
   height: auto;
 }
 
-.left .ham_btn {
-  position: absolute;
-  top: 16px;
-  right: 24px;
+.left .top_tool {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.left .top_tool .time {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  width: 80px;
+  padding: 4px 0;
+  border-radius: 4px;
+  background: #6a5cff;
+  display: flex;
+  justify-content: center;
+}
+
+.left .top_tool .ham_btn {
   cursor: pointer;
 }
 
-.left .top {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 32px;
+.left .list {
+  padding-bottom: 32px;
+  border-bottom: 1px solid #ddd;
 }
 
-.left .top span {
-  padding: 4px 12px;
-  border-radius: 4px;
-  background: #6a5cff;
-  color: #fff;
+.left .list h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.left .list .list_tab {
+  box-shadow: inset 0 0 0 1px #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.left .list .list_tab .tab_btn {
+  display: flex;
+}
+
+.left .list .list_tab .tab_btn li {
+  flex: 1;
+  padding: 12px 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: inset -1px 0 0 #ddd;
   font-size: 14px;
   font-weight: 600;
-  text-transform: uppercase;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.left .top h3 {
+.left .list .list_tab .tab_btn li:hover {
+  color: #6a5cff;
+}
+
+.left .list .list_tab .tab_btn li.active {
+  background: #6a5cff;
+  color: #fff;
+}
+
+.left .list .list_tab .tab_cont {
+  box-shadow: inset 0 1px 0 #ddd;
+  padding: 20px;
+}
+
+.left .list .list_tab .tab_cont > div {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left .list .list_tab .tab_cont > div.active {
+  display: flex;
+}
+
+.left .list .list_tab .tab_cont > div h4 {
+  font-size: 14px;
   font-weight: 600;
-}
-
-.left .mission {
-  margin-bottom: 28px;
-}
-
-.left .mission h3 {
-  font-size: 18px;
-  font-weight: 600;
+  color: #6a5cff;
   margin-bottom: 8px;
 }
 
-.left .mission p {
+.left .list .list_tab .tab_cont > div p {
+  font-size: 14px;
   font-weight: 500;
-  color: #666;
 }
 
-.eval {
-  padding: 20px;
-  background: #f3f1ff;
-  border-radius: 12px;
-  position: relative;
+.left .left_cont {
+  margin-top: 32px;
+}
+
+.left .left_cont .left_tab_btn {
+  display: flex;
+  gap: 8px;
   margin-bottom: 32px;
 }
 
-.eval h3 {
+.left .left_cont .left_tab_btn li {
+  padding: 4px 20px;
+  border-radius: 50px;
+  box-shadow: inset 0 0 0 1px #ddd;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.left .left_cont .left_tab_btn li:hover {
+  color: #6a5cff;
+}
+
+.left .left_cont .left_tab_btn li.active {
+  color: #fff;
+  background: #6a5cff;
+  box-shadow: none;
+}
+
+.left_cont .tab_cont > div.active {
+  display: flex;
+}
+
+.left_cont .tab_cont > div {
+  display: none;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.left_cont .tab_cont > div .cont_area h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.left_cont .tab_cont > div .cont_area .cont_box {
+  padding: 20px;
+  background: #f3f1ff;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.left_cont .tab_cont > div .cont_area .cont_box:last-child {
+  margin-bottom: 0;
+}
+
+.left_cont .tab_cont > div .cont_area .cont_box h4 {
+  font-size: 14px;
   font-weight: 600;
   color: #6a5cff;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
-.eval ul {
+.left_cont .tab_cont > div .cont_area .cont_box li,
+.left_cont .tab_cont > div .cont_area .cont_box p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 2;
+}
+
+.left_cont .tab_cont > div .cont_area .cont_box ul {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
-.eval ul li {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
+.left_cont .tab_cont > div .cont_area .cont_box span {
+  font-size: 12px;
   font-weight: 500;
-}
-
-.eval ul li p {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.eval ul li span {
   color: #666;
-  display: inline-block;
-  padding-left: 4px;
+  display: block;
+  margin-top: 4px;
 }
 
-.eval ul li .check_box {
-  width: 12px;
-  height: 12px;
-  box-shadow: inset 0 0 0 1px #b7adff;
-  border-radius: 2px;
-  margin-right: 4px;
+.divider {
+  height: 24px !important;
   position: relative;
-  overflow: hidden;
+  margin-bottom: 8px;
 }
 
-.eval ul li.active .check_box {
-  box-shadow: inset 0 0 0 1px #b7adff;
-}
-
-.eval ul li.active .check_box::after {
+.divider::after {
   position: absolute;
   content: "";
-  width: 12px;
-  height: 12px;
-  top: 0;
+  top: 50%;
   left: 0;
-  background: url(check.svg) no-repeat center center #6a5cff;
-  background-size: 12px;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 1px;
+  background: #ddd;
 }
+
+/************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************/
 
 .help {
   position: absolute;
@@ -1059,6 +1164,8 @@ main .right .tab_btn {
   height: 48px;
   box-shadow: inset -1px 1px 0 #ddd, inset 0px -1px 0 #ddd;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
 }
 
@@ -1066,6 +1173,7 @@ main .right .tab_btn ul {
   display: flex;
   align-items: center;
   overflow: hidden;
+  height: 100%;
 }
 
 main .right .tab_btn ul li {
@@ -1080,6 +1188,28 @@ main .right .tab_btn ul li {
   border-right: 1px solid #ddd;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+main .right .tab_btn span {
+  margin-right: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  display: none;
+}
+
+main .right .tab_btn span.active {
+  display: block;
+}
+
+main .right .tab_btn span.edu {
+  background: #6a5cff;
+}
+
+main .right .tab_btn span.test {
+  background: #b7adff;
 }
 
 main .right .tab_btn ul li:last-child {
@@ -1115,9 +1245,63 @@ main .right .main_cont {
   overflow-y: auto;
 }
 
+body:has(.result.active) .enter {
+  display: none;
+}
+.pps .right .result {
+  display: flex;
+  flex-direction: column;
+}
+
+.pps .right .result h3 {
+  font-weight: 600;
+  color: #6a5cff;
+  margin-bottom: 24px;
+}
+
+.pps .right .result textarea {
+  padding: 20px;
+  width: 100%;
+  height: 480px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.pps .right .result span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #666;
+  display: block;
+  text-align: right;
+}
+
+.pps .right .result .button_area {
+  display: flex;
+  justify-content: center;
+}
+
+.pps .right .result button {
+  width: 160px;
+  height: 32px;
+  background: #6a5cff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.pps .right .result button:hover {
+  background: #5a4ce6;
+}
+
 .enter {
   background: #fff;
-  padding: 12px 24px 20px;
+  padding: 20px 24px;
   flex-shrink: 0;
   box-shadow: inset 0 1px 0 0 #ddd;
 }
@@ -1257,6 +1441,14 @@ main .right .main_cont {
   max-width: 800px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.main_cont .tab_cont > div {
+  display: none;
+}
+
+.main_cont .tab_cont > div.active {
+  display: block;
 }
 
 .gcc .main_cont article .model .chat {
@@ -1458,6 +1650,10 @@ main .right .main_cont {
   flex-direction: column;
   gap: 4px;
   overflow-y: auto;
+}
+
+.code_box.mb_28 {
+  margin-bottom: 28px;
 }
 
 .code_box::-webkit-scrollbar-thumb {
@@ -1790,6 +1986,73 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   font-size: 14px;
   font-weight: 500;
   color: #999;
+}
+
+.live ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.live ul li {
+  padding: 16px 20px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.live ul li.wating {
+  background: #f5f5f5;
+}
+
+.live ul li.success {
+  background: #dfffeb;
+}
+
+.live ul li.error {
+  background: #ffe6e6;
+}
+
+.live ul li > div {
+  width: 20px;
+  height: 20px !important;
+  border-radius: 50px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.live ul li.wating > div {
+  background: #ddd;
+}
+
+.live ul li.success > div {
+  background: #42c676;
+}
+
+.live ul li.error > div {
+  background: #e05252;
+}
+
+.live ul li p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.live ul li p.wating p {
+  color: #666;
+}
+
+.live ul li span {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: 12px;
+  color: #999;
+}
+.live ul li span em {
+  font-size: 12px;
+  color: #999;
+  margin-left: 2px;
+  font-style: normal;
 }
 
 @media screen and (max-width: 1600px) {

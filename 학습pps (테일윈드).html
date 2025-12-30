@@ -3,26 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PPS 학습 모드</title>
+    <title>PPS Assignment</title>
 
-    <!-- font -->
     <link
       rel="stylesheet"
       as="style"
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ["Pretendard", "sans-serif"],
+              mono: ["D2Coding", "monospace"],
             },
             colors: {
               brand: {
@@ -52,8 +49,15 @@
       };
     </script>
 
-    <!-- Custom CSS -->
     <style>
+      @font-face {
+        font-family: "D2Coding";
+        src: url("https://cdn.jsdelivr.net/gh/naver/d2codingfont/D2Coding-Ver1.3.2-20180524/D2Coding/D2Coding-Ver1.3.2-20180524.ttf")
+          format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
       body,
       p,
       h1,
@@ -63,8 +67,13 @@
       h5,
       h6,
       li,
-      div {
+      div,
+      button,
+      textarea {
         word-break: keep-all;
+        font-family: "Pretendard", sans-serif !important;
+        color: #1e1b3a;
+        line-height: 1.5;
       }
 
       /* Scrollbar Custom */
@@ -81,22 +90,27 @@
         background-clip: content-box;
       }
 
-      /* [Left Sidebar Logic - Transition Removed]
-            애니메이션 효과(transition) 제거됨
-        */
+      /* Number Input Reset */
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      /* [Left Sidebar Logic] */
       .left-sidebar {
         width: 72px;
-        /* transition: width 0.3s ease;  <-- 삭제됨 */
       }
       .left-sidebar.active {
         width: 430px;
       }
-
       .left-sidebar > div:not(.ham_btn) {
         opacity: 0;
         height: 0;
         overflow: hidden;
-        /* transition: opacity 0.3s ease; <-- 삭제됨 */
       }
       .left-sidebar.active > div:not(.ham_btn) {
         opacity: 1;
@@ -112,8 +126,7 @@
       }
     </style>
   </head>
-  <body class="font-sans text-text-base leading-[1.5] h-full overflow-hidden">
-    <!-- 헤더 -->
+  <body class="h-screen overflow-hidden text-text-base">
     <header
       class="h-[80px] px-[40px] flex justify-between items-center bg-white"
     >
@@ -121,7 +134,7 @@
         <img src="logo.svg" alt="logo" class="block max-w-full" />
       </div>
       <div class="right flex items-center gap-[20px]">
-        <div class="name text-[16px] font-medium">
+        <div class="name text-[16px] font-medium text-text-base">
           <span class="font-semibold text-brand">김마녀</span>님
         </div>
         <div class="button flex gap-[12px]">
@@ -139,361 +152,448 @@
       </div>
     </header>
 
-    <!-- 메인 컨테이너 -->
-    <main class="flex h-[calc(100vh-80px)] bg-[#f3f1ff]">
-      <!-- 좌측 사이드바 (Left Sidebar) -->
+    <main
+      class="pps flex items-center justify-center bg-brand-bg h-[calc(100vh-80px)]"
+    >
       <div
-        class="left-sidebar flex flex-col bg-white h-full shrink-0 shadow-inset-left p-[40px_24px] relative box-border"
+        id="sidebar"
+        class="left-sidebar active flex flex-col bg-white h-[calc(100vh-80px)] shrink-0 shadow-inset-left p-[16px_24px_40px] relative overflow-y-auto overflow-x-hidden box-border"
       >
-        <div
-          class="ham_btn absolute top-[16px] right-[24px] cursor-pointer z-10"
-          onclick="document.querySelector('.left-sidebar').classList.toggle('active')"
-        >
-          <img src="ham.svg" alt="icon" class="block" />
-        </div>
-
-        <div
-          class="top flex gap-[8px] items-center mb-[32px] max-[1200px]:mb-[28px]"
-        >
-          <span
-            class="px-[12px] py-[4px] rounded-[4px] bg-brand text-white text-[14px] font-semibold uppercase max-[1200px]:text-[12px] max-[1200px]:px-[8px] max-[1200px]:shrink-0"
-            >module a-1</span
-          >
-          <h3 class="font-semibold text-[16px] max-[1200px]:text-[14px]">
-            PPS측정용 멀티탭 인터페이스
-          </h3>
-        </div>
-
-        <div class="mission mb-[28px]">
-          <h3
-            class="text-[18px] font-semibold mb-[8px] max-[1200px]:text-[16px]"
-          >
-            MISSION : 콜드 메일 작성
-          </h3>
-          <p class="font-medium text-[#666] max-[1200px]:text-[14px]">
-            잠재 고객(B2B)에게 우리 회사의 AI 솔루션을 소개하는
-            <br class="max-[1200px]:hidden" />첫 번째 이메일 초안을 작성 하세요.
-          </p>
-        </div>
-
-        <div
-          class="eval p-[20px] bg-[#f3f1ff] rounded-[12px] relative mb-[32px]"
-        >
-          <h3
-            class="font-semibold text-brand mb-[24px] max-[1200px]:text-[14px] max-[1200px]:mb-[16px]"
-          >
-            PPS 평가기준
-          </h3>
-          <ul class="flex flex-col gap-[8px]">
-            <li class="active flex items-center text-[14px] font-medium">
-              <div
-                class="check_box w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[2px] mr-[4px] relative overflow-hidden bg-[url('check.svg')] bg-no-repeat bg-center bg-[length:12px] bg-brand"
-              ></div>
-              <p class="text-[14px] font-medium">명확성 :</p>
-              <span class="text-[#666] pl-[4px]">
-                모호한 표현(잘, 적당히 등) 제거</span
-              >
-            </li>
-            <li class="flex items-center text-[14px] font-medium">
-              <div
-                class="check_box w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
-              ></div>
-              <p class="text-[14px] font-medium">구조화 :</p>
-              <span class="text-[#666] pl-[4px]"> r.c.c.f 요소 포함</span>
-            </li>
-            <li class="flex items-center text-[14px] font-medium">
-              <div
-                class="check_box w-[12px] h-[12px] shadow-[inset_0_0_0_1px_#b7adff] rounded-[2px] mr-[4px] relative overflow-hidden"
-              ></div>
-              <p class="text-[14px] font-medium">리파인 :</p>
-              <span class="text-[#666] pl-[4px]"> 3회 이상 수정 및 개선</span>
-            </li>
-          </ul>
-
+        <div class="top_tool flex justify-between items-center mb-[32px]">
           <div
-            class="help absolute top-[20px] right-[20px] cursor-pointer group"
+            class="time text-[14px] font-medium text-white w-[80px] py-[4px] rounded-[4px] bg-brand flex justify-center"
           >
-            <img src="help.svg" alt="icon" class="block" />
+            01:00:00
+          </div>
+          <div class="ham_btn cursor-pointer" onclick="toggleSidebar()">
+            <img src="ham.svg" alt="icon" />
+          </div>
+        </div>
+
+        <div class="list pb-[32px] border-b border-border">
+          <h3 class="font-semibold mb-[20px] text-[16px]">과제 목록</h3>
+          <div
+            class="list_tab shadow-inset-border rounded-[8px] overflow-hidden w-full"
+          >
+            <ul class="tab_btn flex" id="tab-group-1">
+              <li
+                onclick="switchTab('tab-group-1', 0, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 bg-brand text-white"
+              >
+                과제1
+              </li>
+              <li
+                onclick="switchTab('tab-group-1', 1, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc hover:text-brand"
+              >
+                과제2
+              </li>
+              <li
+                onclick="switchTab('tab-group-1', 2, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc hover:text-brand"
+              >
+                과제3
+              </li>
+            </ul>
+
             <div
-              class="help_tooltip disable absolute bg-white rounded-[12px] p-[12px_20px] w-[240px] top-[24px] left-[-8px] shadow-[1px_1px_6px_rgba(0,0,0,0.1)] cursor-auto hidden"
+              class="tab_cont shadow-[inset_0_1px_0_#ddd] p-[20px]"
+              id="content-group-1"
             >
-              <h3 class="text-[13px] mb-[4px]">여기제목</h3>
-              <p class="text-[12px] font-medium">
-                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
-                늘어나게 됩니다.
-              </p>
+              <div class="flex flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    법을 어기라는 대표님의 지시를 방어하고, 투자자가 안심할 수
+                    있는 합법적이고 윤리적인 기획서를 완성하라.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    생성형 AI와 협업하여 위 자료를 분석 및 수정하고, [최종
+                    기획서]와 [AI 대화 로그(Log) 전문]을 제출하시오.
+                  </p>
+                </div>
+              </div>
+              <div class="hidden flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표 (과제2)
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 2의 목표 내용입니다.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 2의 미션 내용입니다.
+                  </p>
+                </div>
+              </div>
+              <div class="hidden flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표 (과제3)
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 3의 목표 내용입니다.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 3의 미션 내용입니다.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="live pt-[32px] border-t border-[#ddd]">
-          <h3
-            class="text-[18px] font-semibold mb-[28px] max-[1200px]:text-[16px] max-[1200px]:mb-[20px]"
-          >
-            실시간 구조 분석(backend view)
-          </h3>
-        </div>
+        <div class="left_cont mt-[32px]">
+          <div class="left_cont_tab">
+            <ul class="left_tab_btn flex gap-[8px] mb-[32px]" id="tab-group-2">
+              <li
+                onclick="switchTab('tab-group-2', 0, 'text-white bg-brand shadow-none', 'shadow-inset-border text-text-base hover:text-brand')"
+                class="px-[20px] py-[4px] rounded-[50px] text-[14px] font-semibold transition-all duration-300 cursor-pointer shadow-inset-border text-text-base hover:text-brand"
+              >
+                과제
+              </li>
+              <li
+                onclick="switchTab('tab-group-2', 1, 'text-white bg-brand shadow-none', 'shadow-inset-border text-text-base hover:text-brand')"
+                class="px-[20px] py-[4px] rounded-[50px] text-[14px] font-semibold transition-all duration-300 cursor-pointer text-white bg-brand shadow-none"
+              >
+                조건/힌트
+              </li>
+            </ul>
 
-        <div class="progress">
-          <ul class="flex flex-col gap-[16px] max-[1200px]:gap-[12px]">
-            <li>
-              <div class="text flex justify-between items-center mb-[8px]">
-                <h3 class="text-[14px] font-semibold">role(역할)</h3>
-                <p class="text-[14px] font-medium text-[#999]">not found</p>
+            <div class="tab_cont" id="content-group-2">
+              <div class="hidden flex-col gap-[32px]">
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    세션 시나리오
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      과제 상황
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      당신은 헬스케어 스타트업 'P-Lab'의 기획자(PM)입니다.다음
+                      주 벤처캐피탈(VC) 미팅을 앞두고...
+                    </p>
+                  </div>
+                </div>
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    제공 데이터 자산
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      대표님의 메모
+                    </h4>
+                    <ul class="flex flex-col gap-[12px]">
+                      <li
+                        class="text-[14px] font-medium leading-[2] text-text-base"
+                      >
+                        1. 김 PM, 우리 앱 이름은 '꿀잠'이야. 기능은 다 넣어.
+                        ASMR, 수면 분석 등등.
+                      </li>
+                      <li
+                        class="text-[14px] font-medium leading-[2] text-text-base"
+                      >
+                        2. 마케팅 핵심: 우리 앱 쓰면 불면증 100% 완치된다고
+                        홍보해.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div
-                class="bar_back w-full h-[12px] bg-[#f3f1ff] rounded-[50px] relative overflow-hidden max-[1200px]:h-[8px]"
-              >
-                <div
-                  class="bar absolute top-0 left-0 bg-brand z-[9] w-[0%] h-full rounded-[50px]"
-                ></div>
+
+              <div class="flex flex-col gap-[32px]">
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    출력 요구 사항
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      윤리/보안(AES) 가이드
+                      <span
+                        class="text-[12px] font-medium text-text-desc block mt-[4px]"
+                        >* AES 검증 (법적/사회적 리스크 관리)</span
+                      >
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      대표님의 지시 중 AES 평가 요소에 위배되는 사항을 찾아내어,
+                      수정할 것.
+                    </p>
+                  </div>
+                </div>
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    결과물 작성(ACI) 가이드
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      작성 형식
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      서술형 줄글이 아닌 개조식 리스트 형태
+                    </p>
+                  </div>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      권장 길이
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      공백 포함 500자 ~ 700자 이내
+                    </p>
+                  </div>
+                  <div
+                    class="divider h-[24px] relative mb-[8px] after:absolute after:content-[''] after:top-1/2 after:left-0 after:-translate-y-1/2 after:w-full after:h-[1px] after:bg-border"
+                  ></div>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      수익 모델
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      단계별 수익화 전략 (구독 경제 등)
+                    </p>
+                  </div>
+                </div>
               </div>
-            </li>
-            <li>
-              <div class="text flex justify-between items-center mb-[8px]">
-                <h3 class="text-[14px] font-semibold">context(맥락)</h3>
-                <p class="text-[14px] font-medium text-brand">detected</p>
-              </div>
-              <div
-                class="bar_back w-full h-[12px] bg-[#f3f1ff] rounded-[50px] relative overflow-hidden max-[1200px]:h-[8px]"
-              >
-                <div
-                  class="bar absolute top-0 left-0 bg-brand z-[9] w-[44%] h-full rounded-[50px]"
-                ></div>
-              </div>
-            </li>
-            <li>
-              <div class="text flex justify-between items-center mb-[8px]">
-                <h3 class="text-[14px] font-semibold">refine count</h3>
-                <p class="text-[14px] font-medium text-brand">2/3</p>
-              </div>
-              <div
-                class="bar_back w-full h-[12px] bg-[#f3f1ff] rounded-[50px] relative overflow-hidden max-[1200px]:h-[8px]"
-              >
-                <div
-                  class="bar absolute top-0 left-0 bg-brand z-[9] w-[66%] h-full rounded-[50px]"
-                ></div>
-              </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 우측 컨텐츠 (Right Content) -->
-      <div class="right flex-1 h-full flex flex-col overflow-hidden">
+      <div class="right flex flex-col flex-1 h-[calc(100vh-80px)] min-w-0">
         <div
-          class="tab_btn h-[48px] bg-white flex shrink-0 shadow-[inset_-1px_1px_0_#ddd,inset_0_-1px_0_#ddd]"
+          class="tab_btn bg-white h-[48px] shadow-[inset_-1px_1px_0_#ddd,_inset_0px_-1px_0_#ddd] flex items-center justify-between shrink-0"
         >
-          <ul class="flex items-center overflow-hidden h-full">
+          <ul class="flex items-center overflow-hidden h-full" id="tab-group-3">
             <li
-              class="h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold text-[#666] border-r border-[#ddd] cursor-pointer transition-all duration-300 hover:bg-[#f9f9f9]"
+              onclick="switchTab('tab-group-3', 0, 'text-white bg-brand border-none', 'text-text-desc border-r border-border hover:text-text-base'); toggleEnterArea(true);"
+              class="h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc border-r border-border hover:text-text-base"
             >
-              <div
-                class="label text-[10px] font-semibold text-brand px-[12px] py-[2px] bg-[#f3f1ff] flex items-center rounded-[4px]"
-              >
-                V1
-              </div>
-              초안
+              AI 어시스턴트 협업
             </li>
             <li
-              class="active h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold text-white bg-brand border-r border-[#ddd] cursor-pointer transition-all duration-300"
+              onclick="switchTab('tab-group-3', 1, 'text-white bg-brand border-none', 'text-text-desc border-r border-border hover:text-text-base'); toggleEnterArea(false);"
+              class="h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-white bg-brand border-none"
             >
-              <div
-                class="label text-[10px] font-semibold text-brand px-[12px] py-[2px] bg-[#f3f1ff] flex items-center rounded-[4px]"
-              >
-                V2
-              </div>
-              1차 수정
-            </li>
-            <li
-              class="new h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold text-[#666] border-0 cursor-pointer transition-all duration-300 hover:bg-[#f9f9f9]"
-            >
-              <div
-                class="label w-[20px] h-[20px] p-0 flex justify-center items-center text-[10px] font-semibold text-brand bg-[#f3f1ff] rounded-[4px]"
-              >
-                <img src="plus.svg" alt="icon" class="block" />
-              </div>
-              새 버전 추가
+              결과물 작성 및 제출
             </li>
           </ul>
+          <div class="flex">
+            <span
+              class="edu active mr-[24px] text-[14px] font-medium text-white px-[12px] py-[4px] rounded-[8px] bg-brand block"
+            >
+              학습모드
+            </span>
+          </div>
         </div>
 
-        <div class="main_cont flex-1 overflow-y-auto p-[40px] bg-[#f3f1ff]">
-          <span
-            class="info_text text-[14px] font-medium text-[#999] mb-[24px] block text-center"
-            >V1 (초안) 에서 맥락을 가져왔습니다.</span
-          >
+        <div class="main_cont flex-1 overflow-y-auto p-[40px]">
+          <div class="tab_cont" id="content-group-3">
+            <div class="ai hidden">
+              <article class="flex flex-col gap-[24px]">
+                <div class="user flex flex-col items-end">
+                  <div class="user_name flex gap-[8px] items-center mb-[16px]">
+                    <div class="text-[14px] font-medium text-brand">김마녀</div>
+                    <div
+                      class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                    >
+                      <img src="user.svg" alt="icon" />
+                    </div>
+                  </div>
+                  <div
+                    class="chat bg-white p-[24px] shadow-inset-brand rounded-[20px] max-w-[800px] text-[14px] font-medium text-text-base"
+                  >
+                    아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                    바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로
+                    정리해서 넣어줘.
+                  </div>
+                </div>
 
-          <article class="flex flex-col gap-[24px] mb-[24px]">
-            <div class="user flex flex-col items-end">
-              <div class="user_name flex gap-[8px] items-center mb-[16px]">
-                <div
-                  class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
-                >
-                  <img src="user.svg" alt="icon" class="block" />
+                <div class="model flex flex-col">
+                  <div class="model_name flex gap-[8px] items-center mb-[16px]">
+                    <div
+                      class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                    >
+                      <img src="model.svg" alt="icon" />
+                    </div>
+                    <div class="text-[14px] font-medium text-text-desc">
+                      GPT-4o
+                    </div>
+                  </div>
+                  <div
+                    class="chat bg-white p-[24px] shadow-inset-brand rounded-[20px] max-w-[800px] text-[14px] font-medium text-text-base"
+                  >
+                    [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가
+                    도착했습니다.<br />
+                    ... (생략) ...
+                  </div>
+                  <div class="model_option mt-[8px]">
+                    <ul class="flex gap-[12px]">
+                      <li
+                        class="copy flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer w-[20px] h-[20px] justify-center ml-auto !p-0"
+                      >
+                        <img src="copy.svg" alt="icon" />
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <span class="text-[14px] font-medium text-brand">김마녀</span>
-              </div>
-              <div
-                class="chat bg-white p-[24px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[20px] max-w-[800px] text-[14px] font-medium"
-              >
-                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
-                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
-                넣어줘.
-              </div>
+              </article>
             </div>
 
-            <div class="model flex flex-col">
-              <div class="model_name flex gap-[8px] items-center mb-[16px]">
-                <div
-                  class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
-                >
-                  <img src="model.svg" alt="icon" class="block" />
-                </div>
-                <span class="text-[14px] font-medium text-[#666]">GPT-4o</span>
-              </div>
-              <div
-                class="chat bg-white p-[24px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[20px] max-w-[800px] text-[14px] font-medium"
+            <div class="result flex flex-col mt-[60px]">
+              <h3 class="font-semibold text-brand mb-[24px] text-[16px]">
+                기획서
+              </h3>
+              <textarea
+                class="p-[20px] w-full h-[480px] bg-white text-[14px] resize-none border border-border rounded-[8px] placeholder-text-disabled focus:outline-none focus:shadow-none mb-0"
+                placeholder="최종 기획서를 제출하세요"
+              ></textarea>
+              <span
+                class="text-[12px] font-normal text-text-desc block text-right mt-[4px]"
+                >(100/500)</span
               >
-                [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가 도착했습니다.<br />
-                안녕하세요, 팀장님. 영업 현장에서 10년간 발로 뛴 경험으로 미루어
-                볼 때, 가장 힘든 건 '고객 관리' 그 자체보다 '데이터 정리'였을
-                겁니다.<br /><br />
-                저희 솔루션은 팀장님의 시간을 이렇게 돌려드립니다:<br />
-                • 🚀 자동 기록: 통화 내용이 텍스트로 즉시 변환됩니다.<br />
-                • 📊 감정 분석: 고객의 구매 확률을 %로 예측합니다.<br />
-                • ✉️ 팔로우업: 미팅 후 감사 메일을 자동 발송합니다.
-              </div>
-              <div class="model_option mt-[8px]">
-                <ul class="flex gap-[12px]">
-                  <li
-                    class="copy flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="copy.svg" alt="icon" class="block" /> 복사
-                  </li>
-                  <li
-                    class="choose flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="check.svg" alt="icon" class="block" /> 채택
-                  </li>
-                  <li
-                    class="aes flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-[#e05252] text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="aes.svg" alt="icon" class="block" /> 환각 신고
-                    (AES)
-                  </li>
-                </ul>
+              <div class="button_area flex justify-center mt-[24px]">
+                <button
+                  type="button"
+                  class="w-[160px] h-[32px] bg-brand rounded-[8px] flex items-center justify-center text-white text-[14px] font-semibold border-none transition-all duration-300 hover:bg-brand-hover cursor-pointer p-0"
+                >
+                  과제 제출하기
+                </button>
               </div>
             </div>
-          </article>
-
-          <article class="flex flex-col gap-[24px]">
-            <div class="user flex flex-col items-end">
-              <div class="user_name flex gap-[8px] items-center mb-[16px]">
-                <div
-                  class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
-                >
-                  <img src="user.svg" alt="icon" class="block" />
-                </div>
-                <span class="text-[14px] font-medium text-brand">김마녀</span>
-              </div>
-              <div
-                class="chat bg-white p-[24px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[20px] max-w-[800px] text-[14px] font-medium"
-              >
-                아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
-                바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로 정리해서
-                넣어줘.
-              </div>
-            </div>
-            <div class="model flex flex-col">
-              <div class="model_name flex gap-[8px] items-center mb-[16px]">
-                <div
-                  class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
-                >
-                  <img src="model.svg" alt="icon" class="block" />
-                </div>
-                <span class="text-[14px] font-medium text-[#666]">GPT-4o</span>
-              </div>
-              <div
-                class="chat bg-white p-[24px] shadow-[inset_0_0_0_1px_#6a5cff] rounded-[20px] max-w-[800px] text-[14px] font-medium"
-              >
-                [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가 도착했습니다.<br />
-                안녕하세요, 팀장님. 영업 현장에서 10년간 발로 뛴 경험으로 미루어
-                볼 때, 가장 힘든 건 '고객 관리' 그 자체보다 '데이터 정리'였을
-                겁니다.<br /><br />
-                저희 솔루션은 팀장님의 시간을 이렇게 돌려드립니다:<br />
-                • 🚀 자동 기록: 통화 내용이 텍스트로 즉시 변환됩니다.<br />
-                • 📊 감정 분석: 고객의 구매 확률을 %로 예측합니다.<br />
-                • ✉️ 팔로우업: 미팅 후 감사 메일을 자동 발송합니다.
-              </div>
-              <div class="model_option mt-[8px]">
-                <ul class="flex gap-[12px]">
-                  <li
-                    class="copy flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="copy.svg" alt="icon" class="block" /> 복사
-                  </li>
-                  <li
-                    class="choose flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="check.svg" alt="icon" class="block" /> 채택
-                  </li>
-                  <li
-                    class="aes flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-[#e05252] text-white text-[14px] font-normal cursor-pointer"
-                  >
-                    <img src="aes.svg" alt="icon" class="block" /> 환각 신고
-                    (AES)
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         <div
-          class="enter bg-white p-[12px_24px_20px] shrink-0 shadow-[inset_0_1px_0_0_#ddd]"
+          id="enter-area"
+          class="hidden bg-white px-[24px] py-[20px] shrink-0 shadow-[inset_0_1px_0_0_#ddd]"
         >
-          <div
-            class="hint flex gap-[12px] items-center mb-[12px] max-[1200px]:items-start"
-          >
-            <h3 class="text-[14px] font-medium shrink-0">HINT :</h3>
+          <div class="hint flex gap-[12px] items-center mb-[12px]">
+            <h3 class="text-[14px] font-medium shrink-0">힌트</h3>
             <ul class="flex gap-[8px] flex-wrap">
               <li
-                class="flex items-center gap-[4px] text-[12px] font-medium text-brand rounded-[50px] bg-[#f3f1ff] px-[12px] py-[4px]"
-              >
-                <img src="plus.svg" alt="icon" class="block" />역할(ROLE) 부여
-              </li>
-              <li
-                class="flex items-center gap-[4px] text-[12px] font-medium text-brand rounded-[50px] bg-[#f3f1ff] px-[12px] py-[4px]"
-              >
-                <img
-                  src="plus.svg"
-                  alt="icon"
-                  class="block"
-                />제약조건(CONSTRAINT)
-              </li>
-              <li
-                class="flex items-center gap-[4px] text-[12px] font-medium text-brand rounded-[50px] bg-[#f3f1ff] px-[12px] py-[4px]"
-              >
-                <img src="plus.svg" alt="icon" class="block" />검증 요청(AES)
-              </li>
+                class="flex items-center gap-[4px] text-[12px] font-medium text-brand rounded-[50px] bg-brand-bg px-[12px] py-[4px]"
+              ></li>
             </ul>
           </div>
           <div class="textarea relative h-[140px]">
             <textarea
-              name=""
-              id=""
+              class="w-full h-full border border-brand p-[20px] text-[14px] font-medium resize-none rounded-[8px] placeholder-text-disabled focus:outline-none focus:shadow-none"
               placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
-              class="w-full h-full border border-brand p-[20px] text-[14px] font-medium placeholder:text-[#999] rounded-[8px] focus:outline-none resize-none"
             ></textarea>
             <div
               class="enter_icon absolute bottom-[16px] right-[16px] w-[32px] h-[32px] flex justify-center items-center bg-brand rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-brand-hover"
             >
-              <img src="enter.svg" alt="icon" class="block" />
+              <img src="enter.svg" alt="icon" />
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <script>
+      // Sidebar Toggle
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("active");
+      }
+
+      // Tab Switching Logic
+      // groupId: UL id, index: clicked LI index
+      // activeClasses: Tailwind classes string for Active state
+      // inactiveClasses: Tailwind classes string for Inactive state
+      function switchTab(groupId, index, activeClasses, inactiveClasses) {
+        // 1. Handle Buttons
+        const group = document.getElementById(groupId);
+        const buttons = group.getElementsByTagName("li");
+        const activeClassList = activeClasses.split(" ");
+        const inactiveClassList = inactiveClasses.split(" ");
+
+        for (let i = 0; i < buttons.length; i++) {
+          const btn = buttons[i];
+          if (i === index) {
+            // Activate
+            btn.classList.remove(...inactiveClassList);
+            btn.classList.add(...activeClassList);
+          } else {
+            // Deactivate
+            btn.classList.remove(...activeClassList);
+            btn.classList.add(...inactiveClassList);
+          }
+        }
+
+        // 2. Handle Content
+        // Assumes content group ID is "content-" + suffix of button group ID "tab-"
+        const contentGroupId = groupId.replace("tab-", "content-");
+        const contentGroup = document.getElementById(contentGroupId);
+        if (contentGroup) {
+          // Get direct children divs only
+          const contents = Array.from(contentGroup.children);
+
+          for (let i = 0; i < contents.length; i++) {
+            const content = contents[i];
+            if (i === index) {
+              // Show: Remove hidden, ensure flex (or block if handled by children)
+              content.classList.remove("hidden");
+              content.classList.add("flex"); // Most containers here use flex-col
+            } else {
+              // Hide
+              content.classList.remove("flex");
+              content.classList.add("hidden");
+            }
+          }
+        }
+      }
+
+      // Logic for .enter visibility
+      // Defined in CSS as: body:has(.result.active) .enter { display: none; }
+      // Result tab is Index 1 in 'tab-group-3'
+      function toggleEnterArea(visible) {
+        const enterArea = document.getElementById("enter-area");
+        if (visible) {
+          enterArea.classList.remove("hidden");
+        } else {
+          enterArea.classList.add("hidden");
+        }
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="name"><span>김마녀</span>님</div>
+        <div class="button">
+          <div class="my_page">마이페이지</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main>
+      <!-- 사이드메뉴 -->
+      <div class="left active">
+        <div class="ham_btn">
+          <img src="ham.svg" alt="icon" />
+        </div>
+
+        <!-- 상단설명 -->
+        <div class="top">
+          <span>module a-4</span>
+          <h3>WFA 측정용 Webhook 검증기</h3>
+        </div>
+
+        <!-- 미션 -->
+        <div class="mission">
+          <h3>MISSION : 쇼핑몰 정산 자동화</h3>
+          <p>
+            제공된 주문 내역(CSV)을 분석하여, 아래 3가지 값을 JSON 형식으로
+            전송하세요. 도구는 자유입니다.
+          </p>
+        </div>
+        <!-- 코드박스 -->
+        <div class="code_box mb_28">
+          <p class="success">
+            {<br />
+            “total_sales” : Number (필수),<br />
+            “vip_count” : Number (필수),<br />
+            “best_item” : String (필수) <br />
+            }
+          </p>
+        </div>
+        <!-- 평가기준 -->
+        <div class="eval">
+          <h3>WFA 평가 기준</h3>
+          <ul>
+            <li class="active">
+              <div class="check_box"></div>
+              <p>완결성 :</p>
+              <span> 데이터 전송 성공 여부 (pass/fail)</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>정확도 :</p>
+              <span>정답값 오차 범위 내 일치</span>
+            </li>
+            <li>
+              <div class="check_box"></div>
+              <p>안정성(AES) :</p>
+              <span> 에러 상황 시 대체값 전송 (trap)</span>
+            </li>
+          </ul>
+          <div class="help">
+            <img src="help.svg" alt="icon" />
+            <div class="help_tooltip disable">
+              <h3>여기제목</h3>
+              <p>
+                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
+                늘어나게 됩니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- 실시간 -->
+        <div class="live">
+          <h3>연결 상태 (Connection)</h3>
+          <ul>
+            <li class="wating">
+              <div class="status_circle"></div>
+              <p>대기중(Idle)</p>
+              <span>Last ping :<em>-</em></span>
+            </li>
+            <li class="success">
+              <div class="status_circle"></div>
+              <p>초록색 무언가</p>
+              <span>Last ping :<em>444</em></span>
+            </li>
+            <li class="error">
+              <div class="status_circle"></div>
+              <p>빨간색무언가</p>
+              <span>Last ping :<em>1,234</em></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 메인컨텐츠 -->
+      <div class="right">
+        <div class="main_toolbar">
+          <div class="btn_area">
+            <img src="undo.svg" alt="icon" class="undo" />
+            <img src="undo.svg" alt="icon" class="redo" />
+          </div>
+          <div class="status">
+            <div class="error">PPI 마스킹</div>
+            <div>결측치 채우기</div>
+          </div>
+          <div class="ai_send">
+            <p>AI에게 전송 및 분석</p>
+            <span><img src="model.svg" alt="icon" /></span>
+          </div>
+          <div class="help">
+            <img src="help.svg" alt="icon" />
+            <div class="help_tooltip disable">
+              <h3>여기제목</h3>
+              <p>
+                여기에는 설명이 들어갑니다. 설명이 길어지면 2줄 3줄 4줄 로
+                늘어나게 됩니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="main_cont dig">
+          <article>
+            <div class="table">
+              <ul class="head">
+                <li>ID</li>
+                <li>이름(NAME)</li>
+                <li class="error">
+                  <img src="error.svg" alt="icon" />주민등록번호(RRN)
+                </li>
+                <li>부서(Dept)</li>
+                <li>연봉(salary)</li>
+                <li>전화번호(phone)</li>
+              </ul>
+              <ul class="body">
+                <li>001</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>002</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>002</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>003</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>004</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+              <ul class="body">
+                <li>005</li>
+                <li>김철수</li>
+                <li class="error">800101-1234567</li>
+                <li>인사팀</li>
+                <li>50,000,000</li>
+                <li>010-1234-5678</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="enter dig">
+          <div class="textarea">
+            <textarea
+              name=""
+              id=""
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div class="enter_icon"><img src="enter.svg" alt="icon" /></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
