@@ -2055,6 +2055,295 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   font-style: normal;
 }
 
+.admin .left {
+  padding: 0;
+}
+
+.left .admin_nav li {
+  font-weight: 500;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.left .admin_nav li:hover {
+  color: #6a5cff;
+}
+
+.left .admin_nav li.active {
+  color: #fff;
+  background: #6a5cff;
+}
+
+.admin .right {
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  padding: 40px 60px;
+  overflow-y: auto;
+}
+
+.admin .right .title {
+  margin-bottom: 28px;
+}
+
+.admin .right .title h2 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.admin .right .title p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #666;
+}
+
+.admin .right .tab_btn {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  background: none;
+  box-shadow: none;
+  margin-bottom: 40px;
+}
+
+.admin .right .tab_btn > div {
+  font-weight: 500;
+  transition: all 0.3s ease;
+  height: 40px;
+  padding: 0 36px;
+  box-shadow: inset 0 0 0 1px #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin .right .tab_btn > div:hover {
+  color: #6a5cff;
+  box-shadow: inset 0 0 0 1px #6a5cff;
+}
+
+.admin .right .tab_btn > div.active {
+  box-shadow: none;
+  background: #6a5cff;
+  color: #fff;
+}
+
+.right_main {
+  padding: 40px 60px;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.right_main > div {
+  display: none;
+}
+
+.right_main > div.active {
+  display: block;
+}
+
+.right_main h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 36px;
+}
+
+.right_input {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.right_input ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 12px;
+}
+
+.right_input li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 610px;
+}
+
+.right_input li:last-child {
+  width: 100%;
+}
+
+.right_input li .desc {
+  display: flex;
+  align-items: center;
+}
+
+.right_input li .desc p {
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.right_input li .desc .label {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #9b8cff;
+  background: #f3f1ff;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.right_input li .desc .dot {
+  display: flex;
+  font-weight: 500;
+  color: #ff9f43;
+  line-height: 1.25;
+  margin-bottom: auto;
+}
+
+.right_input li > span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+}
+
+.right_input li textarea {
+  height: 200px;
+}
+
+.right_input li select {
+  background: url(input_down.svg) no-repeat center right 12px;
+}
+
+.work_list {
+  margin-top: 40px;
+}
+
+.title_area {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.title_area h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.title_area span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  padding: 8px 24px;
+  background: #6a5cff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.table {
+  border: 1px solid #6a5cff;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.table ul {
+  display: flex;
+}
+
+.table ul.head {
+  background: #f3f1ff;
+}
+
+.table ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 48px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 28px;
+}
+
+.table ul li:first-child {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.table ul li:last-child {
+  width: 240px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.table ul li:last-child span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.table ul li:last-child span.edit {
+  background: #6a5cff;
+}
+
+.table ul li:last-child span.delet {
+  background: #999;
+}
+
+.tool_btn {
+  margin-top: 24px;
+}
+
+.tool_btn ul {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.tool_btn ul li {
+  padding: 8px 24px;
+  background: #6a5cff;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tool_btn ul li.cancle {
+  background: #999;
+}
+
+.json .code_box {
+  max-height: 100%;
+  min-height: auto;
+}
+/**********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+*******************************************RESPONSIVE******************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************/
+
 @media screen and (max-width: 1600px) {
   .main_box .button_box {
     gap: 8px;
