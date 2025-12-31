@@ -25,24 +25,30 @@
               brand: {
                 DEFAULT: "#6a5cff",
                 hover: "#5a4ce6",
-                light: "#b7adff",
-                bg: "#f3f1ff",
-                copy: "#9b8cff",
+              },
+              bg: {
+                main: "#f3f1ff",
                 dark: "#1e1b3a",
               },
               text: {
-                base: "#1e1b3a",
-                desc: "#666666",
-                disabled: "#999999",
+                main: "#1e1b3a",
+                sub: "#666666",
+                desc: "#999999",
+                place: "#999",
               },
               border: {
-                DEFAULT: "#dddddd",
+                DEFAULT: "#ddd",
               },
             },
             boxShadow: {
               "inset-border": "inset 0 0 0 1px #ddd",
               "inset-brand": "inset 0 0 0 1px #6a5cff",
-              "inset-brand-hover": "inset 0 0 0 1px #5a4ce6",
+            },
+            screens: {
+              xl_max: { max: "1600px" },
+              lg_max: { max: "1400px" },
+              md_max: { max: "1200px" },
+              sm_max: { max: "810px" },
             },
           },
         },
@@ -50,20 +56,18 @@
     </script>
 
     <style>
-      body,
-      p,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      li,
-      div {
-        word-break: keep-all;
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
       }
 
-      /* Scrollbar Custom */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Pretendard", sans-serif !important;
+      }
+
       ::-webkit-scrollbar {
         width: 10px;
       }
@@ -76,35 +80,22 @@
         border: 3px solid transparent;
         background-clip: content-box;
       }
-    </style>
 
-    <style>
-      /* 폰트 상속 강제 적용 */
-      input,
-      textarea,
-      select,
-      button {
-        font-family: "Pretendard", sans-serif !important;
-      }
-
-      /* 날짜 인풋 폰트 강제 적용 */
       input[type="date"],
       input[type="time"] {
         font-family: "Pretendard", sans-serif !important;
       }
     </style>
   </head>
-  <body
-    class="font-sans text-text-base leading-[1.5] h-full relative overflow-hidden"
-  >
+  <body class="overflow-hidden h-screen">
     <header
       class="h-[80px] px-[40px] flex justify-between items-center bg-white"
     >
       <div class="logo">
-        <img src="/imges/logo.svg" alt="logo" class="block max-w-full" />
+        <img src="logo.svg" alt="logo" />
       </div>
       <div class="right flex items-center gap-[20px]">
-        <div class="name text-[16px] font-medium">
+        <div class="name text-[16px] font-medium text-text-main">
           <span class="font-semibold text-brand">김마녀</span>님
         </div>
         <div class="button flex gap-[12px]">
@@ -123,130 +114,409 @@
     </header>
 
     <main
-      class="bg-brand-bg h-[calc(100vh-80px)] flex items-center justify-center"
+      class="bg-bg-main h-[calc(100vh-80px)] flex items-center justify-center"
     >
       <div
-        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] px-[60px] py-[40px] overflow-y-auto relative flex flex-col"
+        class="main_box bg-white w-[calc(100%-80px)] h-[calc(100%-80px)] rounded-[20px] p-[40px_60px] overflow-y-auto flex flex-col"
       >
-        <div class="title mb-[40px] shrink-0">
-          <h2 class="text-[32px] font-semibold mb-[4px]">새 특강 개설</h2>
-          <p class="text-[18px] font-normal text-text-desc">
+        <div class="title mb-[40px]">
+          <h2 class="text-[32px] font-semibold mb-[4px] text-text-main">
+            새 특강 개설
+          </h2>
+          <p class="text-[18px] font-normal text-text-sub">
             새로운 특강을 개설하고 학생들을 초대하세요
           </p>
         </div>
 
         <div
-          class="lecture_opened flex flex-wrap gap-y-[24px] gap-x-[12px] justify-center flex-1 content-start"
+          class="lecture_opened flex flex-wrap gap-[24px_12px] justify-center flex-1 content-start"
         >
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-[calc(50%-6px)] sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
-              특강명 <img src="/imges/star.svg" alt="icon" />
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
+              특강명 <img src="star.svg" alt="icon" />
             </p>
             <input
               type="text"
               placeholder="예 :  생성형 AI 활용가이드"
-              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+              class="h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none placeholder:text-text-place"
             />
           </div>
 
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-[calc(50%-6px)] sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
-              수행기관 <img src="/imges/star.svg" alt="icon" />
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
+              수행기관 <img src="star.svg" alt="icon" />
             </p>
             <input
               type="text"
               placeholder="예 : 한국대학교 컴퓨터 공학과"
-              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+              class="h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none placeholder:text-text-place"
             />
           </div>
 
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[1200px]:[&:nth-child(3n)]:w-full max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-full sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
               강사명
             </p>
             <input
               type="text"
               placeholder="예 : 김강사"
-              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+              class="h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none placeholder:text-text-place"
             />
           </div>
 
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-[calc(50%-6px)] sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
-              시작 일시 <img src="/imges/star.svg" alt="icon" />
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
+              시작 일시 <img src="star.svg" alt="icon" />
             </p>
             <div class="date_box flex gap-[8px]">
               <input
                 type="date"
-                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+                class="flex-1 h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none"
               />
               <input
                 type="time"
-                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+                class="flex-1 h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none"
               />
             </div>
           </div>
 
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-[calc(50%-6px)] sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
-              종료 일시 <img src="/imges/star.svg" alt="icon" />
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
+              종료 일시 <img src="star.svg" alt="icon" />
             </p>
             <div class="date_box flex gap-[8px]">
               <input
                 type="date"
-                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+                class="flex-1 h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none"
               />
               <input
                 type="time"
-                class="flex-1 h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a]"
+                class="flex-1 h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none"
               />
             </div>
           </div>
 
           <div
-            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] max-[1200px]:w-[calc(50%-6px)] max-[810px]:w-full"
+            class="flex flex-col gap-[8px] w-[calc(33.33%-8px)] md_max:w-full sm_max:w-full"
           >
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
               장소
             </p>
             <input
               type="text"
               placeholder="예 : 온라인(Zoom) 또는 공학관 301호"
-              class="w-full h-[40px] py-[8px] px-[16px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+              class="h-[40px] px-[16px] border border-border rounded-[8px] text-[14px] font-normal focus:outline-none placeholder:text-text-place"
             />
           </div>
 
           <div class="lecture_textarea w-full flex flex-col gap-[8px]">
-            <p class="flex items-start gap-[2px] font-medium text-[16px]">
+            <p class="flex items-start gap-[2px] font-medium text-text-main">
               주제 및 내용 요약
             </p>
             <textarea
-              name=""
-              id=""
               placeholder="특강의 주요 내용을 간단히 설명해 주세요."
-              class="w-full h-[240px] p-[20px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand resize-none appearance-none antialiased text-[14px] font-normal leading-[1.5] text-[#1e1b3a] placeholder:text-[14px] placeholder:font-normal placeholder:text-[#999]"
+              class="w-full h-[240px] p-[20px] text-[14px] font-normal border border-border rounded-[8px] resize-none focus:outline-none placeholder:text-text-place"
             ></textarea>
           </div>
 
-          <div class="lecture_button w-[360px] max-w-full mt-auto">
+          <div
+            class="work_matching w-full pt-[24px] border-t border-border mt-[12px]"
+          >
+            <h3 class="text-[24px] font-semibold mb-[4px] text-text-main">
+              핵심 역량별 과제 매칭
+            </h3>
+            <p class="text-[14px] font-medium text-text-desc mb-[36px]">
+              각 역량의 학습모드와 평가모드에 사용할 과제를 선택해주세요.
+              선택하지 않은 역량은 해당 특강에서 제외됩니다.
+            </p>
+
+            <ul class="flex gap-[12px] items-start md_max:flex-wrap">
+              <li
+                class="flex-1 rounded-[8px] shadow-inset-border relative md_max:w-[calc(50%-6px)] md_max:flex-auto"
+              >
+                <h4
+                  class="text-[16px] font-medium text-white p-[20px] bg-brand rounded-t-[8px] md_max:text-[14px]"
+                >
+                  PPS - 프롬프트 문제 해결력
+                </h4>
+                <div
+                  class="p-[24px_20px] flex flex-col gap-[20px] rounded-b-[8px] bg-white shadow-[inset_0_-1px_0_#ddd,_inset_1px_0_0_#ddd,_inset_-1px_0_0_#ddd]"
+                >
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      학습모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      평가모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li
+                class="flex-1 rounded-[8px] shadow-inset-border relative md_max:w-[calc(50%-6px)] md_max:flex-auto"
+              >
+                <h4
+                  class="text-[16px] font-medium text-white p-[20px] bg-brand rounded-t-[8px] md_max:text-[14px]"
+                >
+                  DIG - 데이터 기반 통찰력
+                </h4>
+                <div
+                  class="p-[24px_20px] flex flex-col gap-[20px] rounded-b-[8px] bg-white shadow-[inset_0_-1px_0_#ddd,_inset_1px_0_0_#ddd,_inset_-1px_0_0_#ddd]"
+                >
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      학습모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      평가모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li
+                class="flex-1 rounded-[8px] shadow-inset-border relative md_max:w-[calc(50%-6px)] md_max:flex-auto"
+              >
+                <h4
+                  class="text-[16px] font-medium text-white p-[20px] bg-brand rounded-t-[8px] md_max:text-[14px]"
+                >
+                  GCC - 생성형 콘텐츠 제작 능력
+                </h4>
+                <div
+                  class="p-[24px_20px] flex flex-col gap-[20px] rounded-b-[8px] bg-white shadow-[inset_0_-1px_0_#ddd,_inset_1px_0_0_#ddd,_inset_-1px_0_0_#ddd]"
+                >
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      학습모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      평가모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-pointer bg-white"
+                      onclick="toggleSelect(this)"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                    <ul
+                      class="option hidden absolute w-full border border-border min-h-[40px] max-h-[200px] rounded-[8px] top-[calc(100%+4px)] bg-white overflow-y-auto cursor-pointer z-20 shadow-lg"
+                    >
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-1
+                      </li>
+                      <li
+                        class="h-[40px] px-[16px] flex items-center transition-all duration-300 hover:bg-bg-main hover:text-brand text-[14px]"
+                        onclick="selectOption(this)"
+                      >
+                        match-data-2
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+              <li
+                class="flex-1 rounded-[8px] shadow-inset-border relative bg-[#f5f5f5] md_max:w-[calc(50%-6px)] md_max:flex-auto"
+              >
+                <h4
+                  class="text-[16px] font-medium text-white p-[20px] bg-text-desc rounded-t-[8px] md_max:text-[14px]"
+                >
+                  WFA - 업무자동화 도구활용 능력
+                </h4>
+                <div
+                  class="p-[24px_20px] flex flex-col gap-[20px] rounded-b-[8px] shadow-[inset_0_-1px_0_#ddd,_inset_1px_0_0_#ddd,_inset_-1px_0_0_#ddd]"
+                >
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      학습모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-default"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                  </div>
+                  <div class="relative group-custom-select">
+                    <p class="mb-[4px] text-[14px] font-medium text-text-main">
+                      평가모드
+                    </p>
+                    <div
+                      class="custom_select w-full shadow-inset-border h-[40px] flex items-center justify-between px-[16px] rounded-[8px] cursor-default"
+                    >
+                      <span class="text-[14px] text-text-main"
+                        >메타데이터 선택안함</span
+                      >
+                      <img src="input_down.svg" alt="icon" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="lecture_button w-[360px] max-w-full mt-[24px] mx-auto md_max:w-full md_max:max-w-none"
+          >
             <ul class="submit_box flex gap-[8px] h-[40px]">
               <li
-                class="cancle flex-1 flex justify-center items-center rounded-[8px] bg-[#999] text-white font-semibold cursor-pointer transition-all duration-300 hover:bg-[#888] text-[16px] max-[1200px]:text-[14px]"
+                class="flex-1 rounded-[8px] flex justify-center items-center text-white font-semibold text-[14px] cursor-pointer transition-all duration-300 bg-text-desc hover:bg-[#888]"
               >
                 취소
               </li>
               <li
-                class="submit flex-1 flex justify-center items-center rounded-[8px] bg-brand text-white font-semibold cursor-pointer transition-all duration-300 hover:bg-brand-hover text-[16px] max-[1200px]:text-[14px]"
+                class="flex-1 rounded-[8px] flex justify-center items-center text-white font-semibold text-[14px] cursor-pointer transition-all duration-300 bg-brand hover:bg-brand-hover"
               >
                 확인
               </li>
@@ -255,5 +525,50 @@
         </div>
       </div>
     </main>
+
+    <script>
+      function toggleSelect(element) {
+        const optionList = element.nextElementSibling;
+
+        // 다른 셀렉트 닫기
+        document.querySelectorAll(".option").forEach((opt) => {
+          if (opt !== optionList) {
+            opt.classList.add("hidden");
+            opt.classList.remove("block");
+          }
+        });
+
+        if (optionList.classList.contains("hidden")) {
+          optionList.classList.remove("hidden");
+          optionList.classList.add("block");
+        } else {
+          optionList.classList.add("hidden");
+          optionList.classList.remove("block");
+        }
+      }
+
+      function selectOption(element) {
+        const text = element.innerText;
+        const parentDiv = element.closest(".group-custom-select");
+        const displaySpan = parentDiv.querySelector(".custom_select span");
+
+        displaySpan.innerText = text;
+
+        const optionList = element.closest(".option");
+        optionList.classList.add("hidden");
+        optionList.classList.remove("block");
+      }
+
+      // 외부 클릭시 닫기
+      document.addEventListener("click", function (event) {
+        const isClickInside = event.target.closest(".group-custom-select");
+        if (!isClickInside) {
+          document.querySelectorAll(".option").forEach((opt) => {
+            opt.classList.add("hidden");
+            opt.classList.remove("block");
+          });
+        }
+      });
+    </script>
   </body>
 </html>

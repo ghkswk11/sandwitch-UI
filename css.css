@@ -526,6 +526,7 @@ main {
   justify-content: space-between;
   padding: 0 16px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .option {
@@ -2327,6 +2328,85 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   max-height: 100%;
   min-height: auto;
 }
+
+.lecture_opened > div.work_matching {
+  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid #ddd;
+}
+
+.lecture_opened > div.work_matching h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lecture_opened > div.work_matching p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+  margin-bottom: 36px;
+}
+
+.lecture_opened > div.work_matching > ul {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.lecture_opened > div.work_matching > ul > li {
+  flex: 1;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #ddd;
+  overflow: hidden;
+}
+
+.lecture_opened > div.work_matching > ul > li > div {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lecture_opened > div.work_matching > ul > li > div > div {
+  position: relative;
+}
+
+.lecture_opened > div.work_matching > ul > li > div > div .option {
+  display: none;
+}
+
+.lecture_opened > div.work_matching > ul > li > div > div .option.active {
+  display: block;
+}
+
+.lecture_opened > div.work_matching > ul > li h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding: 20px;
+  background: #6a5cff;
+}
+
+.lecture_opened > div.work_matching > ul > li > div p {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e1b3a;
+}
+
+.lecture_opened > div.work_matching > ul > li.disable h4 {
+  background: #999;
+}
+
+.lecture_opened > div.work_matching > ul > li.disable {
+  background: #f5f5f5;
+}
+
+.lecture_opened > div.work_matching > ul > li.disable .custom_select {
+  cursor: default;
+}
+
 /**********************************************************************************************
 ***********************************************************************************************
 ***********************************************************************************************
@@ -2452,6 +2532,19 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   }
   .main_toolbar .ai_send span {
     display: block;
+  }
+
+  .lecture_opened > div.work_matching > ul > li h4 {
+    font-size: 14px;
+  }
+
+  .lecture_opened > div.work_matching > ul {
+    flex-wrap: wrap;
+  }
+
+  .lecture_opened > div.work_matching > ul li {
+    width: calc(50% - 6px);
+    flex: auto;
   }
 }
 
