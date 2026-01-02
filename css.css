@@ -2468,6 +2468,326 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
 .admin_list .table ul li {
   border-bottom: 1px solid #ddd;
 }
+
+.admin_modal {
+  max-width: calc(100vw - 40px);
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  width: 1240px;
+  display: flex;
+  gap: 24px;
+}
+
+.admin_modal.active {
+  flex-direction: column;
+  align-items: normal;
+  justify-content: flex-start;
+}
+
+.admin_modal h2 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.admin_modal .modal_tab_btn {
+  display: flex;
+  gap: 12px;
+}
+.admin_modal .modal_tab_btn li {
+  padding: 8px 36px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin_modal .modal_tab_btn li:hover {
+  box-shadow: inset 0 0 0 1px #6a5cff;
+  color: #6a5cff;
+}
+
+.admin_modal .modal_tab_btn li.active {
+  box-shadow: none;
+  background: #6a5cff;
+  color: #fff;
+}
+
+.modal_cont > div {
+  display: none;
+  background: #fff;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 24px 40px;
+  border-radius: 20px;
+  width: 100%;
+}
+.modal_cont > div.active {
+  display: block;
+}
+
+.admin_modal .modal_btn ul {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.admin_modal .modal_btn li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin_modal .modal_btn li.cancle {
+  background: #999;
+}
+.admin_modal .modal_btn li.add {
+  background: #6a5cff;
+}
+
+.admin_modal .modal_btn li.cancle:hover {
+  background: #888;
+}
+
+.admin_modal .modal_btn li.add:hover {
+  background: #5a4ce6;
+}
+
+.admin_modal .modal_cont > div .right_input ul li {
+  width: 100%;
+}
+
+.admin_modal .modal_cont > div .right_input ul li > span {
+  font-size: 12px;
+  color: #666;
+}
+
+.admin_modal .modal_cont > div .right_input {
+  padding-bottom: 0;
+  border: 0;
+}
+
+.admin_modal .modal_cont > div h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.admin_modal .modal_cont > div .title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.admin_modal .modal_cont .session_info h3 {
+  margin-bottom: 0;
+}
+
+.admin_modal .modal_cont > div .title .add_btn {
+  display: flex;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background: #6a5cff;
+  transition: all 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.admin_modal .modal_cont > div .title .add_btn:hover {
+  background: #5a4ce6;
+}
+
+.admin_modal .modal_cont > div .no_result {
+  padding: 100px 0;
+}
+
+.admin_modal .modal_cont > div .no_result p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+}
+
+.session_main .session > div {
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.session_main .session > div {
+  margin-bottom: 12px;
+}
+.session_main .session > div:last-child {
+  margin-bottom: 0;
+}
+
+.session_main .session > div:hover {
+  border-color: #6a5cff;
+}
+
+.session_main .session > div.active {
+  background: #f3f1ff;
+  display: block;
+}
+
+.session_main .session .head {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 52px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.session_main .session .head h4 {
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.session_main .session > div.active h4,
+.session_main .session > div:hover h4 {
+  color: #6a5cff;
+}
+
+.session_main .session .head .delete_btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff !important;
+  transition: all 0.3s ease;
+  padding: 4px 16px;
+  border-radius: 4px;
+  background: #999;
+  margin-left: auto;
+  cursor: pointer;
+}
+.session_main .session .head .delete_btn:hover {
+  background: #888;
+}
+
+.session_main .session .desc_box {
+  display: none;
+  padding: 24px;
+}
+
+.session_main .session .desc_box.active {
+  display: block;
+}
+
+.desc_box > div {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.desc_box > div:last-child {
+  margin-bottom: 0;
+}
+
+.desc_box > div .desc {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.desc_box .desc.mb_40 {
+  margin-bottom: 28px;
+}
+.desc_box .desc.mb_24 {
+  margin-bottom: 20px;
+}
+
+.desc_box .desc.bb_1 {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #ddd;
+}
+
+.desc_box .desc .f_16 {
+  font-size: 16px;
+}
+
+.desc_box > div .desc .title_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desc_box > div .desc p {
+  font-weight: 500;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.desc_box > div .desc .label {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #9b8cff;
+  background: #f3f1ff;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.desc_box > div .desc .dot {
+  display: flex;
+  font-weight: 500;
+  color: #ff9f43;
+  line-height: 1.25;
+  margin-bottom: auto;
+}
+
+.desc_box > div .desc .reset_btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
+  padding: 4px 16px;
+  border-radius: 4px;
+  background: #9b8cff;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.desc_box > div.desc01 textarea {
+  height: 200px;
+}
+
+.desc_box > div textarea {
+  width: 100%;
+  height: 80px;
+}
+
+.desc_box > div .input_box {
+  margin-bottom: 20px;
+}
+
+.desc_box > div .input_box:last-child {
+  margin-bottom: 0;
+}
+
+.desc_box > div input {
+  width: 100%;
+}
+
+.desc_box .add_btn {
+  background: #6a5cff;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.desc_box .add_btn:hover {
+  background: #5a4ce6;
+}
 /**********************************************************************************************
 ***********************************************************************************************
 ***********************************************************************************************
