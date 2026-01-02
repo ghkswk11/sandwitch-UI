@@ -1,0 +1,113 @@
+<div class="modal_body flex-1 overflow-y-auto px-[32px] pb-[24px]">
+  <!-- 과제 정보 탭 -->
+  <div v-if="currentTab === 'info'" class="info_tab">
+    <div class="flex flex-col gap-[24px]">
+      <!-- 과제 제목 -->
+      <div class="flex flex-col gap-[8px]">
+        <div class="flex items-center">
+          <p class="font-medium text-[14px]">과제 제목</p>
+          <span class="text-[#ff9f43] ml-[4px]">*</span>
+        </div>
+        <input
+          v-model="taskData.title"
+          type="text"
+          placeholder="예 : [기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획"
+          class="w-full h-[40px] px-[16px] text-[14px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand"
+        />
+      </div>
+
+      <!-- 목표 -->
+      <div class="flex flex-col gap-[8px]">
+        <div class="flex items-center">
+          <p class="font-medium text-[14px]">목표</p>
+          <span class="text-[#ff9f43] ml-[4px]">*</span>
+        </div>
+        <textarea
+          v-model="taskData.objective"
+          placeholder="과제의 목표를 입력하세요."
+          class="w-full h-[120px] p-[12px_16px] text-[14px] border border-[#ddd] rounded-[8px] resize-none focus:outline-none focus:border-brand"
+        ></textarea>
+      </div>
+
+      <!-- 미션 -->
+      <div class="flex flex-col gap-[8px]">
+        <div class="flex items-center">
+          <p class="font-medium text-[14px]">미션</p>
+          <span class="text-[#ff9f43] ml-[4px]">*</span>
+        </div>
+        <textarea
+          v-model="taskData.mission"
+          placeholder="과제의 미션을 입력하세요."
+          class="w-full h-[120px] p-[12px_16px] text-[14px] border border-[#ddd] rounded-[8px] resize-none focus:outline-none focus:border-brand"
+        ></textarea>
+      </div>
+
+      <!-- 제한 시간 -->
+      <div class="flex flex-col gap-[8px]">
+        <div class="flex items-center">
+          <p class="font-medium text-[14px]">제한 시간 (분)</p>
+        </div>
+        <input
+          v-model.number="taskData.timeLimit"
+          type="number"
+          placeholder="0"
+          class="w-full h-[40px] px-[16px] text-[14px] border border-[#ddd] rounded-[8px] focus:outline-none focus:border-brand"
+        />
+        <span class="text-[12px] text-text-sub"
+          >제한모드는 '제한없음(0)', 분단위는 '60(분)' 이상</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- 채점 팁 탭 -->
+  <div v-if="currentTab === 'scoring'" class="scoring_tab">
+    <div class="flex flex-col gap-[16px]">
+      <!-- 헤더 영역 -->
+      <div class="flex items-center justify-between">
+        <p class="text-[14px] font-medium text-text-main">
+          과제 채점 시 참고할 팁들 입력하세요.
+        </p>
+        <!-- 팁 추가 버튼 -->
+        <button
+          class="px-[20px] h-[36px] flex items-center justify-center gap-[8px] text-[14px] font-medium text-white bg-brand rounded-[8px] hover:bg-brand-hover transition-all duration-300"
+          @click="addTip"
+        >
+          + 팁 추가
+        </button>
+      </div>
+
+      <!-- 팁 목록 -->
+      <div
+        v-for="(tip, index) in taskData.scoringTips"
+        :key="index"
+        class="tip_item border border-border rounded-[8px] p-[16px] bg-[#F8F9FA]"
+      >
+        <div class="flex items-center justify-between mb-[12px]">
+          <p class="text-[14px] font-medium text-text-main">
+            팁 {{ index + 1 }}
+          </p>
+          <button
+            class="w-[24px] h-[24px] flex items-center justify-center text-[#ff4757] text-[14px] bg-[#ffe5e5] rounded-[4px] hover:bg-[#ffd1d1] transition-all duration-300"
+            @click="removeTip(index)"
+          >
+            ×
+          </button>
+        </div>
+        <textarea
+          v-model="tip.tip"
+          placeholder="채점 팁을 입력하세요."
+          class="w-full h-[80px] p-[12px_16px] text-[14px] border border-[#ddd] rounded-[8px] resize-none focus:outline-none focus:border-brand"
+        ></textarea>
+      </div>
+
+      <!-- 팁이 없을 때 -->
+      <div
+        v-if="taskData.scoringTips.length === 0"
+        class="text-center py-[40px] text-text-sub text-[14px]"
+      >
+        팁이 없습니다. '+ 팁 추가' 버튼을 눌러 팁을 추가하세요.
+      </div>
+    </div>
+  </div>
+</div>

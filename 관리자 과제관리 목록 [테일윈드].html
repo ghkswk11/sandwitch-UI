@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Task Management</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+              mono: ["D2Coding", "monospace"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+              },
+              text: {
+                main: "#1e1b3a",
+                sub: "#666666",
+                gray: "#999999",
+                dark: "#444444",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+              state: {
+                view: "#9b8cff",
+                edit: "#6a5cff",
+                delete: "#999999",
+              },
+            },
+            boxShadow: {
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-left": "inset -1px 1px 0 0px #ddd",
+            },
+            screens: {
+              "2xl": { max: "1600px" },
+              xl: { max: "1400px" },
+              lg: { max: "1200px" },
+              md: { max: "810px" },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* CSS Reset & Basics */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        background: none;
+        text-decoration: none;
+        list-style: none;
+      }
+      body {
+        font-family: "Pretendard", sans-serif;
+        line-height: 1.5;
+        color: #1e1b3a;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+
+      /* Custom Select Arrow */
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          no-repeat center right 12px;
+        background-color: white;
+      }
+
+      /* Search Icon */
+      .search-input-bg {
+        background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M21 21L16.65 16.65' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          no-repeat 16px 8px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body class="overflow-hidden h-screen flex flex-col">
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white shrink-0"
+    >
+      <div class="logo">
+        <img src="logo.svg" alt="logo" class="block" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="button flex gap-[12px]">
+          <div
+            class="label text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px]"
+          >
+            관리자
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="admin flex h-[calc(100vh-80px)]">
+      <div
+        class="left active flex flex-col bg-white h-full shrink-0 shadow-inset-left w-[430px] overflow-y-auto overflow-x-hidden lg:w-[360px] lg:p-[32px_20px] 2xl:w-[320px]"
+      >
+        <ul class="admin_nav w-full">
+          <li
+            class="active font-medium px-[32px] py-[16px] cursor-pointer transition-all duration-300 text-white bg-brand"
+          >
+            과제관리
+          </li>
+          <li
+            class="font-medium px-[32px] py-[16px] cursor-pointer transition-all duration-300 hover:text-brand text-text-main"
+          >
+            특강관리
+          </li>
+          <li
+            class="font-medium px-[32px] py-[16px] cursor-pointer transition-all duration-300 hover:text-brand text-text-main"
+          >
+            사용자 관리
+          </li>
+          <li
+            class="font-medium px-[32px] py-[16px] cursor-pointer transition-all duration-300 hover:text-brand text-text-main"
+          >
+            환경설정
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="right flex-1 bg-[#f9f9f9] border-t border-border p-[40px_60px] overflow-y-auto flex flex-col min-w-0"
+      >
+        <div class="title mb-[28px]">
+          <h2 class="text-[32px] font-semibold text-text-main mb-[4px]">
+            과제 관리
+          </h2>
+          <p class="text-[20px] font-medium text-text-sub">
+            등록된 과제를 관리하고, 검색, 필터, 정렬 기능을 통해 원하는 과제를
+            빠르게 찾을 수 있습니다.
+          </p>
+        </div>
+
+        <div class="admin_list bg-white rounded-[40px] p-[40px_60px]">
+          <div class="input_box flex items-end gap-[8px] mb-[60px]">
+            <div class="search flex-1 flex flex-col gap-[8px]">
+              <p class="font-medium text-text-main">검색어</p>
+              <input
+                type="search"
+                class="search-input-bg w-full h-[40px] pl-[44px] text-[14px] border border-border rounded-[8px] focus:outline-none"
+              />
+            </div>
+
+            <div class="flex flex-col gap-[8px]">
+              <p class="font-medium text-text-main">연도</p>
+              <select
+                class="w-[200px] h-[40px] px-[16px] text-[14px] border border-border rounded-[8px] focus:outline-none cursor-pointer 2xl:w-[120px]"
+              >
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-[8px]">
+              <p class="font-medium text-text-main">월</p>
+              <select
+                class="w-[200px] h-[40px] px-[16px] text-[14px] border border-border rounded-[8px] focus:outline-none cursor-pointer 2xl:w-[120px]"
+              >
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-[8px]">
+              <p class="font-medium text-text-main">역량코드</p>
+              <select
+                class="w-[200px] h-[40px] px-[16px] text-[14px] border border-border rounded-[8px] focus:outline-none cursor-pointer 2xl:w-[120px]"
+              >
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+
+            <div
+              class="new w-[140px] h-[40px] flex items-center justify-center font-semibold text-white bg-brand rounded-[8px] cursor-pointer transition-all duration-300 hover:bg-brand-hover shrink-0"
+            >
+              + 새 과제 생성
+            </div>
+          </div>
+
+          <div class="work_list">
+            <div class="table border-0 rounded-0 overflow-hidden w-full">
+              <ul class="head flex bg-brand-bg w-full">
+                <li
+                  class="flex-1 flex items-center justify-start h-[48px] px-[28px] text-[14px] font-medium 2xl:px-[16px]"
+                >
+                  제목
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[48px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  역량코드
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[48px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  모드
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[48px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  버전
+                </li>
+                <li
+                  class="w-[240px] flex items-center justify-center gap-[8px] h-[48px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[160px] 2xl:px-[16px]"
+                >
+                  작업
+                </li>
+              </ul>
+
+              <ul class="body flex w-full border-b border-border">
+                <li
+                  class="flex-1 flex items-center justify-start h-[60px] px-[28px] text-[14px] font-medium 2xl:px-[16px]"
+                >
+                  [기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  PPS
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  학습모드
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  v1.2.0
+                </li>
+                <li
+                  class="w-[240px] flex items-center justify-center gap-[8px] h-[60px] px-[28px] shrink-0 2xl:w-[160px] 2xl:px-[16px]"
+                >
+                  <span
+                    class="view flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-view rounded-[4px] cursor-pointer"
+                    >보기</span
+                  >
+                  <span
+                    class="edit flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-brand rounded-[4px] cursor-pointer"
+                    >수정</span
+                  >
+                  <span
+                    class="delet flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-delete rounded-[4px] cursor-pointer"
+                    >삭제</span
+                  >
+                </li>
+              </ul>
+
+              <ul class="body flex w-full border-b border-border">
+                <li
+                  class="flex-1 flex items-center justify-start h-[60px] px-[28px] text-[14px] font-medium 2xl:px-[16px]"
+                >
+                  [기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  PPS
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  학습모드
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  v1.2.0
+                </li>
+                <li
+                  class="w-[240px] flex items-center justify-center gap-[8px] h-[60px] px-[28px] shrink-0 2xl:w-[160px] 2xl:px-[16px]"
+                >
+                  <span
+                    class="view flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-view rounded-[4px] cursor-pointer"
+                    >보기</span
+                  >
+                  <span
+                    class="edit flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-brand rounded-[4px] cursor-pointer"
+                    >수정</span
+                  >
+                  <span
+                    class="delet flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-delete rounded-[4px] cursor-pointer"
+                    >삭제</span
+                  >
+                </li>
+              </ul>
+
+              <ul class="body flex w-full border-b border-border">
+                <li
+                  class="flex-1 flex items-center justify-start h-[60px] px-[28px] text-[14px] font-medium 2xl:px-[16px]"
+                >
+                  [기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  PPS
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  학습모드
+                </li>
+                <li
+                  class="w-[120px] flex items-center justify-center h-[60px] px-[28px] text-[14px] font-medium shrink-0 2xl:w-[100px] 2xl:px-[16px]"
+                >
+                  v1.2.0
+                </li>
+                <li
+                  class="w-[240px] flex items-center justify-center gap-[8px] h-[60px] px-[28px] shrink-0 2xl:w-[160px] 2xl:px-[16px]"
+                >
+                  <span
+                    class="view flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-view rounded-[4px] cursor-pointer"
+                    >보기</span
+                  >
+                  <span
+                    class="edit flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-brand rounded-[4px] cursor-pointer"
+                    >수정</span
+                  >
+                  <span
+                    class="delet flex items-center justify-center w-[80px] h-[28px] text-[14px] font-semibold text-white bg-state-delete rounded-[4px] cursor-pointer"
+                    >삭제</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

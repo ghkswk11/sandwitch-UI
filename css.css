@@ -2293,6 +2293,10 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   cursor: pointer;
 }
 
+.table ul li:last-child span.view {
+  background: #9b8cff;
+}
+
 .table ul li:last-child span.edit {
   background: #6a5cff;
 }
@@ -2407,6 +2411,63 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
   cursor: default;
 }
 
+.admin_list {
+  padding: 40px 60px;
+  background: #fff;
+  border-radius: 40px;
+}
+
+.admin_list .input_box {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.admin_list .input_box select {
+  width: 200px;
+}
+
+.admin_list .input_box > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input_box .new {
+  font-weight: 600;
+  color: #fff;
+  border-radius: 8px;
+  background: #6a5cff;
+  width: 140px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.input_box .new:hover {
+  background: #5a4ce6;
+}
+
+.admin_list .work_list .table {
+  border: 0;
+  border-radius: 0;
+}
+
+.admin_list .table .head li {
+  height: 48px;
+}
+
+.admin_list .table ul li {
+  height: 60px;
+}
+
+.admin_list .table ul li {
+  border-bottom: 1px solid #ddd;
+}
 /**********************************************************************************************
 ***********************************************************************************************
 ***********************************************************************************************
@@ -2431,6 +2492,23 @@ Horiontal Scrollbar button (BOTTOM-RIGHT aKa END)
 
   .main_box .main_content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin .left {
+    width: 320px;
+  }
+
+  .admin .table ul li {
+    padding: 0 16px;
+    width: 100px;
+  }
+
+  .admin .table ul li:last-child {
+    width: 160px;
+  }
+
+  .admin .admin_list .input_box select {
+    width: 120px;
   }
 }
 

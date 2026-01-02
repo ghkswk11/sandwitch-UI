@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header>
+      <div class="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
+      <div class="right">
+        <div class="button">
+          <div class="label">관리자</div>
+          <div class="logout">로그아웃</div>
+        </div>
+      </div>
+    </header>
+    <!-- 메인 -->
+    <main class="admin">
+      <!-- 사이드메뉴 -->
+      <div class="left active">
+        <ul class="admin_nav">
+          <li class="active">과제관리</li>
+          <li>특강관리</li>
+          <li>사용자 관리</li>
+          <li>환경설정</li>
+        </ul>
+      </div>
+      <!-- 메인컨텐츠 -->
+      <div class="right">
+        <!-- 타이틀 -->
+        <div class="title">
+          <h2>과제 관리</h2>
+          <p>
+            등록된 과제를 관리하고, 검색, 필터, 정렬 기능을 통해 원하는 과제를
+            빠르게 찾을 수 있습니다.
+          </p>
+        </div>
+        <!-- 목록메인 -->
+        <div class="admin_list">
+          <!-- 인풋박스 -->
+          <div class="input_box">
+            <!-- 검색어 -->
+            <div class="search">
+              <p>검색어</p>
+              <input type="search" />
+            </div>
+            <!-- 연도 -->
+            <div>
+              <p>연도</p>
+              <select name="" id="">
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+            <!-- 월 -->
+            <div>
+              <p>월</p>
+              <select name="" id="">
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+            <!-- 역량코드 -->
+            <div>
+              <p>역량코드</p>
+              <select name="" id="">
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+                <option value="">옵션</option>
+              </select>
+            </div>
+            <!-- 추가 -->
+            <div class="new">+ 새 과제 생성</div>
+          </div>
+
+          <!-- 목록 -->
+          <div class="work_list">
+            <div class="table">
+              <ul class="head">
+                <li>제목</li>
+                <li>역량코드</li>
+                <li>모드</li>
+                <li>버전</li>
+                <li>작업</li>
+              </ul>
+              <ul class="body">
+                <li>[기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획</li>
+                <li>PPS</li>
+                <li>학습모드</li>
+                <li>v1.2.0</li>
+                <li>
+                  <span class="view">보기</span>
+                  <span class="edit">수정</span>
+                  <span class="delet">삭제</span>
+                </li>
+              </ul>
+              <ul class="body">
+                <li>[기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획</li>
+                <li>PPS</li>
+                <li>학습모드</li>
+                <li>v1.2.0</li>
+                <li>
+                  <span class="view">보기</span>
+                  <span class="edit">수정</span>
+                  <span class="delet">삭제</span>
+                </li>
+              </ul>
+              <ul class="body">
+                <li>[기획] 수면 테크 앱 '꿀잠' 투자 제안서 기획</li>
+                <li>PPS</li>
+                <li>학습모드</li>
+                <li>v1.2.0</li>
+                <li>
+                  <span class="view">보기</span>
+                  <span class="edit">수정</span>
+                  <span class="delet">삭제</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
