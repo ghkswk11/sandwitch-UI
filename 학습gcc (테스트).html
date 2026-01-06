@@ -76,7 +76,7 @@
         line-height: 1.5;
       }
 
-      /* Scrollbar Custom */
+      /* Scrollbar */
       ::-webkit-scrollbar {
         width: 10px;
       }
@@ -90,7 +90,7 @@
         background-clip: content-box;
       }
 
-      /* Number Input Reset */
+      /* Input Number Reset */
       input[type="number"]::-webkit-outer-spin-button,
       input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -100,7 +100,7 @@
         -moz-appearance: textfield;
       }
 
-      /* [Left Sidebar Logic] */
+      /* Sidebar Transition */
       .left-sidebar {
         width: 72px;
       }
@@ -220,42 +220,8 @@
                   </p>
                 </div>
               </div>
-              <div class="hidden flex-col gap-[20px]">
-                <div class="target flex flex-col">
-                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                    목표 (과제2)
-                  </h4>
-                  <p class="text-[14px] font-medium text-text-base">
-                    과제 2의 목표 내용입니다.
-                  </p>
-                </div>
-                <div class="mission flex flex-col">
-                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                    핵심 미션
-                  </h4>
-                  <p class="text-[14px] font-medium text-text-base">
-                    과제 2의 미션 내용입니다.
-                  </p>
-                </div>
-              </div>
-              <div class="hidden flex-col gap-[20px]">
-                <div class="target flex flex-col">
-                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                    목표 (과제3)
-                  </h4>
-                  <p class="text-[14px] font-medium text-text-base">
-                    과제 3의 목표 내용입니다.
-                  </p>
-                </div>
-                <div class="mission flex flex-col">
-                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                    핵심 미션
-                  </h4>
-                  <p class="text-[14px] font-medium text-text-base">
-                    과제 3의 미션 내용입니다.
-                  </p>
-                </div>
-              </div>
+              <div class="hidden flex-col gap-[20px]"></div>
+              <div class="hidden flex-col gap-[20px]"></div>
             </div>
           </div>
         </div>
@@ -292,40 +258,30 @@
                     <p
                       class="text-[14px] font-medium leading-[2] text-text-base"
                     >
-                      당신은 헬스케어 스타트업 'P-Lab'의 기획자(PM)입니다.다음
+                      당신은 헬스케어 스타트업 'P-Lab'의 기획자(PM)입니다. 다음
                       주 벤처캐피탈(VC) 미팅을 앞두고...
                     </p>
-                  </div>
-                </div>
-                <div class="cont_area">
-                  <h3 class="font-semibold mb-[20px] text-[16px]">
-                    제공 데이터 자산
-                  </h3>
-                  <div
-                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
-                  >
-                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                      대표님의 메모
-                    </h4>
-                    <ul class="flex flex-col gap-[12px]">
-                      <li
-                        class="text-[14px] font-medium leading-[2] text-text-base"
-                      >
-                        1. 김 PM, 우리 앱 이름은 '꿀잠'이야. 기능은 다 넣어.
-                        ASMR, 수면 분석 등등.
-                      </li>
-                      <li
-                        class="text-[14px] font-medium leading-[2] text-text-base"
-                      >
-                        2. 마케팅 핵심: 우리 앱 쓰면 불면증 100% 완치된다고
-                        홍보해.
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </div>
 
               <div class="flex flex-col gap-[32px]">
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">첨부 파일</h3>
+                  <div
+                    class="relative flex flex-col justify-center items-center gap-2 rounded-[8px] border border-dashed border-[#ddd] py-4"
+                  >
+                    <input
+                      type="file"
+                      class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      onchange="handleFileUpload(this)"
+                    />
+                    <img src="gcc_file.svg" alt="icon" />
+                    <p class="text-[12px] font-normal text-[#999]">
+                      파일을 추가해 주세요.
+                    </p>
+                  </div>
+                </div>
                 <div class="cont_area">
                   <h3 class="font-semibold mb-[20px] text-[16px]">
                     출력 요구 사항
@@ -345,50 +301,6 @@
                     >
                       대표님의 지시 중 AES 평가 요소에 위배되는 사항을 찾아내어,
                       수정할 것.
-                    </p>
-                  </div>
-                </div>
-                <div class="cont_area">
-                  <h3 class="font-semibold mb-[20px] text-[16px]">
-                    결과물 작성(ACI) 가이드
-                  </h3>
-                  <div
-                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
-                  >
-                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                      작성 형식
-                    </h4>
-                    <p
-                      class="text-[14px] font-medium leading-[2] text-text-base"
-                    >
-                      서술형 줄글이 아닌 개조식 리스트 형태
-                    </p>
-                  </div>
-                  <div
-                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
-                  >
-                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                      권장 길이
-                    </h4>
-                    <p
-                      class="text-[14px] font-medium leading-[2] text-text-base"
-                    >
-                      공백 포함 500자 ~ 700자 이내
-                    </p>
-                  </div>
-                  <div
-                    class="divider h-[24px] relative mb-[8px] after:absolute after:content-[''] after:top-1/2 after:left-0 after:-translate-y-1/2 after:w-full after:h-[1px] after:bg-border"
-                  ></div>
-                  <div
-                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
-                  >
-                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
-                      수익 모델
-                    </h4>
-                    <p
-                      class="text-[14px] font-medium leading-[2] text-text-base"
-                    >
-                      단계별 수익화 전략 (구독 경제 등)
                     </p>
                   </div>
                 </div>
@@ -419,9 +331,8 @@
           <div class="flex">
             <span
               class="edu active mr-[24px] text-[14px] font-medium text-white px-[12px] py-[4px] rounded-[8px] bg-brand block"
+              >학습모드</span
             >
-              학습모드
-            </span>
           </div>
         </div>
 
@@ -442,11 +353,9 @@
                     class="chat bg-white p-[24px] shadow-inset-brand rounded-[20px] max-w-[800px] text-[14px] font-medium text-text-base"
                   >
                     아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
-                    바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로
-                    정리해서 넣어줘.
+                    바꿔줘.
                   </div>
                 </div>
-
                 <div class="model flex flex-col">
                   <div class="model_name flex gap-[8px] items-center mb-[16px]">
                     <div
@@ -463,33 +372,98 @@
                   >
                     [제목] 김철수 팀장님, 야근을 줄여줄 AI 비서가
                     도착했습니다.<br />
-                    ... (생략) ...
-                  </div>
-                  <div class="model_option mt-[8px]">
-                    <ul class="flex gap-[12px]">
-                      <li
-                        class="copy flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer justify-center"
-                      >
-                        <img src="copy.svg" alt="icon" /> 복사
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </article>
             </div>
 
-            <div class="result flex flex-col">
-              <h3 class="font-semibold text-brand mb-[24px] text-[16px]">
-                기획서
-              </h3>
-              <textarea
-                class="p-[20px] w-full h-[480px] bg-white text-[14px] resize-none border border-border rounded-[8px] placeholder-text-disabled focus:outline-none focus:shadow-none mb-0"
-                placeholder="최종 기획서를 제출하세요"
-              ></textarea>
-              <span
-                class="text-[12px] font-normal text-text-desc block text-right mt-[4px]"
-                >(100/500)</span
-              >
+            <div class="result flex flex-col mt-[60px]">
+              <div class="flex gap-2">
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3 text-brand">
+                    과제1
+                  </h3>
+                  <div
+                    id="file-box-1"
+                    class="file-box relative h-[300px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden bg-center bg-no-repeat bg-cover bg-white transition-all duration-300 after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px] before:content-[''] before:absolute before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-[url('gcc_video.svg')] before:bg-no-repeat before:bg-center before:bg-contain before:z-20 before:hidden"
+                    onclick="openPreview(1)"
+                  >
+                    <input
+                      type="file"
+                      id="input-1"
+                      accept="image/*, video/*"
+                      class="w-full h-full opacity-0 cursor-pointer relative z-10"
+                      onchange="handleResultFileUpload(this, 1)"
+                      onclick="event.stopPropagation()"
+                    />
+                    <button
+                      id="reset-btn-1"
+                      type="button"
+                      class="hidden absolute top-3 right-3 z-30 w-6 h-6 bg-black/50 rounded-full text-white text-[12px] flex items-center justify-center hover:bg-black/70"
+                      onclick="resetResultFile(event, 1)"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3 text-brand">
+                    과제2
+                  </h3>
+                  <div
+                    id="file-box-2"
+                    class="file-box relative h-[300px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden bg-center bg-no-repeat bg-cover bg-white transition-all duration-300 after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px] before:content-[''] before:absolute before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-[url('gcc_video.svg')] before:bg-no-repeat before:bg-center before:bg-contain before:z-20 before:hidden"
+                    onclick="openPreview(2)"
+                  >
+                    <input
+                      type="file"
+                      id="input-2"
+                      accept="image/*, video/*"
+                      class="w-full h-full opacity-0 cursor-pointer relative z-10"
+                      onchange="handleResultFileUpload(this, 2)"
+                      onclick="event.stopPropagation()"
+                    />
+                    <button
+                      id="reset-btn-2"
+                      type="button"
+                      class="hidden absolute top-3 right-3 z-30 w-6 h-6 bg-black/50 rounded-full text-white text-[12px] flex items-center justify-center hover:bg-black/70"
+                      onclick="resetResultFile(event, 2)"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3 text-brand">
+                    과제3
+                  </h3>
+                  <div
+                    id="file-box-3"
+                    class="file-box relative h-[300px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden bg-center bg-no-repeat bg-cover bg-white transition-all duration-300 after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px] before:content-[''] before:absolute before:w-12 before:h-12 before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-[url('gcc_video.svg')] before:bg-no-repeat before:bg-center before:bg-contain before:z-20 before:hidden"
+                    onclick="openPreview(3)"
+                  >
+                    <input
+                      type="file"
+                      id="input-3"
+                      accept="image/*, video/*"
+                      class="w-full h-full opacity-0 cursor-pointer relative z-10"
+                      onchange="handleResultFileUpload(this, 3)"
+                      onclick="event.stopPropagation()"
+                    />
+                    <button
+                      id="reset-btn-3"
+                      type="button"
+                      class="hidden absolute top-3 right-3 z-30 w-6 h-6 bg-black/50 rounded-full text-white text-[12px] flex items-center justify-center hover:bg-black/70"
+                      onclick="resetResultFile(event, 3)"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div class="button_area flex justify-center mt-[24px]">
                 <button
                   type="button"
@@ -509,7 +483,7 @@
           <div class="textarea relative h-[140px]">
             <textarea
               class="w-full h-full border border-brand p-[20px] text-[14px] font-medium resize-none rounded-[8px] placeholder-text-disabled focus:outline-none focus:shadow-none"
-              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+              placeholder="다음 수정을 위해 피드백을 입력하세요."
             ></textarea>
             <div
               class="enter_icon absolute bottom-[16px] right-[16px] w-[32px] h-[32px] flex justify-center items-center bg-brand rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-brand-hover"
@@ -521,19 +495,37 @@
       </div>
     </main>
 
+    <div
+      id="preview-modal"
+      class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-10"
+      onclick="closePreview()"
+    >
+      <div
+        class="relative max-w-4xl max-h-full"
+        onclick="event.stopPropagation()"
+      >
+        <button
+          class="absolute -top-10 right-0 text-white text-2xl font-bold"
+          onclick="closePreview()"
+        >
+          ✕
+        </button>
+        <div
+          id="preview-content"
+          class="flex justify-center items-center"
+        ></div>
+      </div>
+    </div>
+
     <script>
-      // Sidebar Toggle
+      // 1. Sidebar Toggle
       function toggleSidebar() {
         const sidebar = document.getElementById("sidebar");
         sidebar.classList.toggle("active");
       }
 
-      // Tab Switching Logic
-      // groupId: UL id, index: clicked LI index
-      // activeClasses: Tailwind classes string for Active state
-      // inactiveClasses: Tailwind classes string for Inactive state
+      // 2. Tab Switching
       function switchTab(groupId, index, activeClasses, inactiveClasses) {
-        // 1. Handle Buttons
         const group = document.getElementById(groupId);
         const buttons = group.getElementsByTagName("li");
         const activeClassList = activeClasses.split(" ");
@@ -542,32 +534,24 @@
         for (let i = 0; i < buttons.length; i++) {
           const btn = buttons[i];
           if (i === index) {
-            // Activate
             btn.classList.remove(...inactiveClassList);
             btn.classList.add(...activeClassList);
           } else {
-            // Deactivate
             btn.classList.remove(...activeClassList);
             btn.classList.add(...inactiveClassList);
           }
         }
 
-        // 2. Handle Content
-        // Assumes content group ID is "content-" + suffix of button group ID "tab-"
         const contentGroupId = groupId.replace("tab-", "content-");
         const contentGroup = document.getElementById(contentGroupId);
         if (contentGroup) {
-          // Get direct children divs only
           const contents = Array.from(contentGroup.children);
-
           for (let i = 0; i < contents.length; i++) {
             const content = contents[i];
             if (i === index) {
-              // Show: Remove hidden, ensure flex (or block if handled by children)
               content.classList.remove("hidden");
-              content.classList.add("flex"); // Most containers here use flex-col
+              content.classList.add("flex");
             } else {
-              // Hide
               content.classList.remove("flex");
               content.classList.add("hidden");
             }
@@ -575,9 +559,7 @@
         }
       }
 
-      // Logic for .enter visibility
-      // Defined in CSS as: body:has(.result.active) .enter { display: none; }
-      // Result tab is Index 1 in 'tab-group-3'
+      // 3. Enter Area Toggle
       function toggleEnterArea(visible) {
         const enterArea = document.getElementById("enter-area");
         if (visible) {
@@ -585,6 +567,126 @@
         } else {
           enterArea.classList.add("hidden");
         }
+      }
+
+      // 4. Left Sidebar File Upload
+      function handleFileUpload(input) {
+        const pTag = input.parentElement.querySelector("p");
+        if (input.files && input.files.length > 0) {
+          pTag.innerText = input.files[0].name;
+          pTag.classList.remove("text-[#999]", "font-normal");
+          pTag.classList.add("text-brand", "font-medium");
+        } else {
+          pTag.innerText = "파일을 추가해 주세요.";
+          pTag.classList.remove("text-brand", "font-medium");
+          pTag.classList.add("text-[#999]", "font-normal");
+        }
+      }
+
+      // 5. Result File Upload & Preview Logic
+      const uploadedFiles = {
+        1: { type: null, url: null },
+        2: { type: null, url: null },
+        3: { type: null, url: null },
+      };
+
+      function handleResultFileUpload(input, id) {
+        const file = input.files[0];
+        if (!file) return;
+
+        const fileBox = document.getElementById(`file-box-${id}`);
+        const resetBtn = document.getElementById(`reset-btn-${id}`);
+        const fileURL = URL.createObjectURL(file);
+
+        // Style updates on upload
+        fileBox.classList.remove("border", "border-dashed");
+        fileBox.classList.add("after:hidden");
+        input.classList.add("hidden"); // Hide input so clicks hit fileBox
+        resetBtn.classList.remove("hidden");
+
+        if (file.type.startsWith("image/")) {
+          uploadedFiles[id] = { type: "image", url: fileURL };
+          fileBox.style.backgroundImage = `url('${fileURL}')`;
+          fileBox.classList.remove("before:block");
+          fileBox.classList.add("before:hidden");
+        } else if (file.type.startsWith("video/")) {
+          uploadedFiles[id] = { type: "video", url: fileURL };
+          fileBox.classList.remove("before:hidden");
+          fileBox.classList.add("before:block");
+
+          // Video Thumbnail Generation
+          const video = document.createElement("video");
+          video.src = fileURL;
+          video.currentTime = 1;
+          video.muted = true;
+          video.playsInline = true;
+
+          video.onloadeddata = () => {
+            setTimeout(() => {
+              const canvas = document.createElement("canvas");
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              const thumbnail = canvas.toDataURL("image/jpeg");
+              fileBox.style.backgroundImage = `url('${thumbnail}')`;
+            }, 200);
+          };
+        }
+      }
+
+      function resetResultFile(event, id) {
+        event.stopPropagation();
+        const input = document.getElementById(`input-${id}`);
+        const fileBox = document.getElementById(`file-box-${id}`);
+        const resetBtn = document.getElementById(`reset-btn-${id}`);
+
+        input.value = "";
+        uploadedFiles[id] = { type: null, url: null };
+
+        fileBox.style.backgroundImage = "none";
+        fileBox.classList.add("border", "border-dashed");
+        fileBox.classList.remove("after:hidden");
+        fileBox.classList.add("before:hidden");
+        fileBox.classList.remove("before:block");
+
+        input.classList.remove("hidden");
+        resetBtn.classList.add("hidden");
+      }
+
+      function openPreview(id) {
+        const fileData = uploadedFiles[id];
+        if (!fileData.url) {
+          document.getElementById(`input-${id}`).click();
+          return;
+        }
+
+        const modal = document.getElementById("preview-modal");
+        const content = document.getElementById("preview-content");
+        content.innerHTML = "";
+
+        if (fileData.type === "image") {
+          const img = document.createElement("img");
+          img.src = fileData.url;
+          img.className =
+            "max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl";
+          content.appendChild(img);
+        } else if (fileData.type === "video") {
+          const video = document.createElement("video");
+          video.src = fileData.url;
+          video.controls = true;
+          video.autoplay = true;
+          video.className = "max-w-full max-h-[80vh] rounded-lg shadow-2xl";
+          content.appendChild(video);
+        }
+        modal.classList.remove("hidden");
+      }
+
+      function closePreview() {
+        const modal = document.getElementById("preview-modal");
+        const content = document.getElementById("preview-content");
+        modal.classList.add("hidden");
+        content.innerHTML = "";
       }
     </script>
   </body>

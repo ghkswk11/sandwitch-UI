@@ -992,6 +992,35 @@ input[type="number"] {
   margin-bottom: 8px;
 }
 
+.left_cont .tab_cont > div .cont_area .file_box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+  padding: 16px 0;
+}
+
+.left_cont .tab_cont > div .cont_area .file_box input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.left_cont .tab_cont > div .cont_area .file_box p {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999;
+}
+
 .left_cont .tab_cont > div .cont_area .cont_box:last-child {
   margin-bottom: 0;
 }
@@ -1298,6 +1327,58 @@ body:has(.result.active) .enter {
 
 .pps .right .result button:hover {
   background: #5a4ce6;
+}
+
+.pps .right .result .file_area {
+  display: flex;
+  gap: 8px;
+}
+
+.pps .right .result .file_area .file_box {
+  flex: 1;
+}
+
+.pps .right .result .file_area .file_box h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  margin-left: 12px;
+}
+
+.pps .right .result .file_area .file_box .file_layout {
+  height: 300px;
+  border: 1px dashed #5a4ce6;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pps .right .result .file_area .file_box .file_layout input {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.pps .right .result .file_area .file_box .file_layout::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url(plus.svg) no-repeat center center / 20px;
+}
+
+.pps .right .result .file_area .file_box .file_layout::before {
+  position: absolute;
+  content: "";
+  width: 24px;
+  height: 24px;
+  bottom: 20px;
+  left: 20px;
+  background: url(gcc_video.svg) no-repeat center center;
 }
 
 .enter {
