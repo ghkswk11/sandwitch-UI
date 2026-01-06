@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GCC Assignment</title>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+              mono: ["D2Coding", "monospace"],
+            },
+            colors: {
+              brand: {
+                DEFAULT: "#6a5cff",
+                hover: "#5a4ce6",
+                light: "#b7adff",
+                bg: "#f3f1ff",
+                copy: "#9b8cff",
+                dark: "#1e1b3a",
+              },
+              text: {
+                base: "#1e1b3a",
+                desc: "#666666",
+                disabled: "#999999",
+              },
+              border: {
+                DEFAULT: "#dddddd",
+              },
+            },
+            boxShadow: {
+              "inset-border": "inset 0 0 0 1px #ddd",
+              "inset-brand": "inset 0 0 0 1px #6a5cff",
+              "inset-left": "inset -1px 1px 0 0px #ddd",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "D2Coding";
+        src: url("https://cdn.jsdelivr.net/gh/naver/d2codingfont/D2Coding-Ver1.3.2-20180524/D2Coding/D2Coding-Ver1.3.2-20180524.ttf")
+          format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      li,
+      div,
+      button,
+      textarea {
+        word-break: keep-all;
+        font-family: "Pretendard", sans-serif !important;
+        color: #1e1b3a;
+        line-height: 1.5;
+      }
+
+      /* Scrollbar Custom */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: #6a5cff;
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+      }
+
+      /* Number Input Reset */
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      /* [Left Sidebar Logic] */
+      .left-sidebar {
+        width: 72px;
+      }
+      .left-sidebar.active {
+        width: 430px;
+      }
+      .left-sidebar > div:not(.ham_btn) {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      .left-sidebar.active > div:not(.ham_btn) {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+      }
+
+      @media screen and (max-width: 1200px) {
+        .left-sidebar.active {
+          width: 360px;
+          padding: 32px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body class="h-screen overflow-hidden text-text-base">
+    <header
+      class="h-[80px] px-[40px] flex justify-between items-center bg-white"
+    >
+      <div class="logo">
+        <img src="logo.svg" alt="logo" class="block max-w-full" />
+      </div>
+      <div class="right flex items-center gap-[20px]">
+        <div class="name text-[16px] font-medium text-text-base">
+          <span class="font-semibold text-brand">김마녀</span>님
+        </div>
+        <div class="button flex gap-[12px]">
+          <div
+            class="my_page text-[14px] font-semibold text-white bg-brand px-[20px] py-[4px] rounded-[4px] transition-all duration-300 cursor-pointer hover:bg-brand-hover"
+          >
+            마이페이지
+          </div>
+          <div
+            class="logout text-[14px] font-semibold text-brand px-[20px] py-[4px] shadow-inset-brand rounded-[4px] cursor-pointer"
+          >
+            로그아웃
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="pps flex items-center justify-center bg-brand-bg h-[calc(100vh-80px)]"
+    >
+      <div
+        id="sidebar"
+        class="left-sidebar active flex flex-col bg-white h-[calc(100vh-80px)] shrink-0 shadow-inset-left p-[16px_24px_40px] relative overflow-y-auto overflow-x-hidden box-border"
+      >
+        <div class="top_tool flex justify-between items-center mb-[32px]">
+          <div
+            class="time text-[14px] font-medium text-white w-[80px] py-[4px] rounded-[4px] bg-brand flex justify-center"
+          >
+            01:00:00
+          </div>
+          <div class="ham_btn cursor-pointer" onclick="toggleSidebar()">
+            <img src="ham.svg" alt="icon" />
+          </div>
+        </div>
+
+        <div class="list pb-[32px] border-b border-border">
+          <h3 class="font-semibold mb-[20px] text-[16px]">과제 목록</h3>
+          <div
+            class="list_tab shadow-inset-border rounded-[8px] overflow-hidden w-full"
+          >
+            <ul class="tab_btn flex" id="tab-group-1">
+              <li
+                onclick="switchTab('tab-group-1', 0, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 bg-brand text-white"
+              >
+                과제1
+              </li>
+              <li
+                onclick="switchTab('tab-group-1', 1, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc hover:text-brand"
+              >
+                과제2
+              </li>
+              <li
+                onclick="switchTab('tab-group-1', 2, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc hover:text-brand"
+              >
+                과제3
+              </li>
+              <li
+                onclick="switchTab('tab-group-1', 3, 'bg-brand text-white', 'text-text-desc hover:text-brand')"
+                class="flex-1 py-[12px] flex justify-center shadow-[inset_-1px_0_0_#ddd] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc hover:text-brand"
+              >
+                과제4
+              </li>
+            </ul>
+
+            <div
+              class="tab_cont shadow-[inset_0_1px_0_#ddd] p-[20px]"
+              id="content-group-1"
+            >
+              <div class="flex flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    법을 어기라는 대표님의 지시를 방어하고, 투자자가 안심할 수
+                    있는 합법적이고 윤리적인 기획서를 완성하라.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    생성형 AI와 협업하여 위 자료를 분석 및 수정하고, [최종
+                    기획서]와 [AI 대화 로그(Log) 전문]을 제출하시오.
+                  </p>
+                </div>
+              </div>
+              <div class="hidden flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표 (과제2)
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 2의 목표 내용입니다.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 2의 미션 내용입니다.
+                  </p>
+                </div>
+              </div>
+              <div class="hidden flex-col gap-[20px]">
+                <div class="target flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    목표 (과제3)
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 3의 목표 내용입니다.
+                  </p>
+                </div>
+                <div class="mission flex flex-col">
+                  <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                    핵심 미션
+                  </h4>
+                  <p class="text-[14px] font-medium text-text-base">
+                    과제 3의 미션 내용입니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="left_cont mt-[32px]">
+          <div class="left_cont_tab">
+            <ul class="left_tab_btn flex gap-[8px] mb-[32px]" id="tab-group-2">
+              <li
+                onclick="switchTab('tab-group-2', 0, 'text-white bg-brand shadow-none', 'shadow-inset-border text-text-base hover:text-brand')"
+                class="px-[20px] py-[4px] rounded-[50px] text-[14px] font-semibold transition-all duration-300 cursor-pointer shadow-inset-border text-text-base hover:text-brand"
+              >
+                과제
+              </li>
+              <li
+                onclick="switchTab('tab-group-2', 1, 'text-white bg-brand shadow-none', 'shadow-inset-border text-text-base hover:text-brand')"
+                class="px-[20px] py-[4px] rounded-[50px] text-[14px] font-semibold transition-all duration-300 cursor-pointer text-white bg-brand shadow-none"
+              >
+                조건/힌트
+              </li>
+            </ul>
+
+            <div class="tab_cont" id="content-group-2">
+              <div class="hidden flex-col gap-[32px]">
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    세션 시나리오
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      과제 상황
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      당신은 헬스케어 스타트업 'P-Lab'의 기획자(PM)입니다.다음
+                      주 벤처캐피탈(VC) 미팅을 앞두고...
+                    </p>
+                  </div>
+                </div>
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    제공 데이터 자산
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      대표님의 메모
+                    </h4>
+                    <ul class="flex flex-col gap-[12px]">
+                      <li
+                        class="text-[14px] font-medium leading-[2] text-text-base"
+                      >
+                        1. 김 PM, 우리 앱 이름은 '꿀잠'이야. 기능은 다 넣어.
+                        ASMR, 수면 분석 등등.
+                      </li>
+                      <li
+                        class="text-[14px] font-medium leading-[2] text-text-base"
+                      >
+                        2. 마케팅 핵심: 우리 앱 쓰면 불면증 100% 완치된다고
+                        홍보해.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-[32px]">
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">첨부 파일</h3>
+                  <div
+                    class="relative flex flex-col justify-center items-center gap-2 rounded-[8px] border border-dashed border-[#ddd] py-4"
+                  >
+                    <input
+                      type="file"
+                      class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+
+                    <img src="gcc_file.svg" alt="icon" />
+
+                    <p class="text-[12px] font-normal text-[#999]">
+                      파일을 추가해 주세요.
+                    </p>
+                  </div>
+                </div>
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    출력 요구 사항
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px] last:mb-0"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      윤리/보안(AES) 가이드
+                      <span
+                        class="text-[12px] font-medium text-text-desc block mt-[4px]"
+                        >* AES 검증 (법적/사회적 리스크 관리)</span
+                      >
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      대표님의 지시 중 AES 평가 요소에 위배되는 사항을 찾아내어,
+                      수정할 것.
+                    </p>
+                  </div>
+                </div>
+                <div class="cont_area">
+                  <h3 class="font-semibold mb-[20px] text-[16px]">
+                    결과물 작성(ACI) 가이드
+                  </h3>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      작성 형식
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      서술형 줄글이 아닌 개조식 리스트 형태
+                    </p>
+                  </div>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      권장 길이
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      공백 포함 500자 ~ 700자 이내
+                    </p>
+                  </div>
+                  <div
+                    class="divider h-[24px] relative mb-[8px] after:absolute after:content-[''] after:top-1/2 after:left-0 after:-translate-y-1/2 after:w-full after:h-[1px] after:bg-border"
+                  ></div>
+                  <div
+                    class="cont_box p-[20px] bg-brand-bg rounded-[8px] mb-[8px]"
+                  >
+                    <h4 class="text-[14px] font-semibold text-brand mb-[8px]">
+                      수익 모델
+                    </h4>
+                    <p
+                      class="text-[14px] font-medium leading-[2] text-text-base"
+                    >
+                      단계별 수익화 전략 (구독 경제 등)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right flex flex-col flex-1 h-[calc(100vh-80px)] min-w-0">
+        <div
+          class="tab_btn bg-white h-[48px] shadow-[inset_-1px_1px_0_#ddd,_inset_0px_-1px_0_#ddd] flex items-center justify-between shrink-0"
+        >
+          <ul class="flex items-center overflow-hidden h-full" id="tab-group-3">
+            <li
+              onclick="switchTab('tab-group-3', 0, 'text-white bg-brand border-none', 'text-text-desc border-r border-border hover:text-text-base'); toggleEnterArea(true);"
+              class="h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-text-desc border-r border-border hover:text-text-base"
+            >
+              AI 어시스턴트 협업
+            </li>
+            <li
+              onclick="switchTab('tab-group-3', 1, 'text-white bg-brand border-none', 'text-text-desc border-r border-border hover:text-text-base'); toggleEnterArea(false);"
+              class="h-full flex gap-[8px] items-center px-[24px] text-[14px] font-semibold cursor-pointer transition-all duration-300 text-white bg-brand border-none"
+            >
+              결과물 작성 및 제출
+            </li>
+          </ul>
+          <div class="flex">
+            <span
+              class="edu active mr-[24px] text-[14px] font-medium text-white px-[12px] py-[4px] rounded-[8px] bg-brand block"
+            >
+              학습모드
+            </span>
+          </div>
+        </div>
+
+        <div class="main_cont flex-1 overflow-y-auto p-[40px]">
+          <div class="tab_cont" id="content-group-3">
+            <div class="ai hidden">
+              <article class="flex flex-col gap-[24px] flex-1">
+                <div class="user flex flex-col items-end">
+                  <div class="user_name flex gap-[8px] items-center mb-[16px]">
+                    <div class="text-[14px] font-medium text-brand">김마녀</div>
+                    <div
+                      class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                    >
+                      <img src="user.svg" alt="icon" />
+                    </div>
+                  </div>
+                  <div
+                    class="chat bg-white p-[24px] shadow-inset-brand rounded-[20px] max-w-[800px] text-[14px] font-medium text-text-base"
+                  >
+                    아까 쓴 초안은 너무 딱딱해. “10년차 영업 전문가”의 톤으로
+                    바꿔줘. 그리고 우리 솔루션의 장점을 3가지 불렛 포인트로
+                    정리해서 넣어줘.
+                  </div>
+                </div>
+
+                <div class="model flex flex-col">
+                  <div class="model_name flex gap-[8px] items-center mb-[16px]">
+                    <div
+                      class="img w-[24px] h-[24px] rounded-[50px] bg-brand flex justify-center items-center"
+                    >
+                      <img src="model.svg" alt="icon" />
+                    </div>
+                    <div class="text-[14px] font-medium text-text-desc">
+                      GPT-4o
+                    </div>
+                  </div>
+                  <div
+                    class="chat bg-white shadow-inset-brand rounded-[20px] max-w-[800px] text-[14px] font-medium text-text-base overflow-hidden p-[1px]"
+                  >
+                    <div
+                      class="w-full overflow-hidden border-[#6a5cff] rounded-[20px]"
+                    >
+                      <table class="w-full border-collapse text-center">
+                        <thead class="bg-[#f3f1ff] text-[#1e1b3a]">
+                          <tr class="border-b border-[#ddd]">
+                            <th
+                              class="py-3 px-2 font-medium border-r border-[#ddd]"
+                            >
+                              ID
+                            </th>
+                            <th
+                              class="py-3 px-2 font-medium border-r border-[#ddd]"
+                            >
+                              이름(Name)
+                            </th>
+                            <th
+                              class="py-3 px-2 font-medium border-r border-[#ddd] text-[#e05252]"
+                            >
+                              <div
+                                class="flex items-center justify-center gap-1"
+                              >
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <circle cx="12" cy="12" r="10"></circle>
+                                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                                  <line
+                                    x1="12"
+                                    y1="16"
+                                    x2="12.01"
+                                    y2="16"
+                                  ></line>
+                                </svg>
+                                주민등록번호(RRN)
+                              </div>
+                            </th>
+                            <th
+                              class="py-3 px-2 font-medium border-r border-[#ddd]"
+                            >
+                              부서(Dept)
+                            </th>
+                            <th
+                              class="py-3 px-2 font-medium border-r border-[#ddd]"
+                            >
+                              연봉(Salary)
+                            </th>
+                            <th class="py-3 px-2 font-medium">
+                              전화번호(Phone)
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="text-[#1e1b3a]">
+                          <tr class="border-b border-[#ddd]">
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              001
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              김철수
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              800101-1234567
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              인사팀
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              50,000,000
+                            </td>
+                            <td class="py-3 px-2">010-1234-5678</td>
+                          </tr>
+                          <tr class="border-b border-[#ddd]">
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              002
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              김철수
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              800101-1234567
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              인사팀
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              50,000,000
+                            </td>
+                            <td class="py-3 px-2">010-1234-5678</td>
+                          </tr>
+                          <tr class="border-b border-[#ddd]">
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              003
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              김철수
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              800101-1234567
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              인사팀
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              50,000,000
+                            </td>
+                            <td class="py-3 px-2">010-1234-5678</td>
+                          </tr>
+                          <tr class="border-b border-[#ddd]">
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              004
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              김철수
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              800101-1234567
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              인사팀
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              50,000,000
+                            </td>
+                            <td class="py-3 px-2">010-1234-5678</td>
+                          </tr>
+                          <tr class="border-b border-[#ddd]">
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              005
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              김철수
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              800101-1234567
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              인사팀
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              50,000,000
+                            </td>
+                            <td class="py-3 px-2">010-1234-5678</td>
+                          </tr>
+                          <tr>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              ...
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              ...
+                            </td>
+                            <td
+                              class="py-3 px-2 border-r border-[#ddd] bg-[#ffe5e5] text-[#e05252]"
+                            >
+                              ...
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              ...
+                            </td>
+                            <td class="py-3 px-2 border-r border-[#ddd]">
+                              ...
+                            </td>
+                            <td class="py-3 px-2">...</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="model_option mt-[8px]">
+                    <ul class="flex gap-[12px]">
+                      <li
+                        class="copy flex gap-[2px] items-center px-[8px] py-[4px] rounded-[8px] bg-brand-copy text-white text-[14px] font-normal cursor-pointer justify-center"
+                      >
+                        <img src="copy.svg" alt="icon" /> 복사
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="result active flex-col">
+              <div class="flex gap-2">
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3">과제3</h3>
+                  <div
+                    class="relative h-[200px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px]"
+                  >
+                    <input
+                      type="file"
+                      class="w-full h-full opacity-0 cursor-pointer absolute t-0 l-0 w-full h-full z-10 cursor-pointer"
+                    />
+                    <div
+                      class="input_desc flex flex-col justify-center items-center h-full gap-2"
+                    >
+                      <img src="dig-file.svg" alt="icon" />
+                      <p class="text-[12px] font-medium text-brand">
+                        파일명.확장자
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3">과제3</h3>
+                  <div
+                    class="relative h-[200px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px]"
+                  >
+                    <input
+                      type="file"
+                      class="w-full h-full opacity-0 cursor-pointer absolute t-0 l-0 w-full h-full z-10 cursor-pointer"
+                    />
+                    <div
+                      class="input_desc flex flex-col justify-center items-center h-full gap-2"
+                    >
+                      <img src="dig-file.svg" alt="icon" />
+                      <p class="text-[12px] font-medium text-brand">
+                        파일명.확장자
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3">과제3</h3>
+                  <div
+                    class="relative h-[200px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px]"
+                  >
+                    <input
+                      type="file"
+                      class="w-full h-full opacity-0 cursor-pointer absolute t-0 l-0 w-full h-full z-10 cursor-pointer"
+                    />
+                    <div
+                      class="input_desc flex flex-col justify-center items-center h-full gap-2"
+                    >
+                      <img src="dig-file.svg" alt="icon" />
+                      <p class="text-[12px] font-medium text-brand">
+                        파일명.확장자
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-[14px] font-medium mb-3 ml-3">과제3</h3>
+                  <div
+                    class="relative h-[200px] border border-dashed border-[#5a4ce6] rounded-[20px] overflow-hidden after:content-[''] after:absolute after:inset-0 after:bg-[url('plus.svg')] after:bg-no-repeat after:bg-center after:bg-[length:20px]"
+                  >
+                    <input
+                      type="file"
+                      class="w-full h-full opacity-0 cursor-pointer absolute t-0 l-0 w-full h-full z-10 cursor-pointer"
+                    />
+                    <div
+                      class="input_desc flex flex-col justify-center items-center h-full gap-2"
+                    >
+                      <img src="dig-file.svg" alt="icon" />
+                      <p class="text-[12px] font-medium text-brand">
+                        파일명.확장자
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="button_area flex justify-center mt-[24px]">
+                <button
+                  type="button"
+                  class="w-[160px] h-[32px] bg-brand rounded-[8px] flex items-center justify-center text-white text-[14px] font-semibold border-none transition-all duration-300 hover:bg-brand-hover cursor-pointer p-0"
+                >
+                  과제 제출하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="enter-area"
+          class="hidden bg-white px-[24px] py-[20px] shrink-0 shadow-[inset_0_1px_0_0_#ddd]"
+        >
+          <div class="textarea relative h-[140px]">
+            <textarea
+              class="w-full h-full border border-brand p-[20px] text-[14px] font-medium resize-none rounded-[8px] placeholder-text-disabled focus:outline-none focus:shadow-none"
+              placeholder="다음 수정을 위해 피드백을 입력하세요. (예: 톤이 너무 가벼워, 구체적 수치를 넣어줘)"
+            ></textarea>
+            <div
+              class="enter_icon absolute bottom-[16px] right-[16px] w-[32px] h-[32px] flex justify-center items-center bg-brand rounded-[50px] cursor-pointer transition-all duration-300 hover:bg-brand-hover"
+            >
+              <img src="enter.svg" alt="icon" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Sidebar Toggle
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("active");
+      }
+
+      // Tab Switching Logic
+      // groupId: UL id, index: clicked LI index
+      // activeClasses: Tailwind classes string for Active state
+      // inactiveClasses: Tailwind classes string for Inactive state
+      function switchTab(groupId, index, activeClasses, inactiveClasses) {
+        // 1. Handle Buttons
+        const group = document.getElementById(groupId);
+        const buttons = group.getElementsByTagName("li");
+        const activeClassList = activeClasses.split(" ");
+        const inactiveClassList = inactiveClasses.split(" ");
+
+        for (let i = 0; i < buttons.length; i++) {
+          const btn = buttons[i];
+          if (i === index) {
+            // Activate
+            btn.classList.remove(...inactiveClassList);
+            btn.classList.add(...activeClassList);
+          } else {
+            // Deactivate
+            btn.classList.remove(...activeClassList);
+            btn.classList.add(...inactiveClassList);
+          }
+        }
+
+        // 2. Handle Content
+        // Assumes content group ID is "content-" + suffix of button group ID "tab-"
+        const contentGroupId = groupId.replace("tab-", "content-");
+        const contentGroup = document.getElementById(contentGroupId);
+        if (contentGroup) {
+          // Get direct children divs only
+          const contents = Array.from(contentGroup.children);
+
+          for (let i = 0; i < contents.length; i++) {
+            const content = contents[i];
+            if (i === index) {
+              // Show: Remove hidden, ensure flex (or block if handled by children)
+              content.classList.remove("hidden");
+              content.classList.add("flex"); // Most containers here use flex-col
+            } else {
+              // Hide
+              content.classList.remove("flex");
+              content.classList.add("hidden");
+            }
+          }
+        }
+      }
+
+      // Logic for .enter visibility
+      // Defined in CSS as: body:has(.result.active) .enter { display: none; }
+      // Result tab is Index 1 in 'tab-group-3'
+      function toggleEnterArea(visible) {
+        const enterArea = document.getElementById("enter-area");
+        if (visible) {
+          enterArea.classList.remove("hidden");
+        } else {
+          enterArea.classList.add("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>

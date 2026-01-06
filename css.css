@@ -1342,8 +1342,8 @@ body:has(.result.active) .enter {
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 12px;
-  margin-left: 12px;
-}
+  margin-left: 12px; 
+} 
 
 .pps .right .result .file_area .file_box .file_layout {
   height: 300px;
